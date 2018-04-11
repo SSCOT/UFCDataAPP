@@ -10,7 +10,15 @@
 
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:id="@+id/img"
+            card_view:srcCompat="@android:drawable/btn_star" />
 
         <TextView
             android:id="@+id/txtLuchador1"
@@ -20,6 +28,8 @@
             android:layout_weight="1"
             android:textAlignment="viewStart"
             tool:text="Tony Ferguson" />
+
+
 
     </LinearLayout>
 
