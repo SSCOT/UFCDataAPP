@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Adapters;
+package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters;
 
 import android.content.Context;
 import android.support.v7.widget.RecyclerView;
@@ -8,11 +8,10 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.sergio.ufcdataappinicial.ufcdataapp.Model.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
-import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.LuchadoresViewHolder> {
@@ -35,7 +34,6 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
 
         return new LuchadoresViewHolder(context, item);
     }
-
 
     @Override
     public void onBindViewHolder(LuchadoresViewHolder viewHolder, int position) {

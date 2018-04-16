@@ -1,6 +1,7 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Model;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
 
 import com.google.gson.annotations.SerializedName;
+import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 
 public class Noticia {
 
@@ -30,8 +31,7 @@ public class Noticia {
         this.img = img;
         this.autor = autor;
 
-        // TODO extraer string a archivos externos
-        this.url = "http://ufc-data-api.ufc.com/api/v3/iphone/5/news/" + this.id;
+        this.url = String.format(BuildConfig.API_URL_ARTICLE, "5", this.id);
     }
 
     public int getId() {
@@ -86,5 +86,8 @@ public class Noticia {
         this.autor = autor;
     }
 
+    public String getUrl() {
+        return url;
+    }
 }
 

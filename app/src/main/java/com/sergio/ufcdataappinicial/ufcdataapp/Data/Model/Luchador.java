@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Model;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
 
 import com.google.gson.annotations.SerializedName;
 

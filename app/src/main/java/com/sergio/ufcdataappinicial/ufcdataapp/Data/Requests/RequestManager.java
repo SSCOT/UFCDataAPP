@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.NetworkProvider;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests;
 
 import android.content.Context;
 

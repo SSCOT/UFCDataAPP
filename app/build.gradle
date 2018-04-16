@@ -11,6 +11,27 @@ android {
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
+        debug {
+            applicationIdSuffix ".pre"
+            buildConfigField "String", "API_URL_GET_FIGHTERS_ALL", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters\""
+            buildConfigField "String", "API_URL_GET_FIGHTERS_CHAMPIONS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/title_holders\""
+            buildConfigField "String", "API_URL_GET_FIGHTERS_WEIGHT_CLASS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/stats/weight_class/%s\""
+            buildConfigField "String", "API_URL_GET_FIGHTER", "\"http://ufc-data-api.ufc.com/api/v3/es/fighters/%s.json\""
+
+            buildConfigField "String", "API_URL_GET_NEWS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/news\""
+            buildConfigField "String", "API_URL_ARTICLE", "\"http://ufc-data-api.ufc.com/api/v3/iphone/%s/news/%s\""
+            buildConfigField "String", "API_URL_GET_MEDIA", "\"http://ufc-data-api.ufc.com/api/v3/iphone/media\""
+            buildConfigField "String", "API_URL_MEDIA_DETAIL", "\"http://ufc-data-api.ufc.com/api/v3/iphone/media/%s\""
+
+            buildConfigField "String", "API_URL_GET_EVENTS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/events\""
+            buildConfigField "String", "API_URL_GET_FIGHTS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/events/%s/fights\""
+            buildConfigField "String", "API_URL_GET_EVENT_MEDIA", "\"http://ufc-data-api.ufc.com/api/v3/iphone/events/%s/media\""
+
+            buildConfigField "String", "API_URL_KEY_VALUES", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/stats_filter_key_values\""
+
+            debuggable true
+            minifyEnabled false
+        }
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'

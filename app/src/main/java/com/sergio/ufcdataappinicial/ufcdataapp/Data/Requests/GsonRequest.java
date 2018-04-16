@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.NetworkProvider;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests;
 
 import com.android.volley.AuthFailureError;
 import com.android.volley.NetworkResponse;
@@ -18,8 +18,7 @@ public class GsonRequest<T> extends Request<T> {
     private final Map<String, String> headers;
     private final Response.Listener<T> listener;
 
-    public GsonRequest(String url, Class<T> clase, Map<String, String> headers,
-                       Response.Listener<T> listener, Response.ErrorListener errorListener) {
+    public GsonRequest(String url, Class<T> clase, Map<String, String> headers, Response.Listener<T> listener, Response.ErrorListener errorListener) {
         super(Method.GET, url, errorListener);
         this.clase = clase;
         this.headers = headers;
