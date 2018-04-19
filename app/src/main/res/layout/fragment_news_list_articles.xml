@@ -4,9 +4,20 @@
     android:layout_height="match_parent"
     tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsListArticlesFragment">
 
-    <TextView
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/rvArticles"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="Articles List Fragment" />
+        tools:layout_editor_absoluteX="8dp"
+        tools:layout_editor_absoluteY="8dp" />
+
+    <ProgressBar
+        android:id="@+id/progressBarArticles"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="gone" />
 
 </FrameLayout>

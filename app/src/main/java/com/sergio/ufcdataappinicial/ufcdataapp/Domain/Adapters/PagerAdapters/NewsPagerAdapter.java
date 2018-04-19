@@ -24,9 +24,9 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                return new EventsListUpcomingFragment();
+                return new NewsListArticlesFragment();
             case 1:
-                return new EventsListPastFragment();
+                return new NewsListMediaFragment();
             default:
                 break;
         }
