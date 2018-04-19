@@ -6,19 +6,13 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.widget.DefaultItemAnimator;
-import android.support.v7.widget.LinearLayoutManager;
-import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ProgressBar;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.FighterListFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListCompleteFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
 import butterknife.BindView;
@@ -37,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
 
-        setFragment("fighters");
+        setFragment("news");
 
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
@@ -47,10 +41,10 @@ public class MainActivity extends AppCompatActivity {
                         setFragment("fighters");
                         break;
                     case R.id.btnNavNews:
-                        setFragment("fighters");
+                        setFragment("news");
                         break;
                     case R.id.btnNavEvents:
-                        setFragment("fighters");
+                        setFragment("events");
                         break;
                 }
 
@@ -66,13 +60,13 @@ public class MainActivity extends AppCompatActivity {
 
         switch (tipo){
             case "fighters":
-                fragment = FighterListFragment.newInstance();
+                fragment = FightersFragment.newInstance();
                 break;
             case "news":
-                fragment = FighterListFragment.newInstance();
+                fragment = NewsFragment.newInstance();
                 break;
             case "events":
-                fragment = FighterListFragment.newInstance();
+                fragment = EventsFragment.newInstance();
                 break;
         }
 
@@ -80,7 +74,11 @@ public class MainActivity extends AppCompatActivity {
             return;
         }
 
-        ft.replace(R.id.fFighters, fragment);
+        commitFragment(ft, fragment);
+    }
+
+    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
+        ft.replace(R.id.fragmentPrincipal, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
