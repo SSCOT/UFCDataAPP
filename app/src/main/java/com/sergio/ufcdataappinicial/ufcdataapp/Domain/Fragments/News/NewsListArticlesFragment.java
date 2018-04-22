@@ -1,11 +1,13 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,19 +15,19 @@ import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.NoticiaProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ArticlesAdapter;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
 public class NewsListArticlesFragment extends Fragment {
 
     ProgressBar progressBar;
-    RecyclerView recyclerLuchadores;
+    RecyclerView recycler;
     NoticiaProvider noticiaProvider;
+    Noticia[] news;
 
     public NewsListArticlesFragment() {
     }
@@ -61,19 +63,30 @@ public class NewsListArticlesFragment extends Fragment {
     }
 
     private void recyclerConf(View view) {
-        recyclerLuchadores = view.findViewById(R.id.rvArticles);
-        recyclerLuchadores.setHasFixedSize(true);
-        recyclerLuchadores.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
-        recyclerLuchadores.setItemAnimator(new DefaultItemAnimator());
+        recycler = view.findViewById(R.id.rvArticles);
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recycler.setItemAnimator(new DefaultItemAnimator());
     }
 
     private void getNews() {
         noticiaProvider.getArticles(new NoticiaProvider.NoticiasProviderListener() {
             @Override
-            public void onResponse(Noticia[] news) {
+            public void onResponse(Noticia[] response) {
+                news = response;
                 setLoading(false);
-                ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), news);
-                recyclerLuchadores.setAdapter(adapter);
+                ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), news, new ArticlesAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Noticia noticia, int position) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), ArticleActivity.class);
+                        String urlFinal = news[position].getUrl();
+                        Log.d("--A>", "URL =========> " + urlFinal);
+                        intent.putExtra("noticiaUrl", urlFinal);
+                        startActivity(intent);
+                    }
+                });
+                recycler.setAdapter(adapter);
             }
 
             @Override

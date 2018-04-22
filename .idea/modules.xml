@@ -3,9 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/UFCDataAPP.iml" filepath="$PROJECT_DIR$/UFCDataAPP.iml" />
-      <module fileurl="file://D:/_MASTER_MIMO_2017/4_Android/UFCDataApp/UFCDataAPP.iml" filepath="D:/_MASTER_MIMO_2017/4_Android/UFCDataApp/UFCDataAPP.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://D:/_MASTER_MIMO_2017/4_Android/UFCDataApp/app/app.iml" filepath="D:/_MASTER_MIMO_2017/4_Android/UFCDataApp/app/app.iml" />
     </modules>
   </component>
 </project>

@@ -1,5 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
 
+import android.annotation.SuppressLint;
+
 import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 
@@ -20,8 +22,6 @@ public class Noticia {
     @SerializedName("author")
     private String autor;
 
-    private String url;
-
     public Noticia(int id, String titulo, String fecha, String fechaCreacion, String fechaModificacion, String img, String autor) {
         this.id = id;
         this.titulo = titulo;
@@ -30,8 +30,6 @@ public class Noticia {
         this.fechaModificacion = fechaModificacion;
         this.img = img;
         this.autor = autor;
-
-        this.url = String.format(BuildConfig.API_URL_ARTICLE, "5", this.id);
     }
 
     public int getId() {
@@ -86,8 +84,9 @@ public class Noticia {
         this.autor = autor;
     }
 
+    @SuppressLint("DefaultLocale")
     public String getUrl() {
-        return url;
+        return String.format(BuildConfig.API_URL_ARTICLE, this.id);
     }
 }
 
