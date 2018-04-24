@@ -19,7 +19,7 @@ android {
             buildConfigField "String", "API_URL_GET_FIGHTER", "\"http://ufc-data-api.ufc.com/api/v3/es/fighters/%s.json\""
 
             buildConfigField "String", "API_URL_GET_NEWS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/news\""
-            buildConfigField "String", "API_URL_ARTICLE", "\"ufc-data-api.ufc.com/api/v3/iphone/news/%d\""
+            buildConfigField "String", "API_URL_ARTICLE", "\"http://ufc-data-api.ufc.com/api/v3/iphone/news/%d\""
             buildConfigField "String", "API_URL_GET_MEDIA", "\"http://ufc-data-api.ufc.com/api/v3/iphone/media\""
             buildConfigField "String", "API_URL_MEDIA_DETAIL", "\"http://ufc-data-api.ufc.com/api/v3/iphone/media/%s\""
 

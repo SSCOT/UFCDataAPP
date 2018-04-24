@@ -16,7 +16,15 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.Fig
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.NewsPagerAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FightersFragment extends Fragment {
+
+    @BindView(R.id.tabLayoutFighters)
+    TabLayout tablayout;
+    @BindView(R.id.viewPagerFighters)
+    ViewPager viewPager;
 
     private FragmentActivity myContext;
 
@@ -39,21 +47,22 @@ public class FightersFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fighters, container, false);
+
+        View view = inflater.inflate(R.layout.fragment_fighters, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TabLayout tablayout = getView().findViewById(R.id.tabLayoutFighters);
         tablayout.addTab(tablayout.newTab().setText("ALL"));
         tablayout.addTab(tablayout.newTab().setText("CHAMPIONS"));
         tablayout.addTab(tablayout.newTab().setText("CATEGORIES"));
         tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = getView().findViewById(R.id.viewPagerFighters);
+        // final ViewPager viewPager = getView().findViewById(R.id.viewPagerFighters);
         FightersPagerAdapter pagerAdapter = new FightersPagerAdapter(myContext.getSupportFragmentManager(), tablayout.getTabCount());
 
         viewPager.setAdapter(pagerAdapter);

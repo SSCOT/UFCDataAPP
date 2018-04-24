@@ -8,7 +8,6 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListCompleteFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListWeightFragment;
 
-
 public class FightersPagerAdapter extends FragmentStatePagerAdapter {
 
     private int numberOfTabs;
@@ -31,7 +30,6 @@ public class FightersPagerAdapter extends FragmentStatePagerAdapter {
             default:
                 break;
         }
-
         return null;
     }
 

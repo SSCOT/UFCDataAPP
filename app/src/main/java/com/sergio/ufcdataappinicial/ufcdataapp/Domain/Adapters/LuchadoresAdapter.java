@@ -12,6 +12,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.LuchadoresViewHolder> {
@@ -27,11 +28,7 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
     // Asignamos la celda y la inflamos
     @Override
     public LuchadoresViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        ButterKnife.bind(parent);
-
         View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_luchador, parent, false);
-
         return new LuchadoresViewHolder(context, item);
     }
 
@@ -42,26 +39,23 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
 
     }
 
-    // Número de elementos
     @Override
     public int getItemCount() {
         return luchadores.length;
     }
 
-
     public static class LuchadoresViewHolder extends RecyclerView.ViewHolder {
 
         Context context;
 
-        private TextView txt;
-        private ImageView img;
+        @BindView(R.id.txtLuchador1)
+        TextView txt;
+        @BindView(R.id.img)
+        ImageView img;
 
         public LuchadoresViewHolder(Context context, View itemView) {
             super(itemView);
-
-            txt = itemView.findViewById(R.id.txtLuchador1);
-            img = itemView.findViewById(R.id.img);
-
+            ButterKnife.bind(this,itemView);
             this.context = context;
         }
 

@@ -22,11 +22,18 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ArticlesAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NewsListArticlesFragment extends Fragment {
 
+    @BindView(R.id.progressBarArticles)
     ProgressBar progressBar;
+    @BindView(R.id.rvArticles)
     RecyclerView recycler;
+
     NoticiaProvider noticiaProvider;
+
     Noticia[] news;
 
     public NewsListArticlesFragment() {
@@ -47,8 +54,9 @@ public class NewsListArticlesFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_list_articles, container, false);
+        View view = inflater.inflate(R.layout.fragment_news_list_articles, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
@@ -56,14 +64,12 @@ public class NewsListArticlesFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         noticiaProvider = new NoticiaProvider(getActivity().getApplicationContext());
-        progressBar = getView().findViewById(R.id.progressBarArticles);
         recyclerConf(getView());
         setLoading(true);
         getNews();
     }
 
     private void recyclerConf(View view) {
-        recycler = view.findViewById(R.id.rvArticles);
         recycler.setHasFixedSize(true);
         recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recycler.setItemAnimator(new DefaultItemAnimator());
@@ -81,7 +87,6 @@ public class NewsListArticlesFragment extends Fragment {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), ArticleActivity.class);
                         String urlFinal = news[position].getUrl();
-                        Log.d("--A>", "URL =========> " + urlFinal);
                         intent.putExtra("noticiaUrl", urlFinal);
                         startActivity(intent);
                     }

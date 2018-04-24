@@ -13,7 +13,6 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
 
     private int numberOfTabs;
 
-
     public NewsPagerAdapter(FragmentManager fm, int numberOfTabs) {
         super(fm);
         this.numberOfTabs = numberOfTabs;
@@ -30,7 +29,6 @@ public class NewsPagerAdapter extends FragmentStatePagerAdapter {
             default:
                 break;
         }
-
         return null;
     }
 

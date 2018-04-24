@@ -5,13 +5,14 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.NoticiasViewHolder> {
 
@@ -28,10 +29,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
     // Asignamos la celda y la inflamos
     @Override
     public NoticiasViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-
-        // ButterKnife.bind(parent);
         final View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_article, parent, false);
-        // view.setOnClickListener(this);
         return new NoticiasViewHolder(context, view);
     }
 
@@ -41,7 +39,6 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
         viewHolder.bindNoticia(noticia, listener);
     }
 
-    // Número de elementos
     @Override
     public int getItemCount() {
         return news.length;
@@ -52,26 +49,25 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
 
         Context context;
 
-        private TextView autor;
-        private TextView fecha;
-        private ImageView img;
+        @BindView(R.id.txtAutor)
+        TextView autor;
+        @BindView(R.id.txtFecha)
+        TextView fecha;
+        @BindView(R.id.img)
+        ImageView img;
 
         public NoticiasViewHolder(Context context, View itemView) {
             super(itemView);
-
-            this.autor = itemView.findViewById(R.id.txtAutor);
-            this.fecha = itemView.findViewById(R.id.txtFecha);
-            this.img = itemView.findViewById(R.id.img);
-
+            ButterKnife.bind(this, itemView);
             this.context = context;
         }
 
         public void bindNoticia(final Noticia noticia, final OnItemClickListener listener) {
-            this.autor.setText(noticia.getAutor());
-            this.fecha.setText(noticia.getFecha());
+            autor.setText(noticia.getAutor());
+            fecha.setText(noticia.getFecha());
             String imagen = noticia.getImg();
             if (imagen != null && imagen != "") {
-                Picasso.with(this.context).load(noticia.getImg()).into(this.img);
+                Picasso.with(this.context).load(noticia.getImg()).into(img);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -86,16 +82,4 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
     public interface OnItemClickListener {
         void onItemClick(Noticia noticia, int position);
     }
-
-
-    /*public void setOnClickListener(View.OnClickListener listener) {
-        this.listener = listener;
-    }
-
-    @Override
-    public void onClick(View view) {
-        if (listener != null) {
-            listener.onClick(view);
-        }
-    }*/
 }

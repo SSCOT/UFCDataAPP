@@ -14,7 +14,13 @@ import android.webkit.WebViewClient;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class ArticleFragment extends Fragment {
+
+    @BindView(R.id.articleWeb)
+    WebView webView;
 
     public static ArticleFragment newInstance(String url) {
         ArticleFragment articleFragment = new ArticleFragment();
@@ -28,12 +34,12 @@ public class ArticleFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_article, container, false);
+        ButterKnife.bind(this,view);
 
         String url = "";
 
         if (getArguments() != null) {
             url = (String) getArguments().get("noticiaUrl");
-            Log.d("··", "ARGUMENTOS => "+getArguments());
         }
 
         setWeb(view, url);
@@ -41,9 +47,8 @@ public class ArticleFragment extends Fragment {
     }
 
     public void setWeb(View view, String url) {
-        WebView webView = view.findViewById(R.id.articleWeb);
         webView.setWebViewClient(new WebViewClient());
-        webView.loadUrl("http://" + url);
+        webView.loadUrl(url);
     }
 
 }

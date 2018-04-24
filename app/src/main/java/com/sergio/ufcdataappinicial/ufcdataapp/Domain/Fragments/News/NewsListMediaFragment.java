@@ -1,21 +1,42 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News;
 
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
+import com.android.volley.VolleyError;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.MediaProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.MediaActivity;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.MediaAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
 
 
 public class NewsListMediaFragment extends Fragment {
 
+    @BindView(R.id.progressBarMedia)
+    ProgressBar progressBar;
+    @BindView(R.id.rvMedia)
+    RecyclerView recycler;
+
+    MediaProvider mediaProvider;
+
+    Media[] arrayMedia;
 
     public NewsListMediaFragment() {
-        // Required empty public constructor
     }
 
     public static NewsListMediaFragment newInstance() {
@@ -26,14 +47,60 @@ public class NewsListMediaFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_news_list_media, container, false);
+
+        View view =inflater.inflate(R.layout.fragment_news_list_media, container, false);
+        ButterKnife.bind(this,view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        mediaProvider = new MediaProvider(getActivity().getApplicationContext());
+        recyclerConf(getView());
+        setLoading(true);
+        getMedia();
     }
 
+    private void recyclerConf(View view) {
+        recycler.setHasFixedSize(true);
+        recycler.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
+        recycler.setItemAnimator(new DefaultItemAnimator());
+    }
+
+    private void getMedia() {
+        mediaProvider.getMedia(new MediaProvider.MediaProviderListener() {
+            @Override
+            public void onResponse(Media[] response) {
+                arrayMedia = response;
+                setLoading(false);
+                MediaAdapter adapter = new MediaAdapter(getActivity(), arrayMedia, new MediaAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Media mediaItem, int position) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), MediaActivity.class);
+                        intent.putExtra("mediaItem", arrayMedia[position]);
+                        startActivity(intent);
+                    }
+                });
+                recycler.setAdapter(adapter);
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                setLoading(false);
+                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+            }
+        });
+    }
+
+    private void setLoading(boolean loading) {
+        if (loading) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 
 }

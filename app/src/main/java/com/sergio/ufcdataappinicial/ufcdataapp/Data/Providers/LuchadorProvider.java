@@ -1,16 +1,25 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
+import android.util.Log;
 
+import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
+import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.RequestFuture;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
 
+import org.json.JSONObject;
+
+import java.util.concurrent.ExecutionException;
+
 public class LuchadorProvider {
 
+    private RequestQueue mRequestQueue;
     Context context;
 
     public LuchadorProvider(Context context) {
@@ -19,6 +28,11 @@ public class LuchadorProvider {
 
     public interface LuchadorProviderListener {
         public void onResponse(Luchador[] luchadores);
+        public void onErrorResponse(VolleyError error);
+    }
+
+    public interface LuchadorUniqueProviderListener {
+        public void onResponse(Luchador luchador);
         public void onErrorResponse(VolleyError error);
     }
 
@@ -77,12 +91,12 @@ public class LuchadorProvider {
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
     }
 
-    public void getFighter(String idLuchador, final LuchadorProviderListener listener) {
-        GsonRequest gsonRequest = new GsonRequest<>(String.format(BuildConfig.API_URL_GET_FIGHTERS_WEIGHT_CLASS, idLuchador), Luchador[].class, null, new Response.Listener<Luchador[]>() {
+    public void getFighter(String idLuchador, final LuchadorUniqueProviderListener listener) {
+        GsonRequest gsonRequest = new GsonRequest<>(String.format(BuildConfig.API_URL_GET_FIGHTER, idLuchador), Luchador.class, null, new Response.Listener<Luchador>() {
 
             @Override
-            public void onResponse(Luchador[] luchadores) {
-                listener.onResponse(luchadores);
+            public void onResponse(Luchador luchador) {
+                listener.onResponse(luchador);
             }
         }, new Response.ErrorListener() {
 

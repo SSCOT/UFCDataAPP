@@ -11,11 +11,20 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.EventsPagerAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.NewsPagerAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class EventsFragment extends Fragment {
+
+    @BindView(R.id.tabLayoutEvents)
+    TabLayout tablayout;
+    @BindView(R.id.viewPagerEvents)
+    ViewPager viewPager;
 
     private FragmentActivity myContext;
 
@@ -43,20 +52,25 @@ public class EventsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_events, container, false);
+        View view = inflater.inflate(R.layout.fragment_events, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+        configureTabLayout();
+        configureViewPager();
+    }
 
-        TabLayout tablayout = getView().findViewById(R.id.tabLayoutEvents);
+    private void configureTabLayout() {
         tablayout.addTab(tablayout.newTab().setText("UPCOMING"));
         tablayout.addTab(tablayout.newTab().setText("PAST"));
         tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
+    }
 
-        final ViewPager viewPager = getView().findViewById(R.id.viewPagerEvents);
+    private void configureViewPager() {
         EventsPagerAdapter pagerAdapter = new EventsPagerAdapter(myContext.getSupportFragmentManager(), tablayout.getTabCount());
 
         viewPager.setAdapter(pagerAdapter);
@@ -80,5 +94,4 @@ public class EventsFragment extends Fragment {
             }
         });
     }
-
 }

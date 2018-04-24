@@ -19,10 +19,16 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FightersListCompleteFragment extends Fragment {
 
+    @BindView(R.id.progressBar)
     ProgressBar progressBar;
+    @BindView(R.id.rvLuchadores)
     RecyclerView recyclerLuchadores;
+
     LuchadorProvider luchadorProvider;
 
     public static FightersListCompleteFragment newInstance() {
@@ -34,7 +40,9 @@ public class FightersListCompleteFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fighters_list_complete, container, false);
+        View view = inflater.inflate(R.layout.fragment_fighters_list_complete, container, false);
+        ButterKnife.bind(this,view);
+        return view;
     }
 
     // Una vez creada la actividad
@@ -43,14 +51,12 @@ public class FightersListCompleteFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         luchadorProvider = new LuchadorProvider(getActivity().getApplicationContext());
-        progressBar = getView().findViewById(R.id.progressBar);
         recyclerConf(getView());
         setLoading(true);
         getAllFighters();
     }
 
     private void recyclerConf(View view) {
-        recyclerLuchadores = view.findViewById(R.id.rvLuchadores);
         recyclerLuchadores.setHasFixedSize(true);
         recyclerLuchadores.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerLuchadores.setItemAnimator(new DefaultItemAnimator());

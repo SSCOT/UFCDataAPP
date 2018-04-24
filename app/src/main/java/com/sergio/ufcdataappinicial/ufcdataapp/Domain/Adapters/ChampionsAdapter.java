@@ -14,6 +14,7 @@ import com.squareup.picasso.Picasso;
 
 import org.w3c.dom.Text;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.LuchadoresViewHolder> {
@@ -55,19 +56,18 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
 
         Context context;
 
-        private TextView name;
-        private TextView nickName;
-        private TextView weightClass;
-        private ImageView img;
+        @BindView(R.id.txtName)
+        TextView name;
+        @BindView(R.id.txtNickName)
+        TextView nickName;
+        @BindView(R.id.txtWeight)
+        TextView weightClass;
+        @BindView(R.id.img)
+        ImageView img;
 
         public LuchadoresViewHolder(Context context, View itemView) {
             super(itemView);
-
-            name = itemView.findViewById(R.id.txtName);
-            nickName = itemView.findViewById(R.id.txtNickName);
-            weightClass = itemView.findViewById(R.id.txtWeight);
-            img = itemView.findViewById(R.id.img);
-
+            ButterKnife.bind(this, itemView);
             this.context = context;
         }
 

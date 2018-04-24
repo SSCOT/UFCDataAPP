@@ -15,7 +15,15 @@ import android.view.ViewGroup;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.NewsPagerAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class NewsFragment extends Fragment {
+
+    @BindView(R.id.tabLayoutNews)
+    TabLayout tabLayout;
+    @BindView(R.id.viewPagerNews)
+    ViewPager viewPager;
 
     private FragmentActivity myContext;
 
@@ -41,25 +49,26 @@ public class NewsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        return inflater.inflate(R.layout.fragment_news, container, false);
+        View view = inflater.inflate(R.layout.fragment_news, container, false);
+        ButterKnife.bind(this, view);
+        return view;
     }
 
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
 
-        TabLayout tablayout = getView().findViewById(R.id.tabLayoutNews);
-        tablayout.addTab(tablayout.newTab().setText("NEWS"));
-        tablayout.addTab(tablayout.newTab().setText("MEDIA"));
-        tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        final ViewPager viewPager = getView().findViewById(R.id.viewPagerNews);
-        NewsPagerAdapter pagerAdapter = new NewsPagerAdapter(myContext.getSupportFragmentManager(), tablayout.getTabCount());
+        tabLayout.addTab(tabLayout.newTab().setText("NEWS"));
+        tabLayout.addTab(tabLayout.newTab().setText("MEDIA"));
+        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+
+        NewsPagerAdapter pagerAdapter = new NewsPagerAdapter(myContext.getSupportFragmentManager(), tabLayout.getTabCount());
 
         viewPager.setAdapter(pagerAdapter);
-        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tablayout));
+        viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
 
-        tablayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
                 int pos = tab.getPosition();

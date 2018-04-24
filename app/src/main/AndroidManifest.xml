@@ -18,7 +18,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Domain.Activities.ArticleActivity"></activity>
+        <activity android:name=".Domain.Activities.ArticleActivity" />
+        <activity android:name=".Domain.Activities.MediaActivity" />
     </application>
 
 </manifest>

@@ -19,10 +19,16 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
 public class FightersListChampionsFragment extends Fragment {
 
+    @BindView(R.id.progressBarChampions)
     ProgressBar progressBar;
+    @BindView(R.id.rvChampions)
     RecyclerView recyclerLuchadores;
+
     LuchadorProvider luchadorProvider;
 
     public static FightersListChampionsFragment newInstance() {
@@ -39,8 +45,9 @@ public class FightersListChampionsFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_fighters_list_champions, container, false);
+        View view = inflater.inflate(R.layout.fragment_fighters_list_champions, container, false);
+        ButterKnife.bind(this,view);
+        return view;
     }
 
     @Override
@@ -48,14 +55,12 @@ public class FightersListChampionsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         luchadorProvider = new LuchadorProvider(getActivity().getApplicationContext());
-        progressBar = getView().findViewById(R.id.progressBarChampions);
         recyclerConf(getView());
         setLoading(true);
         getChampions();
     }
 
     private void recyclerConf(View view) {
-        recyclerLuchadores = view.findViewById(R.id.rvChampions);
         recyclerLuchadores.setHasFixedSize(true);
         recyclerLuchadores.setLayoutManager(new LinearLayoutManager(getActivity(), LinearLayoutManager.VERTICAL, false));
         recyclerLuchadores.setItemAnimator(new DefaultItemAnimator());
@@ -73,6 +78,7 @@ public class FightersListChampionsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
+                // TODO Sustituir TOAST
                 Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
             }
         });

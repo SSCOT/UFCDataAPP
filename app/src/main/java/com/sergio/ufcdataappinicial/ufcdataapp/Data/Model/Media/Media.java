@@ -2,7 +2,9 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Media {
+import java.io.Serializable;
+
+public class Media implements Serializable {
 
     private int id;
 
@@ -12,7 +14,7 @@ public class Media {
     private String titulo;
     @SerializedName("description")
     private String descripcion;
-    @SerializedName("thumnail")
+    @SerializedName("thumbnail")
     private String img;
     @SerializedName("embedded_type")
     private String tipoEmbebido;
