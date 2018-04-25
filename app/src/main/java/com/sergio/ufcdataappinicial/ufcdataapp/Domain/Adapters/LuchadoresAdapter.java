@@ -67,4 +67,9 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             }
         }
     }
+
+    public void setFilter(Luchador[] luchadores) {
+        this.luchadores = luchadores;
+        notifyDataSetChanged();
+    }
 }

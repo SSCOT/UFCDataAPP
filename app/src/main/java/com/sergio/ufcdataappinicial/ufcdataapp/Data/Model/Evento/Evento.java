@@ -1,6 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 
 public class Evento {
 
@@ -14,7 +15,6 @@ public class Evento {
     private String subtitulo;
     @SerializedName("event_status")
     private String estado;
-
     private String arena;
     @SerializedName("location")
     private String ciudad;
@@ -22,10 +22,16 @@ public class Evento {
     private float lat;
     @SerializedName("longitude")
     private float lon;
+    @SerializedName("main_event_fighter1_id")
+    private int idLuchador1;
+    @SerializedName("main_event_fighter2_id")
+    private int idLuchador2;
+    private Luchador luchador1;
+    private Luchador luchador2;
 
     private Combate[] combates;
 
-    public Evento(int id, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon) {
+    public Evento(int id, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2) {
         this.id = id;
         this.fecha = fecha;
         this.titulo = titulo;
@@ -35,6 +41,8 @@ public class Evento {
         this.ciudad = ciudad;
         this.lat = lat;
         this.lon = lon;
+        this.idLuchador1 = idLuchador1;
+        this.idLuchador2 = idLuchador2;
     }
 
     public int getId() {
@@ -111,6 +119,38 @@ public class Evento {
 
     public Combate[] getCombates() {
         return combates;
+    }
+
+    public int getIdLuchador1() {
+        return idLuchador1;
+    }
+
+    public void setIdLuchador1(int idLuchador1) {
+        this.idLuchador1 = idLuchador1;
+    }
+
+    public int getIdLuchador2() {
+        return idLuchador2;
+    }
+
+    public void setIdLuchador2(int idLuchador2) {
+        this.idLuchador2 = idLuchador2;
+    }
+
+    public Luchador getLuchador1() {
+        return luchador1;
+    }
+
+    public void setLuchador1(Luchador luchador1) {
+        this.luchador1 = luchador1;
+    }
+
+    public Luchador getLuchador2() {
+        return luchador2;
+    }
+
+    public void setLuchador2(Luchador luchador2) {
+        this.luchador2 = luchador2;
     }
 
     public void setCombates(Combate[] combates) {

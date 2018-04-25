@@ -74,6 +74,7 @@ public class EventsListUpcomingFragment extends Fragment {
         eventProvider.getAll(new EventoProvider.EventoListener() {
             @Override
             public void onResponse(Evento[][] eventos) {
+                // TODO buscar a cada uno de los luchadores del main event y mostrarlos en sus respectivos lugares
                 setLoading(false);
                 EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1]);
                 recyclerView.setAdapter(adapter);
