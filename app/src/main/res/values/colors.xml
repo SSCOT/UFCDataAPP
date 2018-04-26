@@ -13,8 +13,8 @@
     <color name="white">#FFFFFF</color>-->
 
 
-    <!--<color name="colorPrimary">#AC1423</color>-->
-    <color name="colorPrimary">#902032</color>
+    <color name="colorPrimary">#AC1423</color>
+    <!--<color name="colorPrimary">#902032</color>-->
     <color name="colorPrimaryDark">#740414</color>
     <color name="primary_light">#BDBDBD</color>
     <color name="colorAccent">#FFFFFF</color>

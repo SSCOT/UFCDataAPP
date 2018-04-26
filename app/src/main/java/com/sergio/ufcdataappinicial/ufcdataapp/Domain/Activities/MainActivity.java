@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.SearchView;
 
@@ -31,6 +32,8 @@ public class MainActivity extends AppCompatActivity {
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
 
+    Luchador[] luchadoresMainActivity;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +45,7 @@ public class MainActivity extends AppCompatActivity {
         navigation.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener() {
             @Override
             public boolean onNavigationItemSelected(@NonNull MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.btnNavFighters:
                         setFragment("fighters");
                         break;
@@ -59,12 +62,12 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
-    private void setFragment(String tipo){
+    private void setFragment(String tipo) {
 
         Fragment fragment = null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-        switch (tipo){
+        switch (tipo) {
             case "fighters":
                 fragment = FightersFragment.newInstance();
                 break;
@@ -76,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        if (fragment == null){
+        if (fragment == null) {
             return;
         }
 
@@ -87,5 +90,13 @@ public class MainActivity extends AppCompatActivity {
         ft.replace(R.id.fragmentPrincipal, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        /*getMenuInflater().inflate(R.menu.menu_buscador, menu);
+        MenuItem menuItem = menu.findItem(R.id.itemBuscador);
+        SearchView searchView = (SearchView) menuItem.getActionView();*/
+        return super.onCreateOptionsMenu(menu);
     }
 }

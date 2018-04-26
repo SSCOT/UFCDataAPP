@@ -8,12 +8,16 @@ import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.text.Editable;
+import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.SearchView;
 import android.widget.Toast;
@@ -37,6 +41,8 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
     ProgressBar progressBar;
     @BindView(R.id.rvLuchadores)
     RecyclerView recyclerLuchadores;
+    @BindView(R.id.etBuscador)
+    EditText etBuscador;
 
     ArrayList<Luchador> luchadoresGeneral;
 
@@ -53,7 +59,7 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_fighters_list_complete, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -66,6 +72,25 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
         recyclerConf(getView());
         setLoading(true);
         getAllFighters();
+        etBuscador.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (!charSequence.toString().equals("")  && adapter != null) {
+                    ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, charSequence.toString());
+                    Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray(new Luchador[listaLuchadoresFiltrados.size()]);adapter.setFilter(luchadoresFiltrados);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
     private void recyclerConf(View view) {
@@ -79,9 +104,10 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
             @Override
             public void onResponse(Luchador[] luchadores) {
                 setLoading(false);
+
                 luchadoresGeneral = new ArrayList<Luchador>(Arrays.asList(luchadores));
 
-                adapter = new LuchadoresAdapter(getActivity(), luchadores);
+                adapter = new LuchadoresAdapter(getContext(), luchadores);
                 recyclerLuchadores.setAdapter(adapter);
             }
 
@@ -134,30 +160,52 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
             ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, texto);
             Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray();
             adapter.setFilter(luchadoresFiltrados);
-        } catch(Exception e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }
-
 
 
         return false;
     }
 
     private ArrayList<Luchador> filter(ArrayList<Luchador> luchadores, String texto) {
-        ArrayList<Luchador> luchadoresFiltrados = null;
-        try {
+        ArrayList<Luchador> luchadoresFiltrados = new ArrayList<Luchador>();
+
+        if (texto != null)
             texto = texto.toLowerCase();
-            for (Luchador currentLuchador:luchadores) {
-                if (currentLuchador.getNombre().contains(texto) ||
-                        currentLuchador.getApellido().contains(texto) ||
-                        currentLuchador.getNick().contains(texto)) {
+        String apellido = "";
+        String nombre = "";
+        String nick = "";
+        String nombreApellido = "";
+
+        if (luchadores != null) {
+            for (Luchador currentLuchador : luchadores) {
+
+                nombre = currentLuchador.getNombre();
+                if (nombre != null)
+                    nombre = nombre.toLowerCase();
+
+                apellido = currentLuchador.getApellido();
+                if (apellido != null)
+                    apellido = apellido.toLowerCase();
+
+                nick = currentLuchador.getNick();
+                if (nick != null)
+                    nick = nick.toLowerCase();
+
+                if (nombre != null && apellido != null)
+                    nombreApellido = String.format("%s %s", nombre, apellido);
+
+                if (nombre != null && nombre.contains(texto)) {
+                    luchadoresFiltrados.add(currentLuchador);
+                } else if (apellido != null && apellido.contains(texto)) {
+                    luchadoresFiltrados.add(currentLuchador);
+                } else if (nick != null && nick.contains(texto)) {
+                    luchadoresFiltrados.add(currentLuchador);
+                } else if (nombreApellido.contains(texto)) {
                     luchadoresFiltrados.add(currentLuchador);
                 }
-
             }
-
-        } catch (Exception e) {
-            e.printStackTrace();
         }
 
         return luchadoresFiltrados;

@@ -62,6 +62,10 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
         TextView location;
         @BindView(R.id.txtArena)
         TextView arena;
+        @BindView(R.id.imgLuchador1)
+        ImageView imgLuchador1;
+        @BindView(R.id.imgLuchador2)
+        ImageView imgLuchador2;
 
         public EventsViewHolder(Context context, View itemView) {
             super(itemView);
@@ -75,6 +79,23 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
             subtitulo.setText(event.getSubtitulo());
             location.setText(event.getCiudad());
             arena.setText(event.getArena());
+            if (event.getLuchador1() != null) {
+                String imagen1 = event.getLuchador1().getImgPerfil();
+                if (imagen1 != null && !imagen1.equals("")) {
+                    Picasso.with(context).load(event.getLuchador1().getImgCuerpoIzquierda()).into(imgLuchador1);
+                }
+            }
+            if(event.getLuchador2() != null){
+                String imagen2 = event.getLuchador2().getImgPerfil();
+                if (imagen2 != null && !imagen2.equals("")) {
+                    Picasso.with(context).load(event.getLuchador2().getImgCuerpoDerecha()).into(imgLuchador2);
+                }
+            }
         }
+    }
+
+    public void updateData(Evento[] events){
+        this.events = events;
+        notifyDataSetChanged();
     }
 }

@@ -29,6 +29,8 @@ import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -45,8 +47,6 @@ public class EventsListPastFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.progressBarEvents)
     ProgressBar progressBar;
-
-    String tipo;
 
     EventoProvider eventProvider;
     LuchadorProvider luchadorProvider;
@@ -113,7 +113,10 @@ public class EventsListPastFragment extends Fragment {
                     e.printStackTrace();
                 }*/
 
-                /*// Sacamos los luchadores del main card de cada evento
+                final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0]);
+                final ArrayList<Evento> listEvents = new ArrayList<Evento>();
+
+                // Sacamos los luchadores del main card de cada evento
                 for (int i = 0; i < eventos[0].length; i++) {
 
                     final Evento currentEvent = eventos[0][i];
@@ -126,16 +129,20 @@ public class EventsListPastFragment extends Fragment {
                             luchadorProvider.getFighter(String.valueOf(currentEvent.getIdLuchador2()), new LuchadorProvider.LuchadorUniqueProviderListener() {
                                 @Override
                                 public void onResponse(Luchador luchador2) {
-                                    eventos[0][indice].setLuchador1(luchador2);
-                                    setLoading(false);
-                                    EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0]);
-                                    recyclerView.setAdapter(adapter);
+                                    eventos[0][indice].setLuchador2(luchador2);
+                                    listEvents.add(eventos[0][indice]);
+                                    // setLoading(false);
+                                    if(listEvents.size() == eventos[0].length)
+                                    {
+                                        eventos[0] = listEvents.toArray(new Evento[listEvents.size()]);
+                                        adapter.updateData(eventos[0]);
+                                    }
                                 }
 
                                 @Override
                                 public void onErrorResponse(VolleyError error) {
                                     // TODO sustituir toast
-                                    Toast.makeText(getContext(), "Error1", Toast.LENGTH_SHORT).show();
+                                    // Toast.makeText(getContext(), "Error1", Toast.LENGTH_SHORT).show();
                                 }
                             });
                         }
@@ -143,13 +150,12 @@ public class EventsListPastFragment extends Fragment {
                         @Override
                         public void onErrorResponse(VolleyError error) {
                             // TODO sustituir toast
-                            Toast.makeText(getContext(), "Error2 - "+currentEvent.getIdLuchador1(), Toast.LENGTH_SHORT).show();
+                            // Toast.makeText(getContext(), "Error2 - "+currentEvent.getIdLuchador1(), Toast.LENGTH_SHORT).show();
                         }
                     });
-                }*/
+                }
 
                 setLoading(false);
-                EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0]);
                 recyclerView.setAdapter(adapter);
             }
 

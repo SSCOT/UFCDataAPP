@@ -14,9 +14,13 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -31,6 +35,7 @@ public class EventsListUpcomingFragment extends Fragment {
     String tipo;
 
     EventoProvider eventProvider;
+    LuchadorProvider luchadorProvider;
 
     public EventsListUpcomingFragment() {
 
@@ -59,6 +64,7 @@ public class EventsListUpcomingFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         eventProvider = new EventoProvider(getContext());
+        luchadorProvider = new LuchadorProvider(getContext());
         recyclerConf(getView());
         setLoading(true);
         getEvents();
@@ -73,10 +79,55 @@ public class EventsListUpcomingFragment extends Fragment {
     private void getEvents() {
         eventProvider.getAll(new EventoProvider.EventoListener() {
             @Override
-            public void onResponse(Evento[][] eventos) {
-                // TODO buscar a cada uno de los luchadores del main event y mostrarlos en sus respectivos lugares
+            public void onResponse(final Evento[][] eventos) {
+
+
+                final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1]);
+                final ArrayList<Evento> listEvents = new ArrayList<Evento>();
+
+                // Sacamos los luchadores del main card de cada evento
+                for (int i = 0; i < eventos[1].length; i++) {
+
+                    final Evento currentEvent = eventos[1][i];
+                    final int indice = i;
+
+                    luchadorProvider.getFighter(String.valueOf(currentEvent.getIdLuchador1()), new LuchadorProvider.LuchadorUniqueProviderListener() {
+                        @Override
+                        public void onResponse(Luchador luchador1) {
+                            eventos[1][indice].setLuchador1(luchador1);
+                            luchadorProvider.getFighter(String.valueOf(currentEvent.getIdLuchador2()), new LuchadorProvider.LuchadorUniqueProviderListener() {
+                                @Override
+                                public void onResponse(Luchador luchador2) {
+                                    eventos[1][indice].setLuchador2(luchador2);
+                                    listEvents.add(eventos[1][indice]);
+                                    // setLoading(false);
+                                    if(listEvents.size() == eventos[1].length)
+                                    {
+                                        eventos[1] = listEvents.toArray(new Evento[listEvents.size()]);
+                                        adapter.updateData(eventos[1]);
+                                    }
+                                }
+
+                                @Override
+                                public void onErrorResponse(VolleyError error) {
+                                    // TODO sustituir toast
+                                    // Toast.makeText(getContext(), "Error1", Toast.LENGTH_SHORT).show();
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onErrorResponse(VolleyError error) {
+                            // TODO sustituir toast
+                            // Toast.makeText(getContext(), "Error2 - "+currentEvent.getIdLuchador1(), Toast.LENGTH_SHORT).show();
+                        }
+                    });
+                }
+
+
+
                 setLoading(false);
-                EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1]);
+                // EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1]);
                 recyclerView.setAdapter(adapter);
             }
 

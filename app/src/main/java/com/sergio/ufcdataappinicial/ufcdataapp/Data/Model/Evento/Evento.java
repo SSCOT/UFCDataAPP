@@ -54,6 +54,8 @@ public class Evento {
     }
 
     public String getFecha() {
+        if (fecha.length() > 9)
+            fecha = fecha.substring(0,10);
         return fecha;
     }
 

@@ -49,20 +49,25 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
         Context context;
 
         @BindView(R.id.txtLuchador1)
-        TextView txt;
+        TextView txtName;
         @BindView(R.id.img)
         ImageView img;
+        @BindView(R.id.txtNick)
+        TextView txtNick;
 
         public LuchadoresViewHolder(Context context, View itemView) {
             super(itemView);
-            ButterKnife.bind(this,itemView);
+            ButterKnife.bind(this, itemView);
             this.context = context;
         }
 
         public void bindLuchador(Luchador luchador) {
-            txt.setText(luchador.getNombre() + " " +luchador.getApellido());
+            txtName.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
+            if (luchador.getNick() != null) {
+                txtNick.setText(String.format("'%s'", luchador.getNick()));
+            }
             String imagen = luchador.getImgPerfil();
-            if (imagen != null && imagen != "") {
+            if (imagen != null && !imagen.equals("")) {
                 Picasso.with(context).load(luchador.getImgPerfil()).into(img);
             }
         }
