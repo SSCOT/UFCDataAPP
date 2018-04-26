@@ -65,6 +65,8 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             txtName.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
             if (luchador.getNick() != null) {
                 txtNick.setText(String.format("'%s'", luchador.getNick()));
+            } else {
+                txtNick.setText("");
             }
             String imagen = luchador.getImgPerfil();
             if (imagen != null && !imagen.equals("")) {
