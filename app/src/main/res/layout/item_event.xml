@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/margin_small"
-    android:elevation="0dp"
+    android:elevation="50dp"
     card_view:cardCornerRadius="2dp">
 
     <LinearLayout
@@ -19,6 +19,8 @@
             android:id="@+id/imgLuchador1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             android:layout_weight="25"
             tool:src="@mipmap/ic_launcher" />
 
@@ -30,58 +32,50 @@
 
             <TextView
                 android:id="@+id/txtTituloEvent"
+                style="@style/textoTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_centerHorizontal="true"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/margin_small"
-                android:fontFamily="@font/electrolize"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 tool:text="UFC 129" />
 
             <TextView
                 android:id="@+id/txtSubtituloEvent"
+                style="@style/textoSubtitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtTituloEvent"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/electrolize"
                 android:textAlignment="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="16sp"
                 tool:text="Bisping vs Dos Anjos" />
 
             <TextView
                 android:id="@+id/txtFechaEvent"
+                style="@style/textoMenor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtSubtituloEvent"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/electrolize"
-                android:textSize="12sp"
                 tool:text="13-08-2012" />
 
             <TextView
                 android:id="@+id/txtArena"
+                style="@style/textoMenor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtFechaEvent"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/electrolize"
-                android:textSize="12sp"
                 tool:text="Staples Center" />
 
             <TextView
                 android:id="@+id/txtLocation"
+                style="@style/textoMenor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtArena"
                 android:layout_centerHorizontal="true"
-                android:fontFamily="@font/electrolize"
-                android:textSize="12sp"
                 tool:text="(New York)" />
 
 
@@ -92,77 +86,8 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="25"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_marginBottom="@dimen/margin_small"
             tool:src="@mipmap/ic_launcher" />
     </LinearLayout>
-    <!--<RelativeLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            android:orientation="vertical">
-
-            <TextView
-                android:id="@+id/txtTituloEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                tool:text="Tony Ferguson" />
-
-            <TextView
-                android:id="@+id/txtSubtituloEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:textColor="@color/white"
-                tool:text="Tony Ferguson" />
-
-            <TextView
-                android:id="@+id/txtFechaEvent"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:textColor="@color/white"
-                tool:text="20161201" />
-
-            <TextView
-                android:id="@+id/txtLocation"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tool:text="20161201" />
-
-            <TextView
-                android:id="@+id/txtArena"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tool:text="EMBEDDEDVIDEO" />
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-                <ImageView
-                    android:id="@+id/imgLuchador1"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tool:src="@mipmap/ic_launcher" />
-
-                <ImageView
-                    android:id="@+id/imgLuchador2"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    tool:src="@mipmap/ic_launcher" />
-            </LinearLayout>
-
-        </LinearLayout>
-
-    </RelativeLayout>-->
-
 </android.support.v7.widget.CardView>

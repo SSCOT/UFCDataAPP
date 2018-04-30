@@ -5,7 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="100dp"
-    android:layout_margin="10dp"
+    android:layout_margin="@dimen/margin_small"
     card_view:cardCornerRadius="14dp">
 
     <LinearLayout
@@ -29,14 +29,12 @@
 
             <TextView
                 android:id="@+id/txtLuchador1"
+                style="@style/textoTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_margin="@dimen/margin_small"
-                android:fontFamily="@font/electrolize"
+                android:fontFamily="@font/armata"
                 android:gravity="center"
-                android:textColor="@color/colorPrimary"
-                android:textSize="18sp"
-                android:textStyle="bold"
                 tool:text="Tony Ferguson" />
 
             <TextView
