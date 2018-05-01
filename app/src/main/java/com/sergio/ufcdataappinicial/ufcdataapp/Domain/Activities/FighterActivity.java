@@ -17,6 +17,9 @@ public class FighterActivity extends AppCompatActivity {
     @BindView(R.id.imgLuchadorDetail)
     ImageView imgLuchadorDetail;
 
+    @BindView(R.id.imgLuchadorDetailDescription)
+    ImageView getImgLuchadorDetailDescription;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -25,12 +28,18 @@ public class FighterActivity extends AppCompatActivity {
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+
+
         ButterKnife.bind(this);
 
         String url = "http://imagec.ufc.com/http%253A%252F%252Fmedia.ufc.tv%252Ffighter_images%252FKhabib_Nurmagomedov%252F1NURMAGOMEDOV_KHABIB.png?w600-h600-tc1";
+        String url2 = "http://imagec.ufc.com/http%253A%252F%252Fmedia.ufc.tv%252Ffighter_images%252FKhabib_Nurmagomedov%252F1NURMAGOMEDOV_KHABIB_L.png?mh530";
 
         setTitle("Nurmagumedov");
+
         Picasso.with(this).load(url).into(imgLuchadorDetail);
+        Picasso.with(this).load(url2).into(getImgLuchadorDetailDescription);
+
 
     }
 }
