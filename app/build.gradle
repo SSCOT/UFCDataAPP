@@ -16,7 +16,7 @@ android {
             buildConfigField "String", "API_URL_GET_FIGHTERS_ALL", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters\""
             buildConfigField "String", "API_URL_GET_FIGHTERS_CHAMPIONS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/title_holders\""
             buildConfigField "String", "API_URL_GET_FIGHTERS_WEIGHT_CLASS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/stats/weight_class/%s\""
-            buildConfigField "String", "API_URL_GET_FIGHTER", "\"http://ufc-data-api.ufc.com/api/v3/es/fighters/%s.json\""
+            buildConfigField "String", "API_URL_GET_FIGHTER", "\"http://ufc-data-api.ufc.com/api/v3/fighters/%s.json\""
 
             buildConfigField "String", "API_URL_GET_NEWS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/news\""
             buildConfigField "String", "API_URL_ARTICLE", "\"http://ufc-data-api.ufc.com/api/v3/iphone/news/%d\""
@@ -56,4 +56,6 @@ dependencies {
     implementation 'com.android.support:recyclerview-v7:26.1.0'
     implementation 'com.android.support:cardview-v7:26.1.0'
     implementation 'com.android.support:design:26.1.0'
+
+    implementation 'im.dacer:AndroidCharts:1.0.4'
 }

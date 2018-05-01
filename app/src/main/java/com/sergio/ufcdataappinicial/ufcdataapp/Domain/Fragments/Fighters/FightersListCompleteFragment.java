@@ -1,7 +1,9 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.MenuItemCompat;
@@ -25,9 +27,12 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import java.io.Serializable;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -107,7 +112,17 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
 
                 luchadoresGeneral = new ArrayList<Luchador>(Arrays.asList(luchadores));
 
-                adapter = new LuchadoresAdapter(getContext(), luchadores);
+                adapter = new LuchadoresAdapter(getContext(), luchadores, new LuchadoresAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Luchador luchador, int position) {
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), FighterActivity.class);
+                        // intent.putExtra("luchador", String.valueOf(luchador.getId()));
+                        intent.putExtra("idLuchador", String.valueOf(luchador.getId()));
+                        intent.putExtra("titulo", luchador.getNombre() + " " + luchador.getApellido());
+                        startActivity(intent);
+                    }
+                });
                 recyclerLuchadores.setAdapter(adapter);
             }
 
@@ -135,6 +150,7 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
 
         searchView.setOnQueryTextListener(this);
 
+        // TODO: Solución a esto. Menú lupa solo en ALL
         MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
             @Override
             public boolean onMenuItemActionExpand(MenuItem item) {

@@ -86,7 +86,7 @@ public class NewsListArticlesFragment extends Fragment {
                     public void onItemClick(Noticia noticia, int position) {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), ArticleActivity.class);
-                        String urlFinal = news[position].getUrl();
+                        String urlFinal = noticia.getUrl();
                         intent.putExtra("noticiaUrl", urlFinal);
                         startActivity(intent);
                     }

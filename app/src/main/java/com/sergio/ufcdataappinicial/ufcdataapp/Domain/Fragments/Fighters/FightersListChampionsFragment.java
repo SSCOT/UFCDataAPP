@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,13 @@ public class FightersListChampionsFragment extends Fragment {
             @Override
             public void onResponse(Luchador[] luchadores) {
                 setLoading(false);
-                ChampionsAdapter adapter = new ChampionsAdapter(getActivity(), luchadores);
+                ChampionsAdapter adapter = new ChampionsAdapter(getActivity(), luchadores, new LuchadoresAdapter.OnItemClickListener() {
+                    @Override
+                    public void onItemClick(Luchador luchador, int position) {
+                        Toast.makeText(getContext(), luchador.getNombre(), Toast.LENGTH_SHORT).show();
+                        Log.d("", "onItemClick: SE HA REALIZADO UN CLICK");
+                    }
+                });
                 recyclerLuchadores.setAdapter(adapter);
             }
 

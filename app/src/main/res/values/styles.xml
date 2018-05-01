@@ -33,6 +33,13 @@
 
     <style name="textoMenor" parent="textoEspecial">
         <item name="android:textSize">12dp</item>
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textoMenorDestacado" parent="textoEspecial">
+        <item name="android:textSize">14dp</item>
+        <item name="android:textColor">@color/black</item>
+        <item name="android:textStyle">bold</item>
     </style>
 
     <style name="textoMenorDorado" parent="textoEspecial">

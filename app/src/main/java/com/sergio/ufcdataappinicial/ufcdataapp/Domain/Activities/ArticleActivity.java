@@ -26,7 +26,7 @@ public class ArticleActivity extends AppCompatActivity {
         ArticleFragment articleFragment = ArticleFragment.newInstance((String) getIntent().getExtras().get(key));
         FragmentTransaction ft = getFragmentManager().beginTransaction();
         ft.replace(R.id.fragmentArticulo, articleFragment);
-        // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
 

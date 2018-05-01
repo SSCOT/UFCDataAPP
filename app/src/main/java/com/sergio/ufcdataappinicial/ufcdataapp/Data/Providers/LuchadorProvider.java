@@ -27,13 +27,15 @@ public class LuchadorProvider {
     }
 
     public interface LuchadorProviderListener {
-        public void onResponse(Luchador[] luchadores);
-        public void onErrorResponse(VolleyError error);
+        void onResponse(Luchador[] luchadores);
+
+        void onErrorResponse(VolleyError error);
     }
 
     public interface LuchadorUniqueProviderListener {
-        public void onResponse(Luchador luchador);
-        public void onErrorResponse(VolleyError error);
+        void onResponse(Luchador luchador);
+
+        void onErrorResponse(VolleyError error);
     }
 
     public void getAll(final LuchadorProviderListener listener) {
@@ -54,7 +56,7 @@ public class LuchadorProvider {
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
     }
 
-    public void getChampions(final LuchadorProviderListener listener){
+    public void getChampions(final LuchadorProviderListener listener) {
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_FIGHTERS_CHAMPIONS, Luchador[].class, null, new Response.Listener<Luchador[]>() {
 
             @Override
@@ -92,7 +94,8 @@ public class LuchadorProvider {
     }
 
     public void getFighter(String idLuchador, final LuchadorUniqueProviderListener listener) {
-        GsonRequest gsonRequest = new GsonRequest<>(String.format(BuildConfig.API_URL_GET_FIGHTER, idLuchador), Luchador.class, null, new Response.Listener<Luchador>() {
+        String url = String.format(BuildConfig.API_URL_GET_FIGHTER, idLuchador);
+        GsonRequest gsonRequest = new GsonRequest<>(url, Luchador.class, null, new Response.Listener<Luchador>() {
 
             @Override
             public void onResponse(Luchador luchador) {

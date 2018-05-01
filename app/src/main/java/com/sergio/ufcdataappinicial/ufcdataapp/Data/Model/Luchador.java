@@ -1,8 +1,15 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
 
+import android.os.Parcelable;
+
 import com.google.gson.annotations.SerializedName;
 
-public class Luchador {
+import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Hashtable;
+import java.util.Map;
+
+public class Luchador implements Serializable {
 
     private int id;
     @SerializedName("first_name")
@@ -34,8 +41,28 @@ public class Luchador {
     @SerializedName("profile_image")
     private String imgPerfil;
 
-    public Luchador(int id, String nombre, String apellido, String nick, String categoria, String posLibraPorLibra, Boolean campeon, String situacionProfesional, int wins, int losses, int draws, String imgCinturon, String imgCuerpoIzquierda, String imgCuerpoDerecha, String imgPerfil) {
-        this.id = id;
+    @SerializedName("city_residing")
+    private String residenciaCiudad;
+    @SerializedName("state_residing")
+    private String residenciaEstado;
+    @SerializedName("country_residing")
+    private String residenciaPais;
+    @SerializedName("height_ft")
+    private String altura;
+    @SerializedName("weight_kg")
+    private float peso;
+    @SerializedName("ko_tko_wins")
+    private int winsKo;
+    @SerializedName("submission_wins")
+    private int winsSubmission;
+    @SerializedName("decision_wins")
+    private int winsDecision;
+    @SerializedName("strengths")
+    private String habilidades;
+
+    public static Hashtable<String, String> countries = new Hashtable<String, String>();
+
+    public Luchador(String nombre, String apellido, String nick, String categoria, String posLibraPorLibra, Boolean campeon, String situacionProfesional, int wins, int losses, int draws, String imgCinturon, String imgCuerpoIzquierda, String imgCuerpoDerecha, String imgPerfil, String residenciaCiudad, String residenciaEstado, String residenciaPais, String altura, float peso, int winsKo, int winsSubmission, int winsDecision, String habilidades) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nick = nick;
@@ -50,6 +77,15 @@ public class Luchador {
         this.imgCuerpoIzquierda = imgCuerpoIzquierda;
         this.imgCuerpoDerecha = imgCuerpoDerecha;
         this.imgPerfil = imgPerfil;
+        this.residenciaCiudad = residenciaCiudad;
+        this.residenciaEstado = residenciaEstado;
+        this.residenciaPais = residenciaPais;
+        this.altura = altura;
+        this.peso = peso;
+        this.winsKo = winsKo;
+        this.winsSubmission = winsSubmission;
+        this.winsDecision = winsDecision;
+        this.habilidades = habilidades;
     }
 
     public int getId() {
@@ -81,7 +117,7 @@ public class Luchador {
     }
 
     public String getCategoria() {
-        return categoria;
+        return categoria.replace("_"," ");
     }
 
     public void setCategoria(String categoria) {
@@ -167,4 +203,77 @@ public class Luchador {
     public void setImgPerfil(String imgPerfil) {
         this.imgPerfil = imgPerfil;
     }
+
+    public String getResidenciaCiudad() {
+        return residenciaCiudad;
+    }
+
+    public void setResidenciaCiudad(String residenciaCiudad) {
+        this.residenciaCiudad = residenciaCiudad;
+    }
+
+    public String getResidenciaEstado() {
+        return residenciaEstado;
+    }
+
+    public void setResidenciaEstado(String residenciaEstado) {
+        this.residenciaEstado = residenciaEstado;
+    }
+
+    public String getResidenciaPais() {
+        return residenciaPais;
+    }
+
+    public void setResidenciaPais(String residenciaPais) {
+        this.residenciaPais = residenciaPais;
+    }
+
+    public String getAltura() {
+        return altura;
+    }
+
+    public void setAltura(String altura) {
+        this.altura = altura;
+    }
+
+    public float getPeso() {
+        return peso;
+    }
+
+    public void setPeso(float peso) {
+        this.peso = peso;
+    }
+
+    public int getWinsKo() {
+        return winsKo;
+    }
+
+    public void setWinsKo(int winsKo) {
+        this.winsKo = winsKo;
+    }
+
+    public int getWinsSubmission() {
+        return winsSubmission;
+    }
+
+    public void setWinsSubmission(int winsSubmission) {
+        this.winsSubmission = winsSubmission;
+    }
+
+    public int getWinsDecision() {
+        return winsDecision;
+    }
+
+    public void setWinsDecision(int winsDecision) {
+        this.winsDecision = winsDecision;
+    }
+
+    public String getHabilidades() {
+        return habilidades;
+    }
+
+    public void setHabilidades(String habilidades) {
+        this.habilidades = habilidades;
+    }
+
 }

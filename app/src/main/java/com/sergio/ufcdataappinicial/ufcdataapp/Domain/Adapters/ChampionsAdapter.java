@@ -22,7 +22,7 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
     private Context context;
     private Luchador[] luchadores;
 
-    public ChampionsAdapter(Context context, Luchador[] luchadores) {
+    public ChampionsAdapter(Context context, Luchador[] luchadores, LuchadoresAdapter.OnItemClickListener onItemClickListener) {
         this.context = context;
         this.luchadores = luchadores;
     }

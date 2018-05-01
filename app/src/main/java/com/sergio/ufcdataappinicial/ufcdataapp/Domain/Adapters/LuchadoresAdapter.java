@@ -5,6 +5,7 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,10 +20,12 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
 
     private Context context;
     private Luchador[] luchadores;
+    private OnItemClickListener listener;
 
-    public LuchadoresAdapter(Context context, Luchador[] luchadores) {
+    public LuchadoresAdapter(Context context, Luchador[] luchadores, OnItemClickListener listener) {
         this.context = context;
         this.luchadores = luchadores;
+        this.listener = listener;
     }
 
     // Asignamos la celda y la inflamos
@@ -35,7 +38,7 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
     @Override
     public void onBindViewHolder(LuchadoresViewHolder viewHolder, int position) {
         Luchador luchador = luchadores[position];
-        viewHolder.bindLuchador(luchador);
+        viewHolder.bindLuchador(luchador, listener);
 
     }
 
@@ -61,7 +64,7 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             this.context = context;
         }
 
-        public void bindLuchador(Luchador luchador) {
+        public void bindLuchador(final Luchador luchador, final OnItemClickListener listener) {
             txtName.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
             if (luchador.getNick() != null) {
                 txtNick.setText(String.format("'%s'", luchador.getNick()));
@@ -72,11 +75,22 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             if (imagen != null && !imagen.equals("")) {
                 Picasso.with(context).load(luchador.getImgPerfil()).into(img);
             }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(luchador, getAdapterPosition());
+                }
+            });
         }
     }
 
     public void setFilter(Luchador[] luchadores) {
         this.luchadores = luchadores;
         notifyDataSetChanged();
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Luchador luchador, int position);
     }
 }
