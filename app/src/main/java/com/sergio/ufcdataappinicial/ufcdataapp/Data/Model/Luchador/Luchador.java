@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 
 import android.os.Parcelable;
 
@@ -60,9 +60,10 @@ public class Luchador implements Serializable {
     @SerializedName("strengths")
     private String habilidades;
 
-    public static Hashtable<String, String> countries = new Hashtable<String, String>();
+    @SerializedName("fights")
+    private LuchadorCombate[] combates;
 
-    public Luchador(String nombre, String apellido, String nick, String categoria, String posLibraPorLibra, Boolean campeon, String situacionProfesional, int wins, int losses, int draws, String imgCinturon, String imgCuerpoIzquierda, String imgCuerpoDerecha, String imgPerfil, String residenciaCiudad, String residenciaEstado, String residenciaPais, String altura, float peso, int winsKo, int winsSubmission, int winsDecision, String habilidades) {
+    public Luchador(String nombre, String apellido, String nick, String categoria, String posLibraPorLibra, Boolean campeon, String situacionProfesional, int wins, int losses, int draws, String imgCinturon, String imgCuerpoIzquierda, String imgCuerpoDerecha, String imgPerfil, String residenciaCiudad, String residenciaEstado, String residenciaPais, String altura, float peso, int winsKo, int winsSubmission, int winsDecision, String habilidades, LuchadorCombate[] combates) {
         this.nombre = nombre;
         this.apellido = apellido;
         this.nick = nick;
@@ -86,6 +87,7 @@ public class Luchador implements Serializable {
         this.winsSubmission = winsSubmission;
         this.winsDecision = winsDecision;
         this.habilidades = habilidades;
+        this.combates = combates;
     }
 
     public int getId() {
@@ -276,4 +278,11 @@ public class Luchador implements Serializable {
         this.habilidades = habilidades;
     }
 
+    public LuchadorCombate[] getCombates() {
+        return combates;
+    }
+
+    public void setCombates(LuchadorCombate[] combates) {
+        this.combates = combates;
+    }
 }

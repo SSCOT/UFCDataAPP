@@ -9,7 +9,6 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 

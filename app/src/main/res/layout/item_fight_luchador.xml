@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tool="http://schemas.android.com/tools"
+    android:id="@+id/card_view"
+    android:layout_width="match_parent"
+    android:layout_height="@dimen/CardStandard"
+    android:layout_marginStart="@dimen/margin_small"
+    android:layout_marginEnd="@dimen/margin_small"
+    android:elevation="0dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:id="@+id/titulo"
+            style="@style/textoTituloInvertSpecial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:gravity="center"
+            tool:text="UFC 223: Khabib vs. Iaquinta" />
+
+        <ImageView
+            android:id="@+id/imgLuchador"
+            android:layout_width="@dimen/large"
+            android:layout_height="@dimen/large"
+            android:layout_below="@id/titulo"
+            android:layout_margin="@dimen/margin_small"
+            tool:src="@color/cardview_shadow_start_color" />
+
+        <TextView
+            android:id="@+id/txtLuchador"
+            style="@style/textoMenorDestacado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titulo"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toEndOf="@id/imgLuchador"
+            tool:text="Al" />
+
+        <TextView
+            android:id="@+id/txtLuchadorApe"
+            style="@style/textoMenorDestacado"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtLuchador"
+            android:layout_toEndOf="@id/imgLuchador"
+            tool:text="Iaquinta" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="0dp"
+            android:layout_height="70dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="30dp"
+            android:background="?android:attr/listDivider" />
+
+        <TextView
+            android:id="@+id/txtTipoFinal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/txtFecha"
+            android:layout_toStartOf="@id/result"
+            android:textStyle="italic"
+            tool:text="Decision - Unanimous" />
+
+        <TextView
+            android:id="@+id/result"
+            style="@style/textoWin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignEnd="@id/titulo"
+            android:layout_below="@id/titulo"
+            android:layout_margin="@dimen/margin_small"
+            android:layout_marginTop="@dimen/smallDouble"
+            android:gravity="center"
+            android:padding="@dimen/margin_small"
+            tool:text="W" />
+
+        <TextView
+            android:id="@+id/txtFecha"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/titulo"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/margin_small"
+            android:layout_toStartOf="@id/result"
+            tool:text="2017-12-30"
+
+            />
+
+    </RelativeLayout>
+
+    <!--<LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:weightSum="100">
+
+        <ImageView
+            android:id="@+id/img"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight="20"
+            card_view:srcCompat="@android:drawable/btn_star" />
+
+        <RelativeLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="50"
+            android:paddingRight="@dimen/margin_small"
+            android:paddingTop="@dimen/margin_small">
+
+            <TextView
+                android:id="@+id/txtLuchador1"
+                style="@style/textoTitulo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+
+                tool:text="Tony Ferguson" />
+
+            <TextView
+                android:id="@+id/txtNick"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/txtLuchador1"
+                tool:text="'Mandanguita'" />
+        </RelativeLayout>
+
+    </LinearLayout>-->
+
+</android.support.v7.widget.CardView>

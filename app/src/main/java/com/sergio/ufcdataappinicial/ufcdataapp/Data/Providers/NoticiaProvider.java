@@ -5,7 +5,6 @@ import android.content.Context;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;

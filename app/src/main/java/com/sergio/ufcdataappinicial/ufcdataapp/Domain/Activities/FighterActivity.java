@@ -1,5 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities;
 
+import android.app.Fragment;
+import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,12 +11,17 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import com.android.volley.VolleyError;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FightListFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
+
 import java.util.ArrayList;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import im.dacer.androidcharts.PieHelper;
@@ -81,7 +88,11 @@ public class FighterActivity extends AppCompatActivity {
             public void onResponse(Luchador luchador) {
                 setLoading(false);
                 setData(luchador);
-                setChart2(luchador);
+                setChart(luchador);
+                // Lanzamos la lista de combates
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment fragment = FightListFragment.newInstance(luchador);
+                commitFragment(ft, fragment);
             }
 
             @Override
@@ -93,26 +104,28 @@ public class FighterActivity extends AppCompatActivity {
         });
     }
 
-    private void setChart2(Luchador luchador) {
+    private void setChart(Luchador luchador) {
         PieView pieView = (PieView) findViewById(R.id.pie_view);
 
 
-        double total = (double) luchador.getWins();
-        double KO = (double) ((double) (luchador.getWinsKo() * 100) / total);
+        double total = luchador.getWinsKo() + luchador.getWinsDecision() + luchador.getWinsSubmission();
+        double KO = (luchador.getWinsKo() * 100) / total;
         double Submissions = (luchador.getWinsSubmission() * 100) / total;
         double Decisions = (luchador.getWinsDecision() * 100) / total;
 
 
         ArrayList<PieHelper> pieHelperArrayList = new ArrayList<PieHelper>();
-        pieHelperArrayList.add(new PieHelper((float) KO, getResources().getColor(R.color.colorPrimary)));
-        pieHelperArrayList.add(new PieHelper((float) Submissions, getResources().getColor(R.color.colorPrimaryDark)));
-        pieHelperArrayList.add(new PieHelper((float) Decisions, getResources().getColor(R.color.colorPrimaryExtra)));
+        if (KO > 0)
+            pieHelperArrayList.add(new PieHelper((float) KO, getResources().getColor(R.color.colorPrimary)));
+        if (Submissions > 0)
+            pieHelperArrayList.add(new PieHelper((float) Submissions, getResources().getColor(R.color.colorPrimaryDark)));
+        if (Decisions > 0)
+            pieHelperArrayList.add(new PieHelper((float) Decisions, getResources().getColor(R.color.black)));
         pieView.setMinimumHeight(100);
         pieView.setMinimumWidth(100);
         pieView.setDate(pieHelperArrayList);
-        pieView.showPercentLabel(true); //optional
+        pieView.showPercentLabel(true);
     }
-
 
     private void setData(Luchador luchador) {
         txtFighterDetailName.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
@@ -125,6 +138,13 @@ public class FighterActivity extends AppCompatActivity {
         txtFighterDetailRecord.setText(String.format("%d - %d - %d", luchador.getWins(), luchador.getLosses(), luchador.getDraws()));
         txtFighterDetailWeight.setText(String.format("%s kg", luchador.getPeso()));
         txtFighterDetailWeightClass.setText(luchador.getCategoria());
+        if (luchador.getCampeon()) {
+            txtFighterDetailWeightClass.setBackgroundColor(getResources().getColor(R.color.gold));
+            txtFighterDetailWeightClass.setPadding(5, 5, 5, 5);
+            txtFighterDetailWeightClass.setTextColor(getResources().getColor(R.color.white));
+        }
+
+
         getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
         Picasso.with(this).load(luchador.getImgPerfil()).into(imgLuchadorDetail);
         Picasso.with(this).load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
@@ -150,25 +170,11 @@ public class FighterActivity extends AppCompatActivity {
         }
     }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
+        ft.replace(R.id.fightsContentFragment, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+    }
 
 
     /*public void setActionBarTitle(String title) {

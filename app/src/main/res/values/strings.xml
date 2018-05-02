@@ -4,5 +4,8 @@
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="lorem_ipsum">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam sit amet dolor pellentesque diam interdum viverra. Fusce pretium elit ut eros lacinia ultricies. Praesent nisi enim, ultricies vitae mattis vel, accumsan vestibulum lorem. Maecenas sodales euismod feugiat. Vivamus eget placerat tellus. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Mauris molestie ante diam, id aliquet massa faucibus eget. Aenean nec maximus urna. Quisque sollicitudin ac metus sit amet suscipit.\n\nDuis turpis elit, interdum eu porta vitae, fringilla sed dolor. Nullam dictum interdum nibh sit amet sollicitudin. Sed imperdiet eget dui sed eleifend. Phasellus id pulvinar nibh. Pellentesque mattis vehicula erat, quis elementum velit laoreet ut. Fusce faucibus egestas mauris ac suscipit. Nullam sed sem lacus.\n\nAenean interdum magna eget sagittis sodales. Quisque malesuada dui augue, id pretium justo dignissim vel. Nulla sed imperdiet ligula. Ut malesuada, eros eget efficitur varius, nibh felis gravida neque, at accumsan est eros ac mi. Phasellus luctus sit amet nulla quis sollicitudin. Donec scelerisque malesuada mattis. Donec quis congue elit. Cras a fermentum nulla. Nunc ornare fermentum ante, at efficitur nibh ultricies feugiat. Etiam vitae magna et nisi ultrices aliquam.</string>
+    <string name="ko_tko">KO/TKO</string>
+    <string name="submission">Submission</string>
+    <string name="decision">Decision</string>
 
 </resources>

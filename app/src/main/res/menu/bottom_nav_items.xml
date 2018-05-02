@@ -6,13 +6,16 @@
         android:id="@+id/btnNavNews"
         android:enabled="true"
         android:title="News"
+        android:icon="@drawable/ic_news"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btnNavFighters"
         android:title="Fighters"
+        android:icon="@drawable/ic_fighters"
         app:showAsAction="ifRoom" />
     <item
         android:id="@+id/btnNavEvents"
         android:title="Events"
+        android:icon="@drawable/ic_notifications_black_24dp"
         app:showAsAction="ifRoom" />
 </menu>

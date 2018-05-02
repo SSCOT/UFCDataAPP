@@ -1,21 +1,15 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
-import com.android.volley.toolbox.JsonObjectRequest;
-import com.android.volley.toolbox.RequestFuture;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.LuchadorCombate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
-
-import org.json.JSONObject;
-
-import java.util.concurrent.ExecutionException;
 
 public class LuchadorProvider {
 

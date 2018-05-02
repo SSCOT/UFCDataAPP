@@ -1,7 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 
 public class Evento {
 

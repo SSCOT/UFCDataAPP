@@ -8,12 +8,11 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="AppThemeNoToolbar" parent="Theme.AppCompat.DayNight.NoActionBar">
+    <style name="AppThemeNoToolbar" parent="Theme.AppCompat.Light.NoActionBar">
         <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
-
     </style>
 
     <style name="textoEspecial">
@@ -26,6 +25,15 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="textoTituloInvert" parent="textoTitulo">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/black</item>
+    </style>
+
+    <style name="textoTituloInvertSpecial" parent="textoTituloInvert">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
     <style name="textoSubtitulo" parent="textoEspecial">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">16dp</item>
@@ -34,6 +42,15 @@
     <style name="textoMenor" parent="textoEspecial">
         <item name="android:textSize">12dp</item>
         <item name="android:textColor">@color/black</item>
+    </style>
+
+    <style name="textoWin" parent="textoMenor">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/win</item>
+    </style>
+
+    <style name="textoLose" parent="textoWin">
+        <item name="android:background">@color/black</item>
     </style>
 
     <style name="textoMenorDestacado" parent="textoEspecial">
