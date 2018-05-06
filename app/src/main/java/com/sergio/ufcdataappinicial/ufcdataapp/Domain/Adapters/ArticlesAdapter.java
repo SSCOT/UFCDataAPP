@@ -49,6 +49,8 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
 
         Context context;
 
+        @BindView(R.id.txtTitle)
+        TextView titulo;
         @BindView(R.id.txtAutor)
         TextView autor;
         @BindView(R.id.txtFecha)
@@ -63,11 +65,15 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
         }
 
         public void bindNoticia(final Noticia noticia, final OnItemClickListener listener) {
+            titulo.setText(noticia.getTitulo());
             autor.setText(noticia.getAutor());
             fecha.setText(noticia.getFecha());
             String imagen = noticia.getImg();
             if (imagen != null && imagen != "") {
-                Picasso.with(this.context).load(noticia.getImg()).into(img);
+                // Picasso.with(this.context).load(noticia.getImg()).into(img);
+                Picasso.with(this.context)
+                        .load(noticia.getImg())
+                        .into(img);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

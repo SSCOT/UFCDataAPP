@@ -2,6 +2,7 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 public class Evento {
 
@@ -54,13 +55,11 @@ public class Evento {
     }
 
     public String getFecha() {
-        if (fecha.length() > 9)
-            fecha = fecha.substring(0,10);
-        return fecha;
+        return Utilidades.changeDate(fecha);
     }
 
     public void setFecha(String fecha) {
-        this.fecha = fecha;
+        this.fecha = Utilidades.changeDate(fecha);
     }
 
     public String getTitulo() {

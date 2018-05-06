@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 
 import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 public class Noticia {
 
@@ -45,7 +46,7 @@ public class Noticia {
     }
 
     public String getFecha() {
-        return fecha;
+        return Utilidades.changeDate(fecha);
     }
 
     public void setFecha(String fecha) {

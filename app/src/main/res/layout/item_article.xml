@@ -5,8 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_small"
-    card_view:cardCornerRadius="2dp">
+    android:elevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,21 +14,30 @@
         <ImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
+            android:layout_height="200dp"
             card_view:srcCompat="@android:drawable/btn_star" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:layout_below="@id/img">
+            android:layout_below="@id/img"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/txtTitle"
+                style="@style/textoTitulo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_margin="@dimen/margin_small"
+                tool:text="ESTO ES UN TÍTULO DE PRUEBA" />
 
             <TextView
                 android:id="@+id/txtAutor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_marginRight="@dimen/margin_small"
                 tool:text="Tony Ferguson" />
 
             <TextView
@@ -37,6 +45,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
+                android:layout_marginRight="@dimen/margin_small"
                 tool:text="20161201" />
         </LinearLayout>
 
