@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="utf-8"?>
-
 <android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
@@ -45,12 +44,16 @@
         android:background="@color/white"
         app:layout_behavior="@string/appbar_scrolling_view_behavior">
 
-        <LinearLayout
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/content"></FrameLayout>
+
+        <!--<LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
             android:transitionGroup="true">
-
 
             <TextView
                 android:id="@+id/txtFighterDetailName"
@@ -153,7 +156,9 @@
             </LinearLayout>
             <RelativeLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content">
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center">
                 <view
                     android:layout_width="@dimen/chartDim"
                     android:layout_height="@dimen/chartDim"
@@ -223,19 +228,19 @@
             <FrameLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:id="@+id/fightsContentFragment"></FrameLayout>
+                android:id="@+id/fightsContentFragment" />
 
-        </LinearLayout>
+        </LinearLayout>-->
 
     </android.support.v4.widget.NestedScrollView>
 
-    <ProgressBar
+    <!--<ProgressBar
         android:id="@+id/progressBarFighter"
         style="?android:attr/progressBarStyleLarge"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:background="@color/colorPrimaryDark"
-        android:visibility="gone" />
+        android:visibility="gone" />-->
 
 </android.support.design.widget.CoordinatorLayout>

@@ -6,6 +6,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,79 +76,41 @@ public class EventsListPastFragment extends Fragment {
     }
 
     private void getEvents() {
-        eventProvider.getAll(new EventoProvider.EventoListener() {
+        // TODO: Estaría mejor ver si están en local los luchadores y si no están hacer la búsqueda
+        // Sacamos todos los datos de los luchadores
+        luchadorProvider.getAll(new LuchadorProvider.LuchadorProviderListener() {
             @Override
-            public void onResponse(final Evento[][] eventos) {
-
-                /*RequestFuture<JSONObject> future = RequestFuture.newFuture();
-                JsonObjectRequest request = new JsonObjectRequest("http://ufc-data-api.ufc.com/api/v3/es/fighters/241895.json", new JSONObject(), future, future);
-                RequestQueue requestQueue;
-                requestQueue = Volley.newRequestQueue(getContext().getApplicationContext());
-                requestQueue.add(request);
-                JSONObject response = null;
-                try {
-                    Log.d("", "onResponse: ");
-                    response = future.get(60, TimeUnit.SECONDS); // this will block
-                    Log.d("", "onResponse: ");
-                } catch (InterruptedException e) {
-                    // exception handling
-                } catch (ExecutionException e) {
-                    // exception handling
-                } catch (TimeoutException e) {
-                    e.printStackTrace();
-                }*/
-
-                final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0]);
-                final ArrayList<Evento> listEvents = new ArrayList<Evento>();
-
-                // Sacamos los luchadores del main card de cada evento
-                for (int i = 0; i < eventos[0].length; i++) {
-
-                    final Evento currentEvent = eventos[0][i];
-                    final int indice = i;
-
-                    luchadorProvider.getFighter(String.valueOf(currentEvent.getIdLuchador1()), new LuchadorProvider.LuchadorUniqueProviderListener() {
-                        @Override
-                        public void onResponse(Luchador luchador1) {
-                            eventos[0][indice].setLuchador1(luchador1);
-                            luchadorProvider.getFighter(String.valueOf(currentEvent.getIdLuchador2()), new LuchadorProvider.LuchadorUniqueProviderListener() {
-                                @Override
-                                public void onResponse(Luchador luchador2) {
-                                    eventos[0][indice].setLuchador2(luchador2);
-                                    listEvents.add(eventos[0][indice]);
-                                    // setLoading(false);
-                                    if(listEvents.size() == eventos[0].length)
-                                    {
-                                        eventos[0] = listEvents.toArray(new Evento[listEvents.size()]);
-                                        adapter.updateData(eventos[0]);
-                                    }
-                                }
-
-                                @Override
-                                public void onErrorResponse(VolleyError error) {
-                                    // TODO sustituir toast
-                                    // Toast.makeText(getContext(), "Error1", Toast.LENGTH_SHORT).show();
-                                }
-                            });
-                        }
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            // TODO sustituir toast
-                            // Toast.makeText(getContext(), "Error2 - "+currentEvent.getIdLuchador1(), Toast.LENGTH_SHORT).show();
-                        }
-                    });
+            public void onResponse(Luchador[] response) {
+                final SparseArray<Luchador> luchadoresSparse = new SparseArray<Luchador>();
+                for (Luchador item : response) {
+                    luchadoresSparse.append(item.getId(), item);
                 }
+                eventProvider.getAll(new EventoProvider.EventoListener() {
+                    @Override
+                    public void onResponse(final Evento[][] eventos) {
 
-                setLoading(false);
-                recyclerView.setAdapter(adapter);
+                        for (Evento itemEvento : eventos[0]) {
+                            itemEvento.setLuchador1(luchadoresSparse.get(itemEvento.getIdLuchador1()));
+                            itemEvento.setLuchador2(luchadoresSparse.get(itemEvento.getIdLuchador2()));
+                        }
+
+                        final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0]);
+                        setLoading(false);
+                        recyclerView.setAdapter(adapter);
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        setLoading(false);
+                        // TODO Sustituir TOAST
+                        Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                    }
+                });
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                setLoading(false);
-                // TODO Sustituir TOAST
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+
             }
         });
     }

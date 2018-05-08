@@ -16,6 +16,7 @@ import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FightListFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FighterFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -29,10 +30,10 @@ import im.dacer.androidcharts.PieView;
 
 public class FighterActivity extends AppCompatActivity {
 
-    @BindView(R.id.progressBarFighter)
-    ProgressBar progressBar;
     @BindView(R.id.imgLuchadorDetail)
     ImageView imgLuchadorDetail;
+    /*@BindView(R.id.progressBarFighter)
+    ProgressBar progressBar;
     @BindView(R.id.imgLuchadorDetailDescription)
     ImageView imgLuchadorDetailDescription;
     @BindView(R.id.txtFighterDetailName)
@@ -50,7 +51,7 @@ public class FighterActivity extends AppCompatActivity {
     @BindView(R.id.txtFighterDetailResidence)
     TextView txtFighterDetailResidence;
     @BindView(R.id.txtFighterDetailStrengths)
-    TextView getTxtFighterDetailStrengths;
+    TextView getTxtFighterDetailStrengths;*/
 
     LuchadorProvider fighterProvider = new LuchadorProvider(this);
 
@@ -66,11 +67,37 @@ public class FighterActivity extends AppCompatActivity {
 
         String idLuchador = getIntent().getExtras().getString("idLuchador");
         ButterKnife.bind(this);
-        setLoading(true);
-        getData(idLuchador);
+
+        FragmentTransaction ft = getFragmentManager().beginTransaction();
+        Fragment fragment = FighterFragment.newInstance(idLuchador);
+        commitFragment(ft, fragment);
+
+        // setLoading(true);
+        // getData(idLuchador);
     }
 
-    private void getData(String id) {
+    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
+        ft.replace(R.id.content, fragment);
+        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
+        ft.commit();
+    }
+
+    public void setFighterImage (String url) {
+        Picasso.with(this).load(url).into(imgLuchadorDetail);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case android.R.id.home:
+                onBackPressed();
+                return true;
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+    }
+
+    /*private void getData(String id) {
         fighterProvider.getFighter(id, new LuchadorProvider.LuchadorUniqueProviderListener() {
             @Override
             public void onResponse(Luchador luchador) {
@@ -139,16 +166,7 @@ public class FighterActivity extends AppCompatActivity {
 
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case android.R.id.home:
-                onBackPressed();
-                return true;
-            default:
-                return super.onOptionsItemSelected(item);
-        }
-    }
+
 
     private void setLoading(boolean loading) {
         if (loading) {
@@ -162,5 +180,5 @@ public class FighterActivity extends AppCompatActivity {
         ft.replace(R.id.fightsContentFragment, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-    }
+    }*/
 }

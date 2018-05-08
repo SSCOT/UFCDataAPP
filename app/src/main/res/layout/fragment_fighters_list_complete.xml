@@ -5,17 +5,17 @@
     android:layout_height="match_parent"
     tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListCompleteFragment">
 
-    <EditText
+    <android.support.v7.widget.SearchView
+        android:id="@+id/etBuscador"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre del luchador"
-        android:id="@+id/etBuscador"/>
+        android:layout_below="@id/etBuscador" />
 
     <android.support.v7.widget.RecyclerView
         android:id="@+id/rvLuchadores"
-        android:layout_below="@id/etBuscador"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:layout_below="@id/etBuscador"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp" />
 

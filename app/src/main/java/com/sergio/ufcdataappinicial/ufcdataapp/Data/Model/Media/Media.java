@@ -29,10 +29,12 @@ public class Media implements Serializable {
     private String urlInterna;
     @SerializedName("media_date")
     private String fecha;
+    @SerializedName("published_start_date")
+    private String fechaInicial;
     @SerializedName("photos")
     private Foto[] fotos;
 
-    public Media(String tipo, String titulo, String descripcion, String img, String tipoEmbebido, String idEmbebido, String urlStream, String urlVideo, String urlInterna, String fecha, Foto[] fotos) {
+    public Media(String tipo, String titulo, String descripcion, String img, String tipoEmbebido, String idEmbebido, String urlStream, String urlVideo, String urlInterna, String fecha, String fechaInicial, Foto[] fotos) {
         this.tipo = tipo;
         this.titulo = titulo;
         this.descripcion = descripcion;
@@ -43,6 +45,7 @@ public class Media implements Serializable {
         this.urlVideo = urlVideo;
         this.urlInterna = urlInterna;
         this.fecha = fecha;
+        this.fechaInicial = fechaInicial;
         this.fotos = fotos;
     }
 
@@ -136,5 +139,13 @@ public class Media implements Serializable {
 
     public void setUrlInterna(String urlInterna) {
         this.urlInterna = urlInterna;
+    }
+
+    public String getFechaInicial() {
+        return fechaInicial;
+    }
+
+    public void setFechaInicial(String fechaInicial) {
+        this.fechaInicial = fechaInicial;
     }
 }

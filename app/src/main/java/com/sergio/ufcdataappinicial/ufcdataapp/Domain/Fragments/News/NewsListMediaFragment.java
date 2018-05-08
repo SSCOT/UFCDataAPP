@@ -8,7 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,6 +21,8 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.MediaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.MediaActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.MediaAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+
+import java.util.ArrayList;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -98,36 +100,42 @@ public class NewsListMediaFragment extends Fragment {
 
     private Media[] sortResponse(Media[] response) {
 
-        for (int i = 1; i < response.length; i++) {
+        SparseArray<Media> arrayMedia = new SparseArray<>();
+        ArrayList<Media> arrayMediaAux = new ArrayList<>();
 
-            // if (Integer.parseInt(response[i].getFecha().substring(0,10).replace("-","")) < 5){
+        /*
+            Ordenamos por fecha. La mejor forma es obtener la fecha (string) y liberarla de
+            caracteres de separación. Luego la transformamos en entero y la metemos como key en un
+            SparseArray. En el value de cada key metemos el elemento Media.
+            Con el método append, nos queda ordenado pero de menor a mayor.
 
-            Media aux;
-
-            String fecha1 = response[i].getFecha();
-            String fecha2 = response[i-1].getFecha();
-
-            if(fecha1 == "" || fecha1 == null)
-                fecha1 = "0000-00-00";
-            if(fecha2 == "" || fecha2 == null)
-                fecha2 = "0000-00-00";
-
-            while (Integer.parseInt(fecha1.substring(0,9).replace("-","")) < Integer.parseInt(fecha2.substring(0,9).replace("-",""))) {
-                aux = response[i];
-                response[i] = response[i-1];
-                response[i-1] = aux;
-
-                fecha1 = response[i].getFecha();
-                fecha2 = response[i-1].getFecha();
-                if(fecha1 == "" || fecha1 == null)
-                    fecha1 = "0000-00-00";
-                if(fecha2 == "" || fecha2 == null)
-                    fecha2 = "0000-00-00";
+         */
+        for (Media item : response) {
+            String fecha = item.getFecha();
+            if (fecha != null && !fecha.equals("")) {
+                String dia = fecha.substring(0, 10).replace("-", "");
+                int fechaNumero = Integer.parseInt(dia);
+                if (fechaNumero > 0)
+                    arrayMedia.append(fechaNumero, item);
             }
-
         }
 
-        return response;
+        /*
+            Con la ayuda de un array list volteamos el orden del SparseArray
+         */
+
+        for (int i = arrayMedia.size() - 1; i >= 0; i--) {
+            int key = arrayMedia.keyAt(i);
+            Media element = arrayMedia.get(key);
+            arrayMediaAux.add(element);
+        }
+
+        /*
+            Finalmente realizamos una conversión a array normal para facilitar el tratamiento de los
+            datos.
+         */
+
+        return arrayMediaAux.toArray(new Media[arrayMediaAux.size()]);
     }
 
     private void setLoading(boolean loading) {

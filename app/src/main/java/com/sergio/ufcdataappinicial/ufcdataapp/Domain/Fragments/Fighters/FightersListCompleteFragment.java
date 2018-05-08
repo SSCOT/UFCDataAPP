@@ -1,25 +1,17 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.support.v4.view.MenuItemCompat;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
+import android.support.v7.widget.SearchView;
 import android.view.LayoutInflater;
-import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 import android.widget.ProgressBar;
-import android.widget.SearchView;
 import android.widget.Toast;
 
 import com.android.volley.VolleyError;
@@ -35,14 +27,14 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FightersListCompleteFragment extends Fragment implements SearchView.OnQueryTextListener {
+public class FightersListCompleteFragment extends Fragment{
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
     @BindView(R.id.rvLuchadores)
     RecyclerView recyclerLuchadores;
     @BindView(R.id.etBuscador)
-    EditText etBuscador;
+    SearchView etBuscador;
 
     ArrayList<Luchador> luchadoresGeneral;
 
@@ -52,6 +44,11 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
     public static FightersListCompleteFragment newInstance() {
         FightersListCompleteFragment fragment = new FightersListCompleteFragment();
         return fragment;
+    }
+
+    @Override
+    public void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
     }
 
     @Override
@@ -72,24 +69,28 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
         recyclerConf(getView());
         setLoading(true);
         getAllFighters();
-        etBuscador.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
+        etBuscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                callSearch(query);
+                return true;
             }
 
             @Override
-            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (!charSequence.toString().equals("")  && adapter != null) {
-                    ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, charSequence.toString());
-                    Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray(new Luchador[listaLuchadoresFiltrados.size()]);adapter.setFilter(luchadoresFiltrados);
-                }
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, newText);
+                Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray(new Luchador[listaLuchadoresFiltrados.size()]);
+                if(adapter != null)
+                    adapter.setFilter(luchadoresFiltrados);
+
+                return true;
             }
 
-            @Override
-            public void afterTextChanged(Editable editable) {
+            public void callSearch(String query) {
 
             }
+
         });
     }
 
@@ -134,48 +135,6 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
         } else {
             progressBar.setVisibility(View.GONE);
         }
-    }
-
-    @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
-        getActivity().getMenuInflater().inflate(R.menu.menu_buscador, menu);
-        MenuItem menuItem = menu.findItem(R.id.itemBuscador);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-
-        searchView.setOnQueryTextListener(this);
-
-        // TODO: Solución a esto. Menú lupa solo en ALL
-        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                adapter.setFilter((Luchador[]) luchadoresGeneral.toArray());
-                return true;
-            }
-        });
-    }
-
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String texto) {
-        try {
-            ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, texto);
-            Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray();
-            adapter.setFilter(luchadoresFiltrados);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        return false;
     }
 
     private ArrayList<Luchador> filter(ArrayList<Luchador> luchadores, String texto) {
