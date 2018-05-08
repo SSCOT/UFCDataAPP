@@ -1,5 +1,6 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +17,7 @@ import android.widget.Toast;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
@@ -72,11 +74,14 @@ public class FightersListChampionsFragment extends Fragment {
             @Override
             public void onResponse(Luchador[] luchadores) {
                 setLoading(false);
-                ChampionsAdapter adapter = new ChampionsAdapter(getActivity(), luchadores, new LuchadoresAdapter.OnItemClickListener() {
+                ChampionsAdapter adapter = new ChampionsAdapter(getActivity(), luchadores, new ChampionsAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Luchador luchador, int position) {
-                        Toast.makeText(getContext(), luchador.getNombre(), Toast.LENGTH_SHORT).show();
-                        Log.d("", "onItemClick: SE HA REALIZADO UN CLICK");
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), FighterActivity.class);
+                        intent.putExtra("idLuchador", String.valueOf(luchador.getId()));
+                        intent.putExtra("titulo", luchador.getNombre() + " " + luchador.getApellido());
+                        startActivity(intent);
                     }
                 });
                 recyclerLuchadores.setAdapter(adapter);

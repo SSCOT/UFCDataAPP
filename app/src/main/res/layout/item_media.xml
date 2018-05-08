@@ -5,8 +5,7 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:layout_margin="@dimen/margin_small"
-    card_view:cardCornerRadius="2dp">
+    android:elevation="0dp">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -15,46 +14,49 @@
         <ImageView
             android:id="@+id/imgMedia"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@color/black"
-            card_view:srcCompat="@android:drawable/btn_star" />
+            android:layout_height="@dimen/CardStandardDouble"
+            tool:srcCompat="@android:drawable/btn_star" />
+
+        <ImageView
+            android:layout_width="@dimen/large"
+            android:id="@+id/iconMediaType"
+            android:layout_height="@dimen/large"
+            android:layout_marginTop="@dimen/CardStandard"
+            android:layout_centerHorizontal="true"
+            tool:srcCompat="@android:drawable/ic_media_play" />
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgMedia"
-            android:background="@color/black"
             android:orientation="vertical">
 
             <TextView
                 android:id="@+id/txtTituloMedia"
+                style="@style/textoTitulo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:textColor="@color/white"
-                tool:text="Tony Ferguson" />
+                android:layout_margin="@dimen/smallHalf"
+                android:gravity="center"
+                tool:text="KO of the Week: Jacare Souza vs Yushin Okami" />
 
             <TextView
                 android:id="@+id/txtFechaMedia"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="right"
-                android:textColor="@color/white"
+                android:layout_marginEnd="@dimen/smallHalf"
                 tool:text="20161201" />
 
             <TextView
                 android:id="@+id/txtDescripcionMedia"
+                style="@style/textoMenor"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tool:text="20161201" />
+                android:layout_margin="@dimen/smallHalf"
+                tool:text="In the middle of an 8-fight win streak, Jacare Souza finished Yushin Okami quickly in the first round of Fight Night Belo Horizonte in 2013. Next, he faces Kelvin Gastelum in the co-main event of UFC 224 on May 12." />
 
-            <TextView
-                android:id="@+id/txtTipoMedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="@color/white"
-                tool:text="EMBEDDEDVIDEO" />
 
         </LinearLayout>
 

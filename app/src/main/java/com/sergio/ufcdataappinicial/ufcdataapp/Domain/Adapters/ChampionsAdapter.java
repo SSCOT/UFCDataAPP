@@ -19,13 +19,14 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
 
     private Context context;
     private Luchador[] luchadores;
+    private OnItemClickListener listener;
 
-    public ChampionsAdapter(Context context, Luchador[] luchadores, LuchadoresAdapter.OnItemClickListener onItemClickListener) {
+    public ChampionsAdapter(Context context, Luchador[] luchadores, OnItemClickListener listener) {
         this.context = context;
         this.luchadores = luchadores;
+        this.listener = listener;
     }
 
-    // Asignamos la celda y la inflamos
     @Override
     public LuchadoresViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -39,7 +40,7 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
     @Override
     public void onBindViewHolder(LuchadoresViewHolder viewHolder, int position) {
         Luchador luchador = luchadores[position];
-        viewHolder.bindLuchador(luchador);
+        viewHolder.bindLuchador(luchador, listener);
 
     }
 
@@ -69,7 +70,7 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
             this.context = context;
         }
 
-        public void bindLuchador(Luchador luchador) {
+        public void bindLuchador(final Luchador luchador, final OnItemClickListener listener) {
             name.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
             if (luchador.getNick() != null)
                 nickName.setText(String.format("'%s'", luchador.getNick()));
@@ -80,6 +81,17 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
             } else {
                 Picasso.with(context).load(luchador.getImgPerfil()).into(img);
             }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(luchador, getAdapterPosition());
+                }
+            });
         }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Luchador luchador, int position);
     }
 }

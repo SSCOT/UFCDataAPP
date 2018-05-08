@@ -66,11 +66,13 @@ public class FightListFragment extends Fragment {
         recyclerConf(getView());
 
         LuchadorCombate[] cmbts = luchador.getCombates();
-        if(cmbts.length > 20)
-            cmbts = Arrays.copyOfRange(cmbts, 0, 20);
-
-        FightsLuchadorAdapter adapter = new FightsLuchadorAdapter(getActivity().getApplicationContext(), cmbts);
-        recyclerView.setAdapter(adapter);
+        if(cmbts != null) {
+            if(cmbts.length > 20){
+                cmbts = Arrays.copyOfRange(cmbts, 0, 20);
+            }
+            FightsLuchadorAdapter adapter = new FightsLuchadorAdapter(getActivity().getApplicationContext(), cmbts);
+            recyclerView.setAdapter(adapter);
+        }
     }
 
     private void recyclerConf(View view) {

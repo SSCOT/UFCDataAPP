@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
+
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -70,10 +72,9 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
             fecha.setText(noticia.getFecha());
             String imagen = noticia.getImg();
             if (imagen != null && imagen != "") {
-                // Picasso.with(this.context).load(noticia.getImg()).into(img);
-                Picasso.with(this.context)
-                        .load(noticia.getImg())
-                        .into(img);
+                Picasso.with(this.context).load(noticia.getImg()).into(img);
+            } else {
+                img.setImageResource(R.drawable.ufc_logo_white);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

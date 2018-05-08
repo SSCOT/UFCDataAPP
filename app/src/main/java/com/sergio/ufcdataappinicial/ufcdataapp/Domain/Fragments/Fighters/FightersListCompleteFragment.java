@@ -112,7 +112,6 @@ public class FightersListCompleteFragment extends Fragment implements SearchView
                     public void onItemClick(Luchador luchador, int position) {
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), FighterActivity.class);
-                        // intent.putExtra("luchador", String.valueOf(luchador.getId()));
                         intent.putExtra("idLuchador", String.valueOf(luchador.getId()));
                         intent.putExtra("titulo", luchador.getNombre() + " " + luchador.getApellido());
                         startActivity(intent);

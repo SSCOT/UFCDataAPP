@@ -68,18 +68,6 @@ public class FighterActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         setLoading(true);
         getData(idLuchador);
-
-
-
-        /*ButterKnife.bind(this);
-
-        FighterFragment fighterFragment = FighterFragment.newInstance((String) getIntent().getExtras().get(key));
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        ft.replace(R.id.fragmentLuchador, fighterFragment);
-        // ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();*/
-
-
     }
 
     private void getData(String id) {
@@ -175,12 +163,4 @@ public class FighterActivity extends AppCompatActivity {
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
-
-
-    /*public void setActionBarTitle(String title) {
-        setTitle("ANDAAAAA");
-        Toast.makeText(this, "M", Toast.LENGTH_SHORT).show();
-    }*/
-
-
 }

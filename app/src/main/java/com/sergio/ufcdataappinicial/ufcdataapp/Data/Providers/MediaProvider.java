@@ -6,7 +6,6 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
 
@@ -19,13 +18,13 @@ public class MediaProvider {
     }
 
     public interface MediaProviderListener {
-        public void onResponse(Media[] arrayMedia);
-        public void onErrorResponse(VolleyError error);
+        void onResponse(Media[] arrayMedia);
+        void onErrorResponse(VolleyError error);
     }
 
     public interface MediaDetailProviderListener {
-        public void onResponse(Media mediaItem);
-        public void onErrorResponse(VolleyError error);
+        void onResponse(Media mediaItem);
+        void onErrorResponse(VolleyError error);
     }
 
     public void getMedia(final MediaProviderListener listener) {
@@ -63,4 +62,5 @@ public class MediaProvider {
 
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
     }
+
 }

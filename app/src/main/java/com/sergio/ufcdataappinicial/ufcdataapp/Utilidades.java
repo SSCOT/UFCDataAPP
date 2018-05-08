@@ -5,11 +5,13 @@ public class Utilidades {
     }
 
     public static String changeDate(String date) {
-        String newDate;
-        if (date.length() > 9)
-            newDate = date.substring(0,10);
-        else
-            newDate = date;
+        String newDate = null;
+        if (date != null) {
+            if (date.length() > 9)
+                newDate = date.substring(0, 10);
+            else
+                newDate = date;
+        }
         return newDate;
     }
 }

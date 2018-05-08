@@ -14,8 +14,8 @@
         <ImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
-            card_view:srcCompat="@android:drawable/btn_star" />
+            android:layout_height="@dimen/CardStandardDouble"
+            tool:srcCompat="@android:drawable/btn_star" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -29,7 +29,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_margin="@dimen/margin_small"
+                android:gravity="center"
+                android:layout_margin="@dimen/smallHalf"
                 tool:text="ESTO ES UN TÍTULO DE PRUEBA" />
 
             <TextView

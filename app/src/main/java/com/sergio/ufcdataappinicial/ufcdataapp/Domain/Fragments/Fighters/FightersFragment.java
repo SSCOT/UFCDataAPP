@@ -59,7 +59,7 @@ public class FightersFragment extends Fragment {
 
         tablayout.addTab(tablayout.newTab().setText("ALL"));
         tablayout.addTab(tablayout.newTab().setText("CHAMPIONS"));
-        tablayout.addTab(tablayout.newTab().setText("CATEGORIES"));
+        // tablayout.addTab(tablayout.newTab().setText("CATEGORIES"));
         tablayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         // final ViewPager viewPager = getView().findViewById(R.id.viewPagerFighters);

@@ -19,23 +19,24 @@
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
         </activity>
         <activity
             android:name=".Domain.Activities.ArticleActivity"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Domain.Activities.MediaActivity"
-            android:theme="@style/AppTheme" />
+            android:theme="@style/AppThemeNoToolbar" />
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".Domain.Activities.FighterActivity"
-            android:theme="@style/AppThemeNoToolbar">
+        <activity
+            android:name=".Domain.Activities.FighterActivity"
+            android:theme="@style/AppThemeNoToolbar"></activity>
 
-        </activity>
+        <activity android:name=".Domain.Activities.PhotoActivity"
+            android:theme="@style/AppThemeNoToolbar"></activity>
     </application>
 
 </manifest>

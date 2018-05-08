@@ -25,8 +25,8 @@ public class FightersPagerAdapter extends FragmentStatePagerAdapter {
                 return new FightersListCompleteFragment();
             case 1:
                 return new FightersListChampionsFragment();
-            case 2:
-                return new FightersListWeightFragment();
+            /*case 2:
+                return new FightersListWeightFragment();*/
             default:
                 break;
         }

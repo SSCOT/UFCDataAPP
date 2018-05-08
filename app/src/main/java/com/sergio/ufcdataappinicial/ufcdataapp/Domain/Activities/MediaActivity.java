@@ -2,21 +2,21 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.content.Intent;
+import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.widget.Toast;
 
+import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaPhotoGalleryFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaVideoEmbeddedFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaVideoInternalFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
 public class MediaActivity extends AppCompatActivity {
 
     public static Media mediaItem = null;
-    /*public static final String tipoMedia = "tipoMedia";
-    public static final String idMedia = "idMedia";*/
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,24 +29,30 @@ public class MediaActivity extends AppCompatActivity {
 
     }
 
-    private void setFragment(String tipo){
+    private void setFragment(String tipo) {
 
         Fragment fragment = null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
-        switch (tipo){
+        switch (tipo) {
             case "PHOTOGALLERY":
-                fragment = MediaPhotoGalleryFragment.newInstance(mediaItem);
+                fragment = MediaPhotoGalleryFragment.newInstance(mediaItem.getId());
                 break;
             case "INTERNALVIDEO":
-                fragment = MediaVideoInternalFragment.newInstance(mediaItem);
+                String link = String.format(BuildConfig.API_URL_INTERNAL_VIDEO, mediaItem.getUrlInterna());
+                fragment = MediaVideoInternalFragment.newInstance(link);
                 break;
             case "EMBEDDEDVIDEO":
-                fragment = MediaVideoEmbeddedFragment.newInstance(mediaItem);
+                if (mediaItem.getTipoEmbebido().equals("YOUTUBEVIDEO")) {
+                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + mediaItem.getIdEmbebido())));
+                } else {
+                    // TODO: Sustituir toast
+                    Toast.makeText(this, "No se ha podido reproducir el vídeo", Toast.LENGTH_SHORT).show();
+                }
                 break;
         }
 
-        if (fragment == null){
+        if (fragment == null) {
             return;
         }
 

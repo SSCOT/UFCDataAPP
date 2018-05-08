@@ -5,8 +5,10 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.URLUtil;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
@@ -57,8 +59,8 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
         TextView descripcion;
         @BindView(R.id.txtFechaMedia)
         TextView fecha;
-        @BindView(R.id.txtTipoMedia)
-        TextView tipo;
+        @BindView(R.id.iconMediaType)
+        ImageView iconMediaType;
         @BindView(R.id.imgMedia)
         ImageView img;
 
@@ -73,10 +75,25 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             titulo.setText(mediaItem.getTitulo());
             descripcion.setText(mediaItem.getDescripcion());
             fecha.setText(mediaItem.getFecha());
-            tipo.setText(mediaItem.getTipo());
+
             String imagen = mediaItem.getImg();
-            if (imagen != null && imagen != "") {
+
+            if (imagen != null && !imagen.equals("")) {
                 Picasso.with(this.context).load(mediaItem.getImg()).into(img);
+            } else {
+                img.setImageResource(R.drawable.ufc_logo_white);
+            }
+
+            switch (mediaItem.getTipo()) {
+                case "PHOTOGALLERY":
+                    iconMediaType.setImageResource(R.drawable.ic_search);
+                    break;
+                case "INTERNALVIDEO":
+                    iconMediaType.setImageResource(R.drawable.ic_play_circle_white);
+                    break;
+                case "EMBEDDEDVIDEO":
+                    iconMediaType.setImageResource(R.drawable.ic_play_circle_white);
+                    break;
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

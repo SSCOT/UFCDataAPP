@@ -13,7 +13,7 @@ public class Foto {
     @SerializedName("gallery_order")
     private int posicion;
 
-    public Foto(String thumbnail, String imagen, String descripcion, int posicion) {
+    public Foto(String thumbnail, String imagen, String descripcion, int posicion, String titulo) {
         this.thumbnail = thumbnail;
         this.imagen = imagen;
         this.descripcion = descripcion;
