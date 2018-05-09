@@ -1,11 +1,8 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 
-import android.app.FragmentTransaction;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -13,13 +10,9 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FightListFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -60,14 +53,13 @@ public class FighterFragment extends Fragment {
     PieView pieView;
 
 
-    public static FighterFragment newInstance(String idLuchador) {
+    public static FighterFragment newInstance(Luchador luchador) {
         FighterFragment fragment = new FighterFragment();
         Bundle arguments = new Bundle();
-        arguments.putString("luchador", idLuchador);
+        arguments.putSerializable("luchador", luchador);
         fragment.setArguments(arguments);
         return fragment;
     }
-
 
 
     @Override
@@ -84,41 +76,15 @@ public class FighterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         fighterProvider = new LuchadorProvider(getActivity().getApplicationContext());
-        setLoading(true);
-        // Toolbar
-        // ((AppCompatActivity) getActivity()).setSupportActionBar(toolbar);
-        // ((AppCompatActivity) getActivity()).getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        // getActivity().setTitle("PACO MARTINEZ SORIA");
-        String idLuchador = (String) getArguments().get("luchador");
-        getData(idLuchador);
-    }
-
-    private void getData(String id) {
-        fighterProvider.getFighter(id, new LuchadorProvider.LuchadorUniqueProviderListener() {
-            @Override
-            public void onResponse(Luchador luchador) {
-                setLoading(false);
-                setData(luchador);
-                setChart(luchador);
-                ((FighterActivity) getActivity()).setFighterImage(luchador.getImgPerfil());
-                // Lanzamos la lista de combates
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment fragment = FightListFragment.newInstance(luchador);
-                commitFragment(ft, fragment);
-            }
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                setLoading(false);
-                // TODO: Quitar toast
-                Toast.makeText(getActivity(), "Error", Toast.LENGTH_SHORT).show();
-            }
-        });
+        // setLoading(true);
+        Luchador luchador = (Luchador) getArguments().get("luchador");
+        // getData(idLuchador);
+        setData(luchador);
+        setChart(luchador);
     }
 
     private void setChart(Luchador luchador) {
         // PieView pieView = (PieView) findViewById(R.id.pie_view);
-
 
         double total = luchador.getWinsKo() + luchador.getWinsDecision() + luchador.getWinsSubmission();
         double KO = (luchador.getWinsKo() * 100) / total;
@@ -128,11 +94,17 @@ public class FighterFragment extends Fragment {
 
         ArrayList<PieHelper> pieHelperArrayList = new ArrayList<PieHelper>();
         if (KO > 0)
-            pieHelperArrayList.add(new PieHelper((float) KO, getResources().getColor(R.color.colorPrimary)));
+            if (isAdded()) {
+                pieHelperArrayList.add(new PieHelper((float) KO, getResources().getColor(R.color.colorPrimary)));
+            }
         if (Submissions > 0)
-            pieHelperArrayList.add(new PieHelper((float) Submissions, getResources().getColor(R.color.colorPrimaryDark)));
+            if (isAdded()) {
+                pieHelperArrayList.add(new PieHelper((float) Submissions, getResources().getColor(R.color.colorPrimaryDark)));
+            }
         if (Decisions > 0)
-            pieHelperArrayList.add(new PieHelper((float) Decisions, getResources().getColor(R.color.black)));
+            if (isAdded()) {
+                pieHelperArrayList.add(new PieHelper((float) Decisions, getResources().getColor(R.color.black)));
+            }
         pieView.setMinimumHeight(100);
         pieView.setMinimumWidth(100);
         pieView.setDate(pieHelperArrayList);
@@ -174,19 +146,19 @@ public class FighterFragment extends Fragment {
         }
     }
 
-    private void setLoading(boolean loading) {
+    /*private void setLoading(boolean loading) {
         if (loading) {
             progressBar.setVisibility(View.VISIBLE);
         } else {
             progressBar.setVisibility(View.GONE);
         }
-    }
+    }*/
 
-    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
+    /*private void commitFragment(FragmentTransaction ft, Fragment fragment) {
         ft.replace(R.id.fightsContentFragment, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
-    }
+    }*/
 
 
 }

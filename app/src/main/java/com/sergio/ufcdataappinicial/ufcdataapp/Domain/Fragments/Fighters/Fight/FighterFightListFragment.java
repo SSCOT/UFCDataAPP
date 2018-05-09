@@ -6,9 +6,6 @@ import android.support.annotation.Nullable;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.text.Editable;
-import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -17,15 +14,14 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.LuchadorComba
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.FightsLuchadorAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
-import java.io.Serializable;
-import java.util.ArrayList;
+
 import java.util.Arrays;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 
-public class FightListFragment extends Fragment {
+public class FighterFightListFragment extends Fragment {
 
     @BindView(R.id.rvFightsLuchador)
     RecyclerView recyclerView;
@@ -33,8 +29,8 @@ public class FightListFragment extends Fragment {
     private Luchador luchador;
     private LuchadorProvider luchadorProvider;
 
-    public static FightListFragment newInstance(Luchador luchador) {
-        FightListFragment fragment = new FightListFragment();
+    public static FighterFightListFragment newInstance(Luchador luchador) {
+        FighterFightListFragment fragment = new FighterFightListFragment();
         Bundle args = new Bundle();
         args.putSerializable("luchador", luchador);
         fragment.setArguments(args);

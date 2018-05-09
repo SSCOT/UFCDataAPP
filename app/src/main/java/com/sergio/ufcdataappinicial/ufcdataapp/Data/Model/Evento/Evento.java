@@ -8,6 +8,8 @@ public class Evento {
 
     private int id;
 
+    @SerializedName("feature_image")
+    private String imgPrincipal;
     @SerializedName("event_date")
     private String fecha;
     @SerializedName("base_title")
@@ -32,8 +34,8 @@ public class Evento {
 
     private Combate[] combates;
 
-    public Evento(int id, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2) {
-        this.id = id;
+    public Evento(String imgPrincipal, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2, Luchador luchador1, Luchador luchador2, Combate[] combates) {
+        this.imgPrincipal = imgPrincipal;
         this.fecha = fecha;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
@@ -44,6 +46,9 @@ public class Evento {
         this.lon = lon;
         this.idLuchador1 = idLuchador1;
         this.idLuchador2 = idLuchador2;
+        this.luchador1 = luchador1;
+        this.luchador2 = luchador2;
+        this.combates = combates;
     }
 
     public int getId() {
@@ -52,6 +57,14 @@ public class Evento {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public String getImgPrincipal() {
+        return imgPrincipal;
+    }
+
+    public void setImgPrincipal(String imgPrincipal) {
+        this.imgPrincipal = imgPrincipal;
     }
 
     public String getFecha() {

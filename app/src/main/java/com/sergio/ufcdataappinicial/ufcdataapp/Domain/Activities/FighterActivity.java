@@ -9,49 +9,24 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FightListFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FighterFightListFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FighterFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
-import java.util.ArrayList;
-
 import butterknife.BindView;
 import butterknife.ButterKnife;
-import im.dacer.androidcharts.PieHelper;
-import im.dacer.androidcharts.PieView;
 
 public class FighterActivity extends AppCompatActivity {
 
     @BindView(R.id.imgLuchadorDetail)
     ImageView imgLuchadorDetail;
-    /*@BindView(R.id.progressBarFighter)
+    @BindView(R.id.progressBarFighter)
     ProgressBar progressBar;
-    @BindView(R.id.imgLuchadorDetailDescription)
-    ImageView imgLuchadorDetailDescription;
-    @BindView(R.id.txtFighterDetailName)
-    TextView txtFighterDetailName;
-    @BindView(R.id.txtFighterDetailRecord)
-    TextView txtFighterDetailRecord;
-    @BindView(R.id.txtFighterDetailWeightClass)
-    TextView txtFighterDetailWeightClass;
-    @BindView(R.id.txtFighterDetailHeight)
-    TextView txtFighterDetailHeight;
-    @BindView(R.id.txtFighterDetailWeight)
-    TextView txtFighterDetailWeight;
-    @BindView(R.id.txtFighterDetailCity)
-    TextView txtFighterDetailCity;
-    @BindView(R.id.txtFighterDetailResidence)
-    TextView txtFighterDetailResidence;
-    @BindView(R.id.txtFighterDetailStrengths)
-    TextView getTxtFighterDetailStrengths;*/
 
     LuchadorProvider fighterProvider = new LuchadorProvider(this);
 
@@ -68,21 +43,17 @@ public class FighterActivity extends AppCompatActivity {
         String idLuchador = getIntent().getExtras().getString("idLuchador");
         ButterKnife.bind(this);
 
-        FragmentTransaction ft = getFragmentManager().beginTransaction();
-        Fragment fragment = FighterFragment.newInstance(idLuchador);
-        commitFragment(ft, fragment);
-
-        // setLoading(true);
-        // getData(idLuchador);
+        setLoading(true);
+        getData(idLuchador);
     }
 
-    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
-        ft.replace(R.id.content, fragment);
+    private void commitFragment(FragmentTransaction ft, Fragment fragment, int target) {
+        ft.replace(target, fragment);
         ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
         ft.commit();
     }
 
-    public void setFighterImage (String url) {
+    public void setFighterImage(String url) {
         Picasso.with(this).load(url).into(imgLuchadorDetail);
     }
 
@@ -97,6 +68,44 @@ public class FighterActivity extends AppCompatActivity {
         }
     }
 
+    private void getData(String id) {
+        fighterProvider.getFighter(id, new LuchadorProvider.LuchadorUniqueProviderListener() {
+            @Override
+            public void onResponse(Luchador luchador) {
+                setLoading(false);
+                /*setData(luchador);
+                setChart(luchador);*/
+                setFighterImage(luchador.getImgPerfil());
+
+                // Lanzamos los datos del luchador
+                FragmentTransaction ft = getFragmentManager().beginTransaction();
+                Fragment fragment = FighterFragment.newInstance(luchador);
+                commitFragment(ft, fragment, R.id.content);
+
+                // Lanzamos la lista de combates
+                ft = getFragmentManager().beginTransaction();
+                fragment = FighterFightListFragment.newInstance(luchador);
+                commitFragment(ft, fragment, R.id.fightsContentFragment);
+            }
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                setLoading(false);
+                // TODO: Quitar toast
+                // Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void setLoading(boolean loading) {
+        if (loading) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
+
+
     /*private void getData(String id) {
         fighterProvider.getFighter(id, new LuchadorProvider.LuchadorUniqueProviderListener() {
             @Override
@@ -106,7 +115,7 @@ public class FighterActivity extends AppCompatActivity {
                 setChart(luchador);
                 // Lanzamos la lista de combates
                 FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment fragment = FightListFragment.newInstance(luchador);
+                Fragment fragment = FighterFightListFragment.newInstance(luchador);
                 commitFragment(ft, fragment);
             }
 
