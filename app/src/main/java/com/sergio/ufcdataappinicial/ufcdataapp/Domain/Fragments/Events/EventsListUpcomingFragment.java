@@ -1,8 +1,12 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -18,6 +22,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
@@ -96,7 +101,16 @@ public class EventsListUpcomingFragment extends Fragment {
                             itemEvento.setLuchador2(luchadoresSparse.get(itemEvento.getIdLuchador2()));
                         }
 
-                        final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1]);
+                        final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[1], new EventsAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(Evento evento, int position) {
+                                Intent intent = new Intent();
+                                intent.setClass(getActivity(), EventActivity.class);
+                                intent.putExtra("evento", evento);
+
+                                startActivity(intent);
+                            }
+                        });
                         setLoading(false);
                         recyclerView.setAdapter(adapter);
                     }

@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter.FighterFightListFragment">
+    tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFightsFragment">
 
-    <android.support.v7.widget.RecyclerView
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/rvFightsLuchador">
-
-    </android.support.v7.widget.RecyclerView>
+        android:text="eventFights
+" />
 
 </FrameLayout>

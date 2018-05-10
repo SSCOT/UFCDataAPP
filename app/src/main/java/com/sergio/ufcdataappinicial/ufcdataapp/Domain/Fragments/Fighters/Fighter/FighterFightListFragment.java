@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight;
+package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter;
 
 import android.os.Bundle;
 import android.app.Fragment;

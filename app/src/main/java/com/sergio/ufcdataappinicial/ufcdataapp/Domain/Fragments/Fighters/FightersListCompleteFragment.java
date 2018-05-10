@@ -3,7 +3,10 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v4.app.ActivityCompat;
+import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -115,7 +118,18 @@ public class FightersListCompleteFragment extends Fragment{
                         intent.setClass(getActivity(), FighterActivity.class);
                         intent.putExtra("idLuchador", String.valueOf(luchador.getId()));
                         intent.putExtra("titulo", luchador.getNombre() + " " + luchador.getApellido());
+
                         startActivity(intent);
+
+                        // Animación
+                        /*FragmentActivity activity = getActivity();
+
+                        ActivityOptionsCompat options = ActivityOptionsCompat.makeSceneTransitionAnimation(
+                                getActivity(), getActivity().findViewById(R.id.img), getString(R.string.image_transition));
+
+                        ActivityCompat.startActivity(activity, intent, options.toBundle());*/
+
+                        // startActivity(intent);
                     }
                 });
                 recyclerLuchadores.setAdapter(adapter);

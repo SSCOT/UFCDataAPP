@@ -4,12 +4,16 @@ import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
-public class Evento {
+import java.io.Serializable;
+
+public class Evento implements Serializable {
 
     private int id;
 
     @SerializedName("feature_image")
     private String imgPrincipal;
+    @SerializedName("secondary_feature_image")
+    private String imgSecundaria;
     @SerializedName("event_date")
     private String fecha;
     @SerializedName("base_title")
@@ -34,8 +38,9 @@ public class Evento {
 
     private Combate[] combates;
 
-    public Evento(String imgPrincipal, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2, Luchador luchador1, Luchador luchador2, Combate[] combates) {
+    public Evento(String imgPrincipal, String imgSecundaria, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2, Luchador luchador1, Luchador luchador2, Combate[] combates) {
         this.imgPrincipal = imgPrincipal;
+        this.imgSecundaria = imgSecundaria;
         this.fecha = fecha;
         this.titulo = titulo;
         this.subtitulo = subtitulo;
@@ -169,5 +174,13 @@ public class Evento {
 
     public void setCombates(Combate[] combates) {
         this.combates = combates;
+    }
+
+    public String getImgSecundaria() {
+        return imgSecundaria;
+    }
+
+    public void setImgSecundaria(String imgSecundaria) {
+        this.imgSecundaria = imgSecundaria;
     }
 }

@@ -7,6 +7,7 @@ import android.util.Log;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
@@ -28,6 +29,13 @@ public class EventoProvider {
 
         void onErrorResponse(VolleyError error);
     }
+
+    public interface EventoFightsListener {
+        void onResponse(Combate[] fights);
+
+        void onErrorResponse(VolleyError error);
+    }
+
 
     public void getAll(final EventoListener listener) {
         luchadorProvider = new LuchadorProvider(this.context);
@@ -65,6 +73,23 @@ public class EventoProvider {
                 eventsFinal[1] = eventosProximosAux.toArray(new Evento[0]);
 
                 listener.onResponse(eventsFinal);
+            }
+        }, new Response.ErrorListener() {
+
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                listener.onErrorResponse(error);
+            }
+        });
+
+        RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
+    }
+
+    public void getFights(int idEvento, final EventoFightsListener listener) {
+        GsonRequest gsonRequest = new GsonRequest<>(String.format(BuildConfig.API_URL_GET_FIGHTS, idEvento), Combate[].class, null, new Response.Listener<Combate[]>() {
+            @Override
+            public void onResponse(Combate[] fights) {
+                listener.onResponse(fights);
             }
         }, new Response.ErrorListener() {
 

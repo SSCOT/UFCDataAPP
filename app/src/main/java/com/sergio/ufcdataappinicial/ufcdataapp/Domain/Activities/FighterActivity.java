@@ -2,6 +2,7 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities;
 
 import android.app.Fragment;
 import android.app.FragmentTransaction;
+import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -13,8 +14,8 @@ import android.widget.ProgressBar;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fight.FighterFightListFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FighterFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter.FighterFightListFragment;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter.FighterFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -23,10 +24,12 @@ import butterknife.ButterKnife;
 
 public class FighterActivity extends AppCompatActivity {
 
-    @BindView(R.id.imgLuchadorDetail)
+    @BindView(R.id.img)
     ImageView imgLuchadorDetail;
     @BindView(R.id.progressBarFighter)
     ProgressBar progressBar;
+    @BindView(R.id.collapsing_toolbar)
+    CollapsingToolbarLayout collapsingToolbarLayout;
 
     LuchadorProvider fighterProvider = new LuchadorProvider(this);
 
@@ -34,17 +37,25 @@ public class FighterActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fighter);
+        ButterKnife.bind(this);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        setTitle(getIntent().getExtras().getString("titulo"));
 
+        setTitle(getIntent().getExtras().getString("titulo"));
         String idLuchador = getIntent().getExtras().getString("idLuchador");
-        ButterKnife.bind(this);
 
         setLoading(true);
+        setTitleColor();
+        // animateTitleAlpha(false);
         getData(idLuchador);
+    }
+
+    private void setTitleColor() {
+        collapsingToolbarLayout.setExpandedTitleColor(getResources().getColor(R.color.white));
+        collapsingToolbarLayout.setCollapsedTitleTextColor(getResources().getColor(R.color.white));
+
     }
 
     private void commitFragment(FragmentTransaction ft, Fragment fragment, int target) {
@@ -73,8 +84,6 @@ public class FighterActivity extends AppCompatActivity {
             @Override
             public void onResponse(Luchador luchador) {
                 setLoading(false);
-                /*setData(luchador);
-                setChart(luchador);*/
                 setFighterImage(luchador.getImgPerfil());
 
                 // Lanzamos los datos del luchador
@@ -95,6 +104,7 @@ public class FighterActivity extends AppCompatActivity {
                 // Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
             }
         });
+        // setLoading(false);
     }
 
     private void setLoading(boolean loading) {
@@ -105,89 +115,28 @@ public class FighterActivity extends AppCompatActivity {
         }
     }
 
+    /*private int getWhiteWithAlpha(int alpha) {
+        return Color.argb(alpha, 255, 255, 255);
+    }
 
-    /*private void getData(String id) {
-        fighterProvider.getFighter(id, new LuchadorProvider.LuchadorUniqueProviderListener() {
-            @Override
-            public void onResponse(Luchador luchador) {
-                setLoading(false);
-                setData(luchador);
-                setChart(luchador);
-                // Lanzamos la lista de combates
-                FragmentTransaction ft = getFragmentManager().beginTransaction();
-                Fragment fragment = FighterFightListFragment.newInstance(luchador);
-                commitFragment(ft, fragment);
-            }
+    private void animateTitleAlpha(boolean reverse) {
+        ValueAnimator animator;
+        if (reverse) {
+            animator = ObjectAnimator.ofInt(255, 0);
+        } else {
+            animator = ObjectAnimator.ofInt(0, 255);
+        }
 
+        animator.setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
+
+        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
             @Override
-            public void onErrorResponse(VolleyError error) {
-                setLoading(false);
-                // TODO: Quitar toast
-                Toast.makeText(FighterActivity.this, "Error", Toast.LENGTH_SHORT).show();
+            public void onAnimationUpdate(ValueAnimator animation) {
+                Integer value = (Integer) animation.getAnimatedValue();
+                collapsingToolbarLayout.setExpandedTitleColor(getWhiteWithAlpha(value));
             }
         });
-    }
 
-    private void setChart(Luchador luchador) {
-        PieView pieView = (PieView) findViewById(R.id.pie_view);
-
-
-        double total = luchador.getWinsKo() + luchador.getWinsDecision() + luchador.getWinsSubmission();
-        double KO = (luchador.getWinsKo() * 100) / total;
-        double Submissions = (luchador.getWinsSubmission() * 100) / total;
-        double Decisions = (luchador.getWinsDecision() * 100) / total;
-
-
-        ArrayList<PieHelper> pieHelperArrayList = new ArrayList<PieHelper>();
-        if (KO > 0)
-            pieHelperArrayList.add(new PieHelper((float) KO, getResources().getColor(R.color.colorPrimary)));
-        if (Submissions > 0)
-            pieHelperArrayList.add(new PieHelper((float) Submissions, getResources().getColor(R.color.colorPrimaryDark)));
-        if (Decisions > 0)
-            pieHelperArrayList.add(new PieHelper((float) Decisions, getResources().getColor(R.color.black)));
-        pieView.setMinimumHeight(100);
-        pieView.setMinimumWidth(100);
-        pieView.setDate(pieHelperArrayList);
-        pieView.showPercentLabel(true);
-    }
-
-    private void setData(Luchador luchador) {
-        txtFighterDetailName.setText(String.format("%s %s", luchador.getNombre(), luchador.getApellido()));
-        txtFighterDetailHeight.setText(luchador.getAltura());
-        txtFighterDetailCity.setText(luchador.getResidenciaCiudad());
-        if (luchador.getResidenciaEstado() != null)
-            txtFighterDetailResidence.setText(String.format("%s, %s", luchador.getResidenciaEstado(), luchador.getResidenciaPais()));
-        else
-            txtFighterDetailResidence.setText(luchador.getResidenciaPais());
-        txtFighterDetailRecord.setText(String.format("%d - %d - %d", luchador.getWins(), luchador.getLosses(), luchador.getDraws()));
-        txtFighterDetailWeight.setText(String.format("%s kg", luchador.getPeso()));
-        txtFighterDetailWeightClass.setText(luchador.getCategoria());
-        if (luchador.getCampeon()) {
-            txtFighterDetailWeightClass.setBackgroundColor(getResources().getColor(R.color.gold));
-            txtFighterDetailWeightClass.setPadding(5, 5, 5, 5);
-            txtFighterDetailWeightClass.setTextColor(getResources().getColor(R.color.white));
-        }
-
-
-        getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
-        Picasso.with(this).load(luchador.getImgPerfil()).into(imgLuchadorDetail);
-        Picasso.with(this).load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
-
-    }
-
-
-
-    private void setLoading(boolean loading) {
-        if (loading) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-    }
-
-    private void commitFragment(FragmentTransaction ft, Fragment fragment) {
-        ft.replace(R.id.fightsContentFragment, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
+        animator.start();
     }*/
 }

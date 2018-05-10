@@ -7,7 +7,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -19,10 +18,12 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
 
     private Context context;
     private Evento[] events;
+    private OnItemClickListener listener;
 
-    public EventsAdapter(Context context, Evento[] events) {
+    public EventsAdapter(Context context, Evento[] events, OnItemClickListener listener) {
         this.context = context;
         this.events = events;
+        this.listener = listener;
     }
 
     // Asignamos la celda y la inflamos
@@ -36,7 +37,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
     @Override
     public void onBindViewHolder(EventsViewHolder viewHolder, int position) {
         Evento event = events[position];
-        viewHolder.bindEvento(event);
+        viewHolder.bindEvento(event, listener);
 
     }
 
@@ -72,7 +73,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
             this.context = context;
         }
 
-        public void bindEvento(Evento event) {
+        public void bindEvento(final Evento event, final OnItemClickListener listener) {
             fecha.setText(event.getFecha());
             titulo.setText(event.getTitulo());
             subtitulo.setText(event.getSubtitulo());
@@ -90,11 +91,22 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
                     Picasso.with(context).load(event.getLuchador2().getImgCuerpoDerecha()).into(imgLuchador2);
                 }
             }
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(event, getAdapterPosition());
+                }
+            });
         }
     }
 
-    public void updateData(Evento[] events){
+    public interface OnItemClickListener {
+        void onItemClick(Evento evento, int position);
+    }
+
+    /*public void updateData(Evento[] events){
         this.events = events;
         notifyDataSetChanged();
-    }
+    }*/
 }

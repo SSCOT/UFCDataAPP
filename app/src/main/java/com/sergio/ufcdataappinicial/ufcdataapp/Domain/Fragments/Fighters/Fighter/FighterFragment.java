@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
+package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter;
 
 import android.os.Bundle;
 import android.app.Fragment;
@@ -27,10 +27,8 @@ public class FighterFragment extends Fragment {
 
     LuchadorProvider fighterProvider;
 
-    @BindView(R.id.progressBarFighter)
-    ProgressBar progressBar;
-    /*@BindView(R.id.imgLuchadorDetail)
-    ImageView imgLuchadorDetail;*/
+    /*@BindView(R.id.progressBarFighter)
+    ProgressBar progressBar;*/
     @BindView(R.id.imgLuchadorDetailDescription)
     ImageView imgLuchadorDetailDescription;
     @BindView(R.id.txtFighterDetailName)
@@ -76,9 +74,7 @@ public class FighterFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
 
         fighterProvider = new LuchadorProvider(getActivity().getApplicationContext());
-        // setLoading(true);
         Luchador luchador = (Luchador) getArguments().get("luchador");
-        // getData(idLuchador);
         setData(luchador);
         setChart(luchador);
     }
@@ -128,7 +124,6 @@ public class FighterFragment extends Fragment {
             txtFighterDetailWeightClass.setTextColor(getResources().getColor(R.color.white));
         }
 
-
         getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
         // Picasso.with(getActivity()).load(luchador.getImgPerfil()).into(imgLuchadorDetail);
         Picasso.with(getActivity()).load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
@@ -145,20 +140,4 @@ public class FighterFragment extends Fragment {
                 return super.onOptionsItemSelected(item);
         }
     }
-
-    /*private void setLoading(boolean loading) {
-        if (loading) {
-            progressBar.setVisibility(View.VISIBLE);
-        } else {
-            progressBar.setVisibility(View.GONE);
-        }
-    }*/
-
-    /*private void commitFragment(FragmentTransaction ft, Fragment fragment) {
-        ft.replace(R.id.fightsContentFragment, fragment);
-        ft.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_FADE);
-        ft.commit();
-    }*/
-
-
 }

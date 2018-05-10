@@ -119,7 +119,10 @@ public class Luchador implements Serializable {
     }
 
     public String getCategoria() {
-        return categoria.replace("_"," ");
+        if (categoria != null)
+            return categoria.replace("_", " ");
+        else
+            return categoria;
     }
 
     public void setCategoria(String categoria) {

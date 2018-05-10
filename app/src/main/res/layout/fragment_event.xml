@@ -1,0 +1,156 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tool="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFragment">
+
+    <TextView
+        android:id="@+id/txtTitle"
+        style="@style/textoTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:gravity="center"
+        android:layout_margin="@dimen/smallHalf"
+        tools:text="UFC 223" />
+
+    <TextView
+        android:id="@+id/txtSubtitle"
+        style="@style/textoTitulo"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtTitle"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="@dimen/margin_small"
+        android:gravity="center"
+        tools:text="Khabib vs Iaquinta" />
+
+    <ImageView
+        android:id="@+id/imgLuchador1"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSubtitle"
+        android:layout_marginStart="@dimen/margin_small"
+        android:layout_toStartOf="@id/dataLuchador1"
+        android:src="@color/cardview_shadow_start_color" />
+
+    <ImageView
+        android:id="@+id/imgLuchador2"
+        android:layout_width="100dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSubtitle"
+        android:layout_marginEnd="@dimen/margin_small"
+        android:layout_toEndOf="@id/dataLuchador2"
+        android:src="@color/cardview_shadow_start_color" />
+
+    <LinearLayout
+        android:id="@+id/dataLuchador1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSubtitle"
+        android:layout_toStartOf="@id/centralDivider"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtLuchador1Record"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="@dimen/smallHalf"
+            tools:text="53-10-3" />
+
+        <TextView
+            android:id="@+id/txtLuchador1Altura"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="@dimen/smallHalf"
+            tools:text="5' 10''" />
+
+        <TextView
+            android:id="@+id/txtLuchador1Peso"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="@dimen/smallHalf"
+            tools:text="70 kg" />
+
+        <TextView
+            android:id="@+id/txtLuchador1Habilidades"
+            style="@style/textoMenor"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="end"
+            android:padding="@dimen/smallHalf"
+            android:textAlignment="textEnd"
+            tools:text="Wrestling, Muay Thai, BJJ" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dataLuchador2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/txtSubtitle"
+        android:layout_toEndOf="@id/centralDivider"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/txtLuchador2Record"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="@dimen/smallHalf"
+            tools:text="53-10-3" />
+
+        <TextView
+            android:id="@+id/txtLuchador2Altura"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="@dimen/smallHalf"
+            tools:text="5' 10''" />
+
+        <TextView
+            android:id="@+id/txtLuchador2Peso"
+            style="@style/textoMenor"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="@dimen/smallHalf"
+            tools:text="70 kg" />
+
+        <TextView
+            android:id="@+id/txtLuchador2Habilidades"
+            style="@style/textoMenor"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="start"
+            android:padding="@dimen/smallHalf"
+            android:textAlignment="textStart"
+            tools:text="Wrestling, Muay Thai, BJJ" />
+    </LinearLayout>
+
+    <View
+        android:id="@+id/centralDivider"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:background="?android:attr/listDivider" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        style="?android:attr/progressBarStyleLarge"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@color/colorPrimaryDark"
+        android:visibility="gone" />
+
+</RelativeLayout>
