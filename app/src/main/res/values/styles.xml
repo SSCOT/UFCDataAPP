@@ -34,6 +34,10 @@
         <item name="android:background">@color/colorPrimary</item>
     </style>
 
+    <style name="textoTituloInvertGold" parent="textoTituloInvert">
+        <item name="android:background">@color/gold</item>
+    </style>
+
     <style name="textoSubtitulo" parent="textoEspecial">
         <item name="android:textColor">@color/colorPrimary</item>
         <item name="android:textSize">16dp</item>

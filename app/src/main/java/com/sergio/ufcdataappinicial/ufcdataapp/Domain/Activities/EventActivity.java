@@ -12,6 +12,7 @@ import android.widget.ImageView;
 import android.widget.ProgressBar;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFightsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -50,10 +51,10 @@ public class EventActivity extends AppCompatActivity {
         Fragment fragment = EventFragment.newInstance(event);
         commitFragment(ft, fragment, R.id.content);
 
-        /*// Lanzamos la lista de combates
+        // Lanzamos la lista de combates
         ft = getFragmentManager().beginTransaction();
-        fragment = FighterFightListFragment.newInstance(luchador);
-        commitFragment(ft, fragment, R.id.fightsContentFragment);*/
+        fragment = EventFightsFragment.newInstance(event.getId());
+        commitFragment(ft, fragment, R.id.fightsContentFragment);
 
         // setLoading(true);
         // getFights(event.getId());

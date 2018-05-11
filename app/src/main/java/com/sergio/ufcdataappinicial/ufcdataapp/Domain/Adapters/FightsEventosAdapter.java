@@ -1,0 +1,125 @@
+package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters;
+
+import android.content.Context;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.squareup.picasso.Picasso;
+
+import org.w3c.dom.Text;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+
+public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdapter.FightsEventsViewHolder> {
+
+    private Context context;
+    private Combate[] fights;
+    private OnItemClickListener listener;
+
+    public FightsEventosAdapter(Context context, Combate[] fights, OnItemClickListener listener) {
+        this.context = context;
+        this.fights = fights;
+        this.listener = listener;
+    }
+
+    // Asignamos la celda y la inflamos
+    @Override
+    public FightsEventsViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View item = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_fight_evento, parent, false);
+        return new FightsEventsViewHolder(context, item);
+    }
+
+    @Override
+    public void onBindViewHolder(FightsEventsViewHolder viewHolder, int position) {
+        Combate fight = fights[position];
+        viewHolder.bindFight(fight, listener);
+
+    }
+
+    @Override
+    public int getItemCount() {
+        return fights.length;
+    }
+
+    public static class FightsEventsViewHolder extends RecyclerView.ViewHolder {
+
+        Context context;
+
+        @BindView(R.id.titulo)
+        TextView txtTitulo;
+
+        @BindView(R.id.imgLuchador1)
+        ImageView imgLuchador1;
+        @BindView(R.id.txtLuchador1)
+        TextView txtLuchador1;
+        @BindView(R.id.txtLuchadorApe1)
+        TextView txtLuchadorApe1;
+
+        @BindView(R.id.imgLuchador2)
+        ImageView imgLuchador2;
+        @BindView(R.id.txtLuchador2)
+        TextView txtLuchador2;
+        @BindView(R.id.txtLuchadorApe2)
+        TextView txtLuchadorApe2;
+
+        @BindView(R.id.win1)
+        TextView win1;
+        @BindView(R.id.win2)
+        TextView win2;
+
+
+        public FightsEventsViewHolder(Context context, View itemView) {
+            super(itemView);
+            ButterKnife.bind(this, itemView);
+            this.context = context;
+        }
+
+        public void bindFight(final Combate fight, final OnItemClickListener listener) {
+
+            if(fight.getDescripcion() != null)
+                txtTitulo.setText(fight.getDescripcion());
+            else
+                txtTitulo.setVisibility(View.GONE);
+
+            String img1 = fight.getImgPerfil1();
+            if (img1 != null && !img1.equals("")) {
+                Picasso.with(context).load(img1).into(imgLuchador1);
+            }
+
+            String img2 = fight.getImgPerfil2();
+            if (img2 != null && !img2.equals("")) {
+                Picasso.with(context).load(img2).into(imgLuchador2);
+            }
+
+            txtLuchador2.setText(fight.getNombre2());
+            txtLuchadorApe2.setText(fight.getApellido2());
+
+            txtLuchador1.setText(fight.getNombre1());
+            txtLuchadorApe1.setText(fight.getApellido1());
+            if(fight.getGanador1() != null && fight.getGanador1())
+                win1.setVisibility(View.VISIBLE);
+            else if (fight.getGanador2() != null && fight.getGanador2())
+                win2.setVisibility(View.VISIBLE);
+
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    listener.onItemClick(fight, getAdapterPosition());
+                }
+            });
+        }
+    }
+
+    public interface OnItemClickListener {
+        void onItemClick(Combate fight, int position);
+    }
+
+}

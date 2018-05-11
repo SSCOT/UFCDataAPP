@@ -48,7 +48,6 @@ public class FighterActivity extends AppCompatActivity {
 
         setLoading(true);
         setTitleColor();
-        // animateTitleAlpha(false);
         getData(idLuchador);
     }
 
@@ -114,29 +113,4 @@ public class FighterActivity extends AppCompatActivity {
             progressBar.setVisibility(View.GONE);
         }
     }
-
-    /*private int getWhiteWithAlpha(int alpha) {
-        return Color.argb(alpha, 255, 255, 255);
-    }
-
-    private void animateTitleAlpha(boolean reverse) {
-        ValueAnimator animator;
-        if (reverse) {
-            animator = ObjectAnimator.ofInt(255, 0);
-        } else {
-            animator = ObjectAnimator.ofInt(0, 255);
-        }
-
-        animator.setDuration(getResources().getInteger(android.R.integer.config_mediumAnimTime));
-
-        animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator animation) {
-                Integer value = (Integer) animation.getAnimatedValue();
-                collapsingToolbarLayout.setExpandedTitleColor(getWhiteWithAlpha(value));
-            }
-        });
-
-        animator.start();
-    }*/
 }
