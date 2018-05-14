@@ -1,6 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -65,6 +66,7 @@ public class NewsListArticlesFragment extends Fragment {
 
         noticiaProvider = new NoticiaProvider(getActivity().getApplicationContext());
         recyclerConf(getView());
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getNews();
     }

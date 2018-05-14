@@ -59,4 +59,7 @@ dependencies {
     implementation 'com.android.support:design:26.1.0'
 
     implementation 'im.dacer:AndroidCharts:1.0.4'
+
+    implementation 'com.numetriclabz.numandroidcharts:numandroidcharts:1.0.18'
+    implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 }

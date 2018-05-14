@@ -2,7 +2,9 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Combate {
+import java.io.Serializable;
+
+public class Combate  implements Serializable {
 
     private int id;
 
@@ -13,9 +15,9 @@ public class Combate {
     @SerializedName("fighter1_nickname")
     private String nick1;
     @SerializedName("fighter1height")
-    private int altura1;
+    private String altura1;
     @SerializedName("fighter1weight")
-    private int peso1;
+    private String peso1;
     @SerializedName("fighter1record")
     private String record1;
     @SerializedName("fighter1_rank")
@@ -48,9 +50,9 @@ public class Combate {
     @SerializedName("fighter2_nickname")
     private String nick2;
     @SerializedName("fighter2height")
-    private int altura2;
+    private String altura2;
     @SerializedName("fighter2weight")
-    private int peso2;
+    private String peso2;
     @SerializedName("fighter2record")
     private String record2;
     @SerializedName("fighter2_rank")
@@ -76,6 +78,24 @@ public class Combate {
     @SerializedName("fighter2_is_winner")
     private Boolean ganador2;
 
+    @SerializedName("fighter1_wins")
+    private int f1Wins;
+    @SerializedName("fighter1_losses")
+    private int f1Losses;
+    @SerializedName("fighter1_draws")
+    private int f1Draws;
+    @SerializedName("fighter2_wins")
+    private int f2Wins;
+    @SerializedName("fighter2_losses")
+    private int f2Losses;
+    @SerializedName("fighter2_draws")
+    private int f2Draws;
+
+    @SerializedName("fighter1reach")
+    private String alcance1;
+    @SerializedName("fighter2reach")
+    private String alcance2;
+
     @SerializedName("result")
     private Resultado result;
 
@@ -87,10 +107,7 @@ public class Combate {
     @SerializedName("is_main_event")
     private Boolean esPelaPrincipal;
 
-    public Combate(int id, String nombre1, String apellido1, String nick1, int altura1, int peso1, String record1, String pos1, String imgCuerpo1, String imgPerfil1, String knockDownAvg1, String strikingAcc1, String strikingDef1, String takeDownAvg1, String takeDownAcc1, String takeDownDef1, String sumisionAvg1, Boolean ganador1, String nombre2, String apellido2, String nick2, int altura2, int peso2, String record2, String pos2, String imgCuerpo2, String imgPerfil2, String knockDownAvg2, String strikingAcc2, String strikingDef2, String takeDownAvg2, String takeDownAcc2, String takeDownDef2, String sumisionAvg2, Boolean ganador2, Resultado result, String descripcion, Boolean esPeleaDeTitulo, Boolean esPelaPrincipal) {
-        super();
-
-        this.id = id;
+    public Combate(String nombre1, String apellido1, String nick1, String altura1, String peso1, String record1, String pos1, String imgCuerpo1, String imgPerfil1, String knockDownAvg1, String strikingAcc1, String strikingDef1, String takeDownAvg1, String takeDownAcc1, String takeDownDef1, String sumisionAvg1, Boolean ganador1, String nombre2, String apellido2, String nick2, String altura2, String peso2, String record2, String pos2, String imgCuerpo2, String imgPerfil2, String knockDownAvg2, String strikingAcc2, String strikingDef2, String takeDownAvg2, String takeDownAcc2, String takeDownDef2, String sumisionAvg2, Boolean ganador2, int f1Wins, int f1Losses, int f1Draws, int f2Wins, int f2Losses, int f2Draws, String alcance1, String alcance2, Resultado result, String descripcion, Boolean esPeleaDeTitulo, Boolean esPelaPrincipal) {
         this.nombre1 = nombre1;
         this.apellido1 = apellido1;
         this.nick1 = nick1;
@@ -125,6 +142,14 @@ public class Combate {
         this.takeDownDef2 = takeDownDef2;
         this.sumisionAvg2 = sumisionAvg2;
         this.ganador2 = ganador2;
+        this.f1Wins = f1Wins;
+        this.f1Losses = f1Losses;
+        this.f1Draws = f1Draws;
+        this.f2Wins = f2Wins;
+        this.f2Losses = f2Losses;
+        this.f2Draws = f2Draws;
+        this.alcance1 = alcance1;
+        this.alcance2 = alcance2;
         this.result = result;
         this.descripcion = descripcion;
         this.esPeleaDeTitulo = esPeleaDeTitulo;
@@ -163,19 +188,23 @@ public class Combate {
         this.nick1 = nick1;
     }
 
-    public int getAltura1() {
-        return altura1;
+    public String getAltura1() {
+        if (altura1 != null){
+            float alturaCm = Float.parseFloat(altura1);
+            return String.format("%.0f cm", alturaCm * 2.54);
+        }
+        return "-";
     }
 
-    public void setAltura1(int altura1) {
+    public void setAltura1(String altura1) {
         this.altura1 = altura1;
     }
 
-    public int getPeso1() {
-        return peso1;
+    public String getPeso1() {
+        return peso1+" kg";
     }
 
-    public void setPeso1(int peso1) {
+    public void setPeso1(String peso1) {
         this.peso1 = peso1;
     }
 
@@ -299,19 +328,23 @@ public class Combate {
         this.nick2 = nick2;
     }
 
-    public int getAltura2() {
-        return altura2;
+    public String getAltura2() {
+        if (altura2 != null) {
+            float alturaCm = Float.parseFloat(altura2);
+            return String.format("%.0f cm", alturaCm * 2.54);
+        }
+        return "-";
     }
 
-    public void setAltura2(int altura2) {
+    public void setAltura2(String altura2) {
         this.altura2 = altura2;
     }
 
-    public int getPeso2() {
-        return peso2;
+    public String getPeso2() {
+        return peso2+" kg";
     }
 
-    public void setPeso2(int peso2) {
+    public void setPeso2(String peso2) {
         this.peso2 = peso2;
     }
 
@@ -441,5 +474,77 @@ public class Combate {
 
     public void setEsPelaPrincipal(Boolean esPelaPrincipal) {
         this.esPelaPrincipal = esPelaPrincipal;
+    }
+
+    public int getF1Wins() {
+        return f1Wins;
+    }
+
+    public void setF1Wins(int f1Wins) {
+        this.f1Wins = f1Wins;
+    }
+
+    public int getF1Losses() {
+        return f1Losses;
+    }
+
+    public void setF1Losses(int f1Losses) {
+        this.f1Losses = f1Losses;
+    }
+
+    public int getF1Draws() {
+        return f1Draws;
+    }
+
+    public void setF1Draws(int f1Draws) {
+        this.f1Draws = f1Draws;
+    }
+
+    public int getF2Wins() {
+        return f2Wins;
+    }
+
+    public void setF2Wins(int f2Wins) {
+        this.f2Wins = f2Wins;
+    }
+
+    public int getF2Losses() {
+        return f2Losses;
+    }
+
+    public void setF2Losses(int f2Losses) {
+        this.f2Losses = f2Losses;
+    }
+
+    public int getF2Draws() {
+        return f2Draws;
+    }
+
+    public void setF2Draws(int f2Draws) {
+        this.f2Draws = f2Draws;
+    }
+
+    public String getAlcance1() {
+        if(alcance1 != null){
+            float cm = Float.parseFloat(alcance1);
+            return String.format("%.0f cm", cm * 2.54);
+        }
+        return "-";
+    }
+
+    public void setAlcance1(String alcance1) {
+        this.alcance1 = alcance1;
+    }
+
+    public String getAlcance2() {
+        if(alcance2 != null){
+            float cm = Float.parseFloat(alcance2);
+            return String.format("%.0f cm", cm * 2.54);
+        }
+        return "-";
+    }
+
+    public void setAlcance2(String alcance2) {
+        this.alcance2 = alcance2;
     }
 }

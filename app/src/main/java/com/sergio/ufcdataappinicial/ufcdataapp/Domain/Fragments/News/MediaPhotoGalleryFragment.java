@@ -3,6 +3,7 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
@@ -76,6 +77,7 @@ public class MediaPhotoGalleryFragment extends Fragment {
 
         mediaProvider = new MediaProvider(getActivity().getApplicationContext());
         recyclerConf();
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getGallery();
     }

@@ -1,5 +1,6 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event;
 
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
@@ -59,6 +60,8 @@ public class EventFragment extends Fragment {
     @BindView(R.id.txtLuchador2Habilidades)
     TextView txtLuchador2Habilidades;
 
+    private boolean flagWait = false;
+
 
 
     public EventFragment() {
@@ -94,6 +97,7 @@ public class EventFragment extends Fragment {
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
         luchadorProvider = new LuchadorProvider(getActivity().getApplicationContext());
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         setGeneralData();
         getData(evento.getLuchador1().getId(), evento.getLuchador2().getId());
@@ -105,16 +109,21 @@ public class EventFragment extends Fragment {
     }
 
     private void getData(int id1, int id2) {
+        flagWait = false;
         luchadorProvider.getFighter(String.valueOf(id1), new LuchadorProvider.LuchadorUniqueProviderListener() {
             @Override
             public void onResponse(Luchador luchador1) {
                 // Luchador 1
-                setLoading(false);
                 Picasso.with(getActivity()).load(luchador1.getImgCuerpoIzquierda()).into(imgLuchador1);
                 txtLuchador1Record.setText(String.format("%d - %d - %d", luchador1.getWins(), luchador1.getLosses(), luchador1.getDraws()));
                 txtLuchador1Altura.setText(luchador1.getAltura());
                 txtLuchador1Peso.setText(String.format("%s kg", luchador1.getPeso()));
                 txtLuchador1Habilidades.setText(luchador1.getHabilidades());
+
+                if (flagWait)
+                    setLoading(false);
+                else
+                    flagWait = true;
             }
 
             @Override
@@ -126,12 +135,16 @@ public class EventFragment extends Fragment {
             @Override
             public void onResponse(Luchador luchador2) {
                 // Luchador 2
-                setLoading(false);
                 Picasso.with(getActivity()).load(luchador2.getImgCuerpoIzquierda()).into(imgLuchador2);
                 txtLuchador2Record.setText(String.format("%d - %d - %d", luchador2.getWins(), luchador2.getLosses(), luchador2.getDraws()));
                 txtLuchador2Altura.setText(luchador2.getAltura());
                 txtLuchador2Peso.setText(String.format("%s kg", luchador2.getPeso()));
                 txtLuchador2Habilidades.setText(luchador2.getHabilidades());
+                // Luchador 2
+                if (flagWait)
+                    setLoading(false);
+                else
+                    flagWait = true;
             }
 
             @Override

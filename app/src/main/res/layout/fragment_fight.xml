@@ -1,0 +1,587 @@
+<android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fights.FightFragment">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <!--<com.numetriclabz.numandroidcharts.StackedBarChart
+            android:layout_width="wrap_content"
+            android:layout_height="100dp"
+            android:id="@+id/chart"
+            android:layout_centerInParent="true"/>-->
+
+
+        <!--<com.github.mikephil.charting.charts.BarChart
+        android:id="@+id/chartBar"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />-->
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/win1"
+                    style="@style/textoWin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignEnd="@id/txtLuchadorApe1"
+                    android:layout_below="@id/txtLuchadorApe1"
+                    android:padding="2dp"
+                    android:text="WIN"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtLuchadorNom1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="Jacinto" />
+
+                <TextView
+                    android:id="@+id/txtLuchadorApe1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchadorNom1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/margin_small"
+                    tools:text="Nurmagomedov" />
+
+                <ImageView
+                    android:id="@+id/imgLuchador1"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchadorApe1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/margin_small" />
+
+                <TextView
+                    android:id="@+id/txtLuchador1Record"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgLuchador1"
+                    android:layout_centerHorizontal="true"
+                    tools:text="15-0-2" />
+
+                <ImageView
+                    android:id="@+id/iconRecord1"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador1Record"
+                    android:layout_marginEnd="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toStartOf="@id/txtLuchador1Record"
+                    android:src="@drawable/record_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador1Altura"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador1Record"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="175 cn" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador1Altura"
+                    android:layout_alignEnd="@id/iconRecord1"
+                    android:src="@drawable/height_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador1Peso"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador1Altura"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="150 kg" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador1Peso"
+                    android:layout_alignEnd="@id/iconRecord1"
+                    android:src="@drawable/weight_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador1Reach"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador1Peso"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="180 cm" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador1Reach"
+                    android:layout_alignEnd="@id/iconRecord1"
+                    android:src="@drawable/reach_" />
+
+                <view
+                    android:id="@+id/pie_view"
+                    class="im.dacer.androidcharts.PieView"
+                    android:layout_width="@dimen/chartDimHalf"
+                    android:layout_height="@dimen/chartDimHalf"
+                    android:layout_below="@id/txtLuchador1Reach"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/smallDouble"
+                    android:layout_marginTop="@dimen/margin_small" />
+
+                <TextView
+                    android:id="@+id/txtLegendKo1"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_toStartOf="@id/txtLegendSubmission1"
+                    android:background="@color/colorPrimary"
+                    android:padding="1dp"
+                    android:text="@string/win"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtLegendSubmission1"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="1dp"
+                    android:text="@string/draw"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtLegendDecision1"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_toEndOf="@id/txtLegendSubmission1"
+                    android:background="@color/black"
+                    android:padding="1dp"
+                    android:text="@string/loss"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtStriking1"
+                    style="@style/textoMenorDestacado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLegendKo1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="STRIKING" />
+
+                <ImageView
+                    android:id="@+id/imgStrike1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/txtStriking1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/strike" />
+
+                <TextView
+                    android:id="@+id/txtAccuracy1"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgStrike1"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toStartOf="@id/imgStrike1"
+                    android:text="Accuracy" />
+
+                <TextView
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgStrike1"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toEndOf="@id/imgStrike1"
+                    android:text="Defense" />
+
+                <TextView
+                    android:id="@+id/txtGrapplingAccuracy1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy2"
+                    android:layout_toStartOf="@id/imgStrike1"
+                    tools:text="100%" />
+
+                <TextView
+                    android:id="@+id/txtGrapplingDefense1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy2"
+                    android:layout_toEndOf="@id/imgStrike1"
+                    tools:text="100%" />
+
+
+                <TextView
+                    android:id="@+id/txtGrappling1"
+                    style="@style/textoMenorDestacado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgStrike1"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="GRAPPLING" />
+
+                <ImageView
+                    android:id="@+id/imgGrapplin1"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/txtGrappling1"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/grappling_" />
+
+                <TextView
+                    android:id="@+id/txtAccuracy2"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgGrapplin1"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toStartOf="@id/imgGrapplin1"
+                    android:text="Accuracy" />
+
+                <TextView
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgGrapplin1"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toEndOf="@id/imgGrapplin1"
+                    android:text="Defense" />
+
+                <TextView
+                    android:id="@+id/txtStrikingAccuracy1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy1"
+                    android:layout_toStartOf="@id/imgStrike1"
+                    tools:text="50%" />
+
+                <TextView
+                    android:id="@+id/txtStrikingDefense1"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy1"
+                    android:layout_toEndOf="@id/imgStrike1"
+                    tools:text="50%" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/win2"
+                    style="@style/textoWin"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignStart="@id/txtLuchadorApe2"
+                    android:layout_below="@id/txtLuchadorApe2"
+                    android:padding="2dp"
+                    android:text="WIN"
+                    android:visibility="gone" />
+
+                <TextView
+                    android:id="@+id/txtLuchadorNom2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="Jacinto" />
+
+                <TextView
+                    android:id="@+id/txtLuchadorApe2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchadorNom2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/margin_small"
+                    tools:text="Nurmagomedov" />
+
+                <ImageView
+                    android:id="@+id/imgLuchador2"
+                    android:layout_width="150dp"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchadorApe2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/margin_small" />
+
+                <TextView
+                    android:id="@+id/txtLuchador2Record"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgLuchador2"
+                    android:layout_centerHorizontal="true"
+                    tools:text="15-0-2" />
+
+                <ImageView
+                    android:id="@+id/iconRecord2"
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador2Record"
+                    android:layout_marginStart="@dimen/margin_small"
+                    android:layout_toEndOf="@id/txtLuchador2Record"
+                    android:src="@drawable/record_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador2Altura"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador2Record"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="175 cn" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador2Altura"
+                    android:layout_alignStart="@id/iconRecord2"
+                    android:layout_toEndOf="@id/txtLuchador2Altura"
+                    android:src="@drawable/height_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador2Peso"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador2Altura"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="150 kg" />
+
+                <ImageView
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignBottom="@id/txtLuchador2Peso"
+                    android:layout_alignStart="@id/iconRecord2"
+                    android:layout_toEndOf="@id/txtLuchador2Peso"
+                    android:src="@drawable/weight_" />
+
+                <TextView
+                    android:id="@+id/txtLuchador2Reach"
+                    style="@style/textoSubtituloNegro"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLuchador2Peso"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    tools:text="180 cm" />
+
+                <ImageView
+                    android:layout_width="25dp"
+                    android:layout_height="25dp"
+                    android:layout_alignBottom="@id/txtLuchador2Reach"
+                    android:layout_alignStart="@id/iconRecord2"
+                    android:layout_toEndOf="@id/txtLuchador2Record"
+                    android:src="@drawable/reach_" />
+
+                <view
+                    android:id="@+id/pie_view2"
+                    class="im.dacer.androidcharts.PieView"
+                    android:layout_width="@dimen/chartDimHalf"
+                    android:layout_height="@dimen/chartDimHalf"
+                    android:layout_below="@id/txtLuchador2Reach"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginStart="@dimen/smallDouble"
+                    android:layout_marginTop="@dimen/margin_small" />
+
+                <TextView
+                    android:id="@+id/txtLegendW"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_toStartOf="@id/txtLegendD"
+                    android:background="@color/colorPrimary"
+                    android:padding="1dp"
+                    android:text="@string/win"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtLegendD"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_margin="@dimen/margin_small"
+                    android:background="@color/colorPrimaryDark"
+                    android:padding="1dp"
+                    android:text="@string/draw"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtLegendDecision2"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/pie_view2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_toEndOf="@id/txtLegendD"
+                    android:background="@color/black"
+                    android:padding="1dp"
+                    android:text="@string/loss"
+                    android:textColor="@color/white" />
+
+                <TextView
+                    android:id="@+id/txtStriking2"
+                    style="@style/textoMenorDestacado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtLegendW"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="STRIKING" />
+
+                <ImageView
+                    android:id="@+id/imgStrike2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/txtStriking2"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/strike" />
+
+                <TextView
+                    android:id="@+id/txtAccuracy4"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgStrike2"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toStartOf="@id/imgStrike2"
+                    android:text="Accuracy" />
+
+                <TextView
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgStrike2"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toEndOf="@id/imgStrike2"
+                    android:text="Defense" />
+
+                <TextView
+                    android:id="@+id/txtGrapplingAccuracy2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy3"
+                    android:layout_toStartOf="@id/imgStrike2"
+                    tools:text="100%" />
+
+                <TextView
+                    android:id="@+id/txtGrapplingDefense2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy3"
+                    android:layout_toEndOf="@id/imgStrike2"
+                    tools:text="100%" />
+
+
+                <TextView
+                    android:id="@+id/txtGrappling2"
+                    style="@style/textoMenorDestacado"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/imgStrike2"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="@dimen/margin_small"
+                    android:text="GRAPPLING" />
+
+                <ImageView
+                    android:id="@+id/imgGrapplin2"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:layout_below="@id/txtGrappling2"
+                    android:layout_centerHorizontal="true"
+                    android:src="@drawable/grappling_" />
+
+                <TextView
+                    android:id="@+id/txtAccuracy3"
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgGrapplin2"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toStartOf="@id/imgGrapplin2"
+                    android:text="Accuracy" />
+
+                <TextView
+                    style="@style/textoMenor"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignTop="@id/imgGrapplin2"
+                    android:layout_marginTop="@dimen/smallHalf"
+                    android:layout_toEndOf="@id/imgGrapplin2"
+                    android:text="Defense" />
+
+                <TextView
+                    android:id="@+id/txtStrikingAccuracy2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy4"
+                    android:layout_toStartOf="@id/imgStrike2"
+                    tools:text="50%" />
+
+                <TextView
+                    android:id="@+id/txtStrikingDefense2"
+                    style="@style/textoTitulo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/txtAccuracy4"
+                    android:layout_toEndOf="@id/imgStrike2"
+                    tools:text="50%" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+    </RelativeLayout>
+</android.support.v4.widget.NestedScrollView>

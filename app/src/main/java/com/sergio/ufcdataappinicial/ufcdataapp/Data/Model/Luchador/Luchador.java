@@ -47,7 +47,7 @@ public class Luchador implements Serializable {
     private String residenciaEstado;
     @SerializedName("country_residing")
     private String residenciaPais;
-    @SerializedName("height_ft")
+    @SerializedName("height")
     private String altura;
     @SerializedName("weight_kg")
     private float peso;
@@ -59,6 +59,7 @@ public class Luchador implements Serializable {
     private int winsDecision;
     @SerializedName("strengths")
     private String habilidades;
+
 
     @SerializedName("fights")
     private LuchadorCombate[] combates;
@@ -234,7 +235,8 @@ public class Luchador implements Serializable {
     }
 
     public String getAltura() {
-        return altura;
+        float alturaCm = Float.parseFloat(altura);
+        return String.format("%.0f cm", alturaCm * 2.54);
     }
 
     public void setAltura(String altura) {

@@ -17,7 +17,9 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:background="@color/colorPrimaryDark"
-        android:visibility="gone" />
+        android:indeterminate="false"
+        android:progressDrawable="?android:attr/colorActivatedHighlight"
+        android:progressTint="?attr/actionModeSplitBackground"
+        android:visibility="visible" />
 
 </FrameLayout>

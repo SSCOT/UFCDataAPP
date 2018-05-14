@@ -33,6 +33,7 @@ public class Evento implements Serializable {
     private int idLuchador1;
     @SerializedName("main_event_fighter2_id")
     private int idLuchador2;
+
     private Luchador luchador1;
     private Luchador luchador2;
 

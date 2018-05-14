@@ -2,7 +2,9 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Puntuacion {
+import java.io.Serializable;
+
+public class Puntuacion implements Serializable {
 
     @SerializedName("WinnerScore")
     private String puntuacionGanador;

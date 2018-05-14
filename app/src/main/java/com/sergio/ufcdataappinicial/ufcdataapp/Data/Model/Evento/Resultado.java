@@ -2,7 +2,9 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import com.google.gson.annotations.SerializedName;
 
-public class Resultado {
+import java.io.Serializable;
+
+public class Resultado implements Serializable{
 
     @SerializedName("Method")
     private String metodoFinalizacion;

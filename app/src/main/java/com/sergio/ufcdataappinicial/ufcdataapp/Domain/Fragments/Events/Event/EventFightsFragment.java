@@ -1,6 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -10,15 +11,20 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FightActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.FightsEventosAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+
+import java.io.Serializable;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -30,6 +36,8 @@ public class EventFightsFragment extends Fragment {
 
     @BindView(R.id.rvEventFights)
     RecyclerView recyclerView;
+    @BindView(R.id.progressBar)
+    ProgressBar progressBar;
 
     public EventFightsFragment() {
 
@@ -66,7 +74,8 @@ public class EventFightsFragment extends Fragment {
         super.onActivityCreated(savedInstanceState);
         eventoProvider = new EventoProvider(getContext());
         recyclerConf(getView());
-        // setLoading(true);
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        setLoading(true);
         getFights();
     }
 
@@ -77,13 +86,13 @@ public class EventFightsFragment extends Fragment {
                 final FightsEventosAdapter adapter = new FightsEventosAdapter(getActivity(), fights, new FightsEventosAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Combate fight, int position) {
-                       /* Intent intent = new Intent();
-                        intent.setClass(getActivity(), EventActivity.class);
-                        intent.putExtra("evento", fight);
-                        startActivity(intent);*/
+                        Intent intent = new Intent();
+                        intent.setClass(getActivity(), FightActivity.class);
+                        intent.putExtra("combate", fight);
+                        startActivity(intent);
                     }
                 });
-                // setLoading(false);
+                setLoading(false);
                 recyclerView.setAdapter(adapter);
             }
 
@@ -100,5 +109,12 @@ public class EventFightsFragment extends Fragment {
         recyclerView.setItemAnimator(new DefaultItemAnimator());
     }
 
+    private void setLoading(boolean loading) {
+        if (loading) {
+            progressBar.setVisibility(View.VISIBLE);
+        } else {
+            progressBar.setVisibility(View.GONE);
+        }
+    }
 
 }

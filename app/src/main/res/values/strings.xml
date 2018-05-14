@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">UFCDataAPP</string>
+    <string name="app_name">UFC MIMO Stats</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -7,6 +7,12 @@
     <string name="ko_tko">KO/TKO</string>
     <string name="submission">Submission</string>
     <string name="decision">Decision</string>
+    <string name="ko_tko_small">KO</string>
+    <string name="submission_small">SUB</string>
+    <string name="decision_small">DCS</string>
+    <string name="win">W</string>
+    <string name="loss">L</string>
+    <string name="draw">D</string>
 
     <string name="image_transition" translatable="false">image_transition</string>
 </resources>

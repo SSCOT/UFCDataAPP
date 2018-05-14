@@ -1,6 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events;
 
 import android.content.Intent;
+import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
@@ -72,6 +73,7 @@ public class EventsListUpcomingFragment extends Fragment {
         eventProvider = new EventoProvider(getContext());
         luchadorProvider = new LuchadorProvider(getContext());
         recyclerConf(getView());
+        progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getEvents();
     }

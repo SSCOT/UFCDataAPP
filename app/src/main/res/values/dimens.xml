@@ -4,6 +4,7 @@
     <dimen name="large">50dp</dimen>
     <dimen name="smallDouble">20dp</dimen>
     <dimen name="chartDim">200dp</dimen>
+    <dimen name="chartDimHalf">100dp</dimen>
     <dimen name="CardStandard">100dp</dimen>
     <dimen name="CardStandardDouble">200dp</dimen>
     <dimen name="smallHalf">5dp</dimen>
