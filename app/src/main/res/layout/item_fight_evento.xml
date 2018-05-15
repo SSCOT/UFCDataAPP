@@ -108,6 +108,17 @@
             android:text="WIN"
             android:visibility="invisible" />
 
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            style="@style/textoSecundarioFondoNegro"
+            android:id="@+id/txtTipoFinal"
+            tool:text="Decission"
+            android:layout_marginBottom="@dimen/margin_small"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:padding="2dp"/>
+
         <View
             android:id="@+id/divider2"
             android:layout_width="match_parent"

@@ -52,13 +52,6 @@ public class FighterActivity extends AppCompatActivity {
         setTitle(getIntent().getExtras().getString("titulo"));
         String idLuchador = getIntent().getExtras().getString("idLuchador");
 
-        // Prueba
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd", Locale.getDefault());
-        Date date = new Date();
-        String fecha = dateFormat.format(date);
-        Toast.makeText(this, fecha, Toast.LENGTH_SHORT).show();
-
-
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         setTitleColor();

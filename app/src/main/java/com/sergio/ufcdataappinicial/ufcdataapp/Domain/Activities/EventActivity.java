@@ -10,12 +10,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
+import android.widget.Toast;
+
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFightsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 

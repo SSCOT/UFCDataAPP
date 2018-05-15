@@ -65,6 +65,9 @@ public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdap
         @BindView(R.id.txtLuchadorApe2)
         TextView txtLuchadorApe2;
 
+        @BindView(R.id.txtTipoFinal)
+        TextView txtTipoFinal;
+
         @BindView(R.id.win1)
         TextView win1;
         @BindView(R.id.win2)
@@ -93,12 +96,12 @@ public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdap
             if (img2 != null && !img2.equals("")) {
                 Picasso.with(context).load(img2).into(imgLuchador2);
             }
-
-            txtLuchador2.setText(fight.getNombre2());
-            txtLuchadorApe2.setText(fight.getApellido2());
-
             txtLuchador1.setText(fight.getNombre1());
             txtLuchadorApe1.setText(fight.getApellido1());
+            txtLuchador2.setText(fight.getNombre2());
+            txtLuchadorApe2.setText(fight.getApellido2());
+            txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
+
             if(fight.getGanador1() != null && fight.getGanador1())
                 win1.setVisibility(View.VISIBLE);
             else if (fight.getGanador2() != null && fight.getGanador2())

@@ -12,8 +12,11 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EventoProvider {
 
@@ -36,15 +39,17 @@ public class EventoProvider {
         void onErrorResponse(VolleyError error);
     }
 
-
     public void getAll(final EventoListener listener) {
         luchadorProvider = new LuchadorProvider(this.context);
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_EVENTS, Evento[].class, null, new Response.Listener<Evento[]>() {
-
-
-
             @Override
             public void onResponse(Evento[] events) {
+
+                // fecha actual
+                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
+                Date date = new Date();
+                String fecha = dateFormat.format(date);
+                int fechaActualInt = Integer.parseInt(fecha);
 
                 int numeroEventos = events.length;
 
@@ -57,11 +62,15 @@ public class EventoProvider {
                 List<Evento> eventosExtra = new ArrayList<Evento>();
 
                 for (Evento currentEvent : events) {
+                    String fechaEvento = currentEvent.getFecha().replace("-","");
+                    int fechaEventoInt = Integer.parseInt(fechaEvento);
 
-                    if (currentEvent.getEstado().equals("POST_EVENT")) {
+
+                    if(fechaEventoInt < fechaActualInt) {
+                        // eventosPasadosAux.add(eventosPasadosAux.size(),currentEvent);
                         eventosPasadosAux.add(currentEvent);
-                    } else if (currentEvent.getEstado().equals("FINALIZED")) {
-                        eventosProximosAux.add(currentEvent);
+                    } else if (fechaEventoInt >= fechaActualInt) {
+                        eventosProximosAux.add(0,currentEvent);
                     }
                 }
 

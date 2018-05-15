@@ -201,7 +201,9 @@ public class Combate  implements Serializable {
     }
 
     public String getPeso1() {
-        return peso1+" kg";
+        // 0,453592
+        float pesoConvertido = (float) (Float.valueOf(peso1) * 0.453592);
+        return String.format("%.0f kg", pesoConvertido);
     }
 
     public void setPeso1(String peso1) {
@@ -341,7 +343,8 @@ public class Combate  implements Serializable {
     }
 
     public String getPeso2() {
-        return peso2+" kg";
+        float pesoConvertido = (float) (Float.valueOf(peso2) * 0.453592);
+        return String.format("%.0f kg", pesoConvertido);
     }
 
     public void setPeso2(String peso2) {

@@ -123,9 +123,9 @@ public class FightFragment extends Fragment {
 
     private void setData() {
 
-       if(fight.getGanador1())
+       if(fight.getGanador1() != null && fight.getGanador1())
            txtWin1.setVisibility(View.VISIBLE);
-       else if (fight.getGanador2())
+       else if (fight.getGanador2() != null && fight.getGanador2())
            txtWin2.setVisibility(View.VISIBLE);
 
         txtLuchadorNom1.setText(fight.getNombre1());
