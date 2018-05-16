@@ -82,37 +82,48 @@ public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdap
 
         public void bindFight(final Combate fight, final OnItemClickListener listener) {
 
-            if(fight.getDescripcion() != null)
-                txtTitulo.setText(fight.getDescripcion());
-            else
-                txtTitulo.setVisibility(View.GONE);
+            // Si no tenemos los datos de los peleadores indicamos "pelea por confirmar"
+            if((fight.getNombre1() != "" && fight.getNombre1() != null) || (fight.getNombre2() != "" && fight.getNombre2() != null)){
+                if(fight.getDescripcion() != null)
+                    txtTitulo.setText(fight.getDescripcion());
+                else
+                    txtTitulo.setVisibility(View.GONE);
 
-            String img1 = fight.getImgPerfil1();
-            if (img1 != null && !img1.equals("")) {
-                Picasso.with(context).load(img1).into(imgLuchador1);
-            }
-
-            String img2 = fight.getImgPerfil2();
-            if (img2 != null && !img2.equals("")) {
-                Picasso.with(context).load(img2).into(imgLuchador2);
-            }
-            txtLuchador1.setText(fight.getNombre1());
-            txtLuchadorApe1.setText(fight.getApellido1());
-            txtLuchador2.setText(fight.getNombre2());
-            txtLuchadorApe2.setText(fight.getApellido2());
-            txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
-
-            if(fight.getGanador1() != null && fight.getGanador1())
-                win1.setVisibility(View.VISIBLE);
-            else if (fight.getGanador2() != null && fight.getGanador2())
-                win2.setVisibility(View.VISIBLE);
-
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    listener.onItemClick(fight, getAdapterPosition());
+                String img1 = fight.getImgPerfil1();
+                if (img1 != null && !img1.equals("")) {
+                    Picasso.with(context).load(img1).into(imgLuchador1);
                 }
-            });
+
+                String img2 = fight.getImgPerfil2();
+                if (img2 != null && !img2.equals("")) {
+                    Picasso.with(context).load(img2).into(imgLuchador2);
+                }
+                txtLuchador1.setText(fight.getNombre1());
+                txtLuchadorApe1.setText(fight.getApellido1());
+                txtLuchador2.setText(fight.getNombre2());
+                txtLuchadorApe2.setText(fight.getApellido2());
+                if(fight.getResult() != null){
+                    if(fight.getResult().getMetodoFinalizacion() != null){
+                        txtTipoFinal.setVisibility(View.VISIBLE);
+                        txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
+                    }
+                }
+                if(fight.getGanador1() != null && fight.getGanador1())
+                    win1.setVisibility(View.VISIBLE);
+                else if (fight.getGanador2() != null && fight.getGanador2())
+                    win2.setVisibility(View.VISIBLE);
+
+                itemView.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View view) {
+                        listener.onItemClick(fight, getAdapterPosition());
+                    }
+                });
+            } else {
+                txtTitulo.setText("fight to be confirmed");
+                txtTitulo.setBackgroundColor(context.getResources().getColor(R.color.secondary_text));
+                txtTitulo.setTextColor(context.getResources().getColor(R.color.white));
+            }
         }
     }
 

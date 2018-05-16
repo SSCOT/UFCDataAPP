@@ -40,7 +40,7 @@
         <activity
             android:name=".Domain.Activities.EventActivity"
             android:theme="@style/AppThemeNoToolbar" />
-        <activity android:name=".Domain.Activities.FightActivity"></activity>
+        <activity android:name=".Domain.Activities.FightActivity" />
     </application>
 
 </manifest>
