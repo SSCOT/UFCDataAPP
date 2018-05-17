@@ -8,6 +8,7 @@ import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.support.v7.widget.SearchView;
 import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -24,6 +25,9 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -33,9 +37,14 @@ public class EventsListPastFragment extends Fragment {
     RecyclerView recyclerView;
     @BindView(R.id.progressBarEvents)
     ProgressBar progressBar;
+    @BindView(R.id.etBuscador)
+    SearchView etBuscador;
 
     EventoProvider eventProvider;
     LuchadorProvider luchadorProvider;
+
+    ArrayList<Evento> eventsGeneral;
+    EventsAdapter adapter;
 
     public EventsListPastFragment() {
 
@@ -54,7 +63,7 @@ public class EventsListPastFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.fragment_events_list, container, false);
+        View view = inflater.inflate(R.layout.fragment_events_list_past, container, false);
         ButterKnife.bind(this, view);
 
         return view;
@@ -69,6 +78,29 @@ public class EventsListPastFragment extends Fragment {
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getEvents();
+
+        etBuscador.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                callSearch(query);
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                ArrayList<Evento> listaEventosFiltrados = filter(eventsGeneral, newText);
+                Evento[] eventosFiltrados = (Evento[]) listaEventosFiltrados.toArray(new Evento[listaEventosFiltrados.size()]);
+                if(adapter != null)
+                    adapter.setFilter(eventosFiltrados);
+
+                return true;
+            }
+
+            public void callSearch(String query) {
+
+            }
+
+        });
     }
 
     private void recyclerConf(View view) {
@@ -96,7 +128,10 @@ public class EventsListPastFragment extends Fragment {
                             itemEvento.setLuchador2(luchadoresSparse.get(itemEvento.getIdLuchador2()));
                         }
 
-                        final EventsAdapter adapter = new EventsAdapter(getActivity(), eventos[0], new EventsAdapter.OnItemClickListener() {
+                        // Guardamos los eventos pasados para el filtrado
+                        eventsGeneral = new ArrayList<Evento>(Arrays.asList(eventos[0]));
+
+                        adapter = new EventsAdapter(getActivity(), eventos[0], new EventsAdapter.OnItemClickListener() {
                             @Override
                             public void onItemClick(Evento evento, int position) {
                                 Intent intent = new Intent();
@@ -131,6 +166,41 @@ public class EventsListPastFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+    private ArrayList<Evento> filter(ArrayList<Evento> events, String texto) {
+        ArrayList<Evento> eventosFiltrados = new ArrayList<Evento>();
+
+        if (texto != null)
+            texto = texto.toLowerCase();
+
+        // Campos del filtro
+        String titulo = "";
+        String subtitulo = "";
+        String fecha = "";
+
+        if (events != null) {
+            for (Evento currentEvent : events) {
+
+                titulo = currentEvent.getTitulo();
+                if (titulo != null)
+                    titulo = titulo.toLowerCase();
+
+                subtitulo = currentEvent.getSubtitulo();
+                if (subtitulo != null)
+                    subtitulo = subtitulo.toLowerCase();
+
+                fecha = currentEvent.getFecha();
+                if (fecha != null)
+                    fecha = fecha.toLowerCase();
+
+                if ((titulo != null && titulo.contains(texto)) || (subtitulo != null && subtitulo.contains(texto)) || (fecha != null && fecha.contains(texto) )) {
+                    eventosFiltrados.add(currentEvent);
+                }
+            }
+        }
+
+        return eventosFiltrados;
     }
 
 }

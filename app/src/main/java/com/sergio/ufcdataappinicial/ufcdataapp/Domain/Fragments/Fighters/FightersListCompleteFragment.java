@@ -164,6 +164,7 @@ public class FightersListCompleteFragment extends Fragment{
         String nombre = "";
         String nick = "";
         String nombreApellido = "";
+        String peso = "";
 
         if (luchadores != null) {
             for (Luchador currentLuchador : luchadores) {
@@ -183,15 +184,18 @@ public class FightersListCompleteFragment extends Fragment{
                 if (nombre != null && apellido != null)
                     nombreApellido = String.format("%s %s", nombre, apellido);
 
-                if (nombre != null && nombre.contains(texto)) {
-                    luchadoresFiltrados.add(currentLuchador);
-                } else if (apellido != null && apellido.contains(texto)) {
-                    luchadoresFiltrados.add(currentLuchador);
-                } else if (nick != null && nick.contains(texto)) {
-                    luchadoresFiltrados.add(currentLuchador);
-                } else if (nombreApellido.contains(texto)) {
+                peso = currentLuchador.getCategoria();
+                if (peso != null)
+                    peso = peso.toLowerCase();
+
+                if ( (nombre != null && nombre.contains(texto))
+                        || (apellido != null && apellido.contains(texto))
+                        || (nick != null && nick.contains(texto))
+                        || (nombreApellido.contains(texto))
+                        || (peso != null && peso.contains(texto))) {
                     luchadoresFiltrados.add(currentLuchador);
                 }
+
             }
         }
 
