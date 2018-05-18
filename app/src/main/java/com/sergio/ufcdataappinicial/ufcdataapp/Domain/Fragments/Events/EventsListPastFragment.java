@@ -24,6 +24,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -147,15 +148,15 @@ public class EventsListPastFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         setLoading(false);
-                        // TODO Sustituir TOAST
-                        Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                        Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
                     }
                 });
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                setLoading(false);
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }
@@ -194,7 +195,9 @@ public class EventsListPastFragment extends Fragment {
                 if (fecha != null)
                     fecha = fecha.toLowerCase();
 
-                if ((titulo != null && titulo.contains(texto)) || (subtitulo != null && subtitulo.contains(texto)) || (fecha != null && fecha.contains(texto) )) {
+                if ((titulo != null && titulo.contains(texto))
+                        || (subtitulo != null && subtitulo.contains(texto))
+                        || (fecha != null && fecha.contains(texto) )) {
                     eventosFiltrados.add(currentEvent);
                 }
             }

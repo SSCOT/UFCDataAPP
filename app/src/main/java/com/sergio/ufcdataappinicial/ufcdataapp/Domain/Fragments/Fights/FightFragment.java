@@ -3,6 +3,8 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fights;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
+import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -117,7 +119,6 @@ public class FightFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         setData();
     }
 
@@ -131,7 +132,7 @@ public class FightFragment extends Fragment {
         txtLuchadorNom1.setText(fight.getNombre1());
         txtLuchadorApe1.setText(fight.getApellido1());
         if(fight.getImgCuerpo1() != null && !fight.getImgCuerpo1().equals(""))
-            Picasso.with(getActivity()).load(fight.getImgCuerpo1()).into(imgLuchador1);
+            /*getActivity()*/ Picasso.get().load(fight.getImgCuerpo1()).into(imgLuchador1);
         txtLuchador1Altura.setText(fight.getAltura1());
         txtLuchador1Peso.setText(fight.getPeso1());
         txtLuchador1Reach.setText(fight.getAlcance1());
@@ -144,7 +145,7 @@ public class FightFragment extends Fragment {
         txtLuchadorNom2.setText(fight.getNombre2());
         txtLuchadorApe2.setText(fight.getApellido2());
         if(fight.getImgCuerpo2() != null && !fight.getImgCuerpo2().equals(""))
-            Picasso.with(getActivity()).load(fight.getImgCuerpo2()).into(imgLuchador2);
+            /*getActivity()*/ Picasso.get().load(fight.getImgCuerpo2()).into(imgLuchador2);
         txtLuchador2Altura.setText(fight.getAltura2());
         txtLuchador2Peso.setText(fight.getPeso2());
         txtLuchador2Reach.setText(fight.getAlcance2());

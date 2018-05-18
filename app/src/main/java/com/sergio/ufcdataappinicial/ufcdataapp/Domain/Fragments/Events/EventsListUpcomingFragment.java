@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
@@ -26,8 +22,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
-
-import java.util.ArrayList;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -120,15 +115,15 @@ public class EventsListUpcomingFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         setLoading(false);
-                        // TODO Sustituir TOAST
-                        Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                        Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
                     }
                 });
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                setLoading(false);
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
 

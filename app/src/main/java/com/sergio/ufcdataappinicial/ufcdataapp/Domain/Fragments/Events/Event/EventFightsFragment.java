@@ -12,19 +12,14 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FightActivity;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.FightsEventosAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
-
-import java.io.Serializable;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -72,7 +67,7 @@ public class EventFightsFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        eventoProvider = new EventoProvider(getContext());
+        eventoProvider = new EventoProvider(getActivity());
         recyclerConf(getView());
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
@@ -98,7 +93,8 @@ public class EventFightsFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                // TODO: Gestionar respuesta
+                setLoading(false);
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

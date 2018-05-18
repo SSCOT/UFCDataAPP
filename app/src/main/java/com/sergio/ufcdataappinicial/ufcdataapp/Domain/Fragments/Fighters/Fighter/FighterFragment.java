@@ -8,7 +8,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
@@ -27,8 +26,6 @@ public class FighterFragment extends Fragment {
 
     LuchadorProvider fighterProvider;
 
-    /*@BindView(R.id.progressBarFighter)
-    ProgressBar progressBar;*/
     @BindView(R.id.imgLuchadorDetailDescription)
     ImageView imgLuchadorDetailDescription;
     @BindView(R.id.txtFighterDetailName)
@@ -80,7 +77,6 @@ public class FighterFragment extends Fragment {
     }
 
     private void setChart(Luchador luchador) {
-        // PieView pieView = (PieView) findViewById(R.id.pie_view);
 
         double total = luchador.getWinsKo() + luchador.getWinsDecision() + luchador.getWinsSubmission();
         double KO = (luchador.getWinsKo() * 100) / total;
@@ -125,8 +121,7 @@ public class FighterFragment extends Fragment {
         }
 
         getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
-        // Picasso.with(getActivity()).load(luchador.getImgPerfil()).into(imgLuchadorDetail);
-        Picasso.with(getActivity()).load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
+        /*getActivity()*/ Picasso.get().load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
 
     }
 

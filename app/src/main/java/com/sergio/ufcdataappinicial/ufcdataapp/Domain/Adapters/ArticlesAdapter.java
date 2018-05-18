@@ -72,7 +72,7 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
             fecha.setText(noticia.getFecha());
             String imagen = noticia.getImg();
             if (imagen != null && imagen != "") {
-                Picasso.with(this.context).load(noticia.getImg()).into(img);
+                /*this.context*/ Picasso.get().load(noticia.getImg()).into(img);
             } else {
                 img.setImageResource(R.drawable.ufc_logo_white);
             }

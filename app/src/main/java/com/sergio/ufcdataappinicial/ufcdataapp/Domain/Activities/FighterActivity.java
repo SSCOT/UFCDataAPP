@@ -4,6 +4,7 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.graphics.PorterDuff;
 import android.support.design.widget.CollapsingToolbarLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -19,6 +20,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter.FighterFightListFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.Fighter.FighterFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 import com.squareup.picasso.Picasso;
 
 import java.text.SimpleDateFormat;
@@ -79,8 +81,7 @@ public class FighterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                // TODO: Quitar toast
-                // Toast.makeText(this, "Error", Toast.LENGTH_SHORT).show();
+                Utilidades.messageWithOk(FighterActivity.this,findViewById(R.id.content),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
         // setLoading(false);
@@ -98,7 +99,7 @@ public class FighterActivity extends AppCompatActivity {
     }
 
     public void setFighterImage(String url) {
-        Picasso.with(this).load(url).into(imgLuchadorDetail);
+        Picasso.get().load(url).into(imgLuchadorDetail);
     }
 
     @Override

@@ -79,7 +79,7 @@ public class MediaAdapter extends RecyclerView.Adapter<MediaAdapter.MediaViewHol
             String imagen = mediaItem.getImg();
 
             if (imagen != null && !imagen.equals("")) {
-                Picasso.with(this.context).load(mediaItem.getImg()).into(img);
+                /*this.context*/ Picasso.get().load(mediaItem.getImg()).into(img);
             } else {
                 img.setImageResource(R.drawable.ufc_logo_white);
             }

@@ -13,6 +13,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaPhotoGalleryFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaVideoInternalFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 public class MediaActivity extends AppCompatActivity {
 
@@ -46,8 +47,7 @@ public class MediaActivity extends AppCompatActivity {
                 if (mediaItem.getTipoEmbebido().equals("YOUTUBEVIDEO")) {
                     startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse("http://www.youtube.com/watch?v=" + mediaItem.getIdEmbebido())));
                 } else {
-                    // TODO: Sustituir toast
-                    Toast.makeText(this, "No se ha podido reproducir el vídeo", Toast.LENGTH_SHORT).show();
+                    Utilidades.messageWithOk(MediaActivity.this,findViewById(R.id.fragmentPrincipalMedia),getResources().getString(R.string.error_reproduccion_video));
                 }
                 break;
         }

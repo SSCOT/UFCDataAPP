@@ -24,6 +24,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.MediaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.PhotoActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PictureAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -97,7 +98,6 @@ public class MediaPhotoGalleryFragment extends Fragment {
                 PictureAdapter adapter = new PictureAdapter(getActivity(), fotos, new PictureAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Foto foto, int position) {
-                        // TODO: Camtiar TOast
                         Toast.makeText(getActivity(), foto.getDescripcion(), Toast.LENGTH_LONG).show();
                         Intent intent = new Intent();
                         intent.setClass(getActivity(), PhotoActivity.class);
@@ -121,7 +121,7 @@ public class MediaPhotoGalleryFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

@@ -82,13 +82,13 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
             if (event.getLuchador1() != null) {
                 String imagen1 = event.getLuchador1().getImgPerfil();
                 if (imagen1 != null && !imagen1.equals("")) {
-                    Picasso.with(context).load(event.getLuchador1().getImgCuerpoIzquierda()).into(imgLuchador1);
+                    /*context*/ Picasso.get().load(event.getLuchador1().getImgCuerpoIzquierda()).into(imgLuchador1);
                 }
             }
             if(event.getLuchador2() != null){
                 String imagen2 = event.getLuchador2().getImgPerfil();
                 if (imagen2 != null && !imagen2.equals("")) {
-                    Picasso.with(context).load(event.getLuchador2().getImgCuerpoDerecha()).into(imgLuchador2);
+                    /*context*/ Picasso.get().load(event.getLuchador2().getImgCuerpoDerecha()).into(imgLuchador2);
                 }
             }
 

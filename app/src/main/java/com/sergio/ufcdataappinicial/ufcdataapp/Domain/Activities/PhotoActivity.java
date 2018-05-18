@@ -21,7 +21,7 @@ public class PhotoActivity extends AppCompatActivity {
         ButterKnife.bind(this);
         String url = getIntent().getExtras().getString("url");
 
-        Picasso.with(this).load(url).into(img);
+        Picasso.get().load(url).into(img);
     }
 
     public void dismissListener(View view) {

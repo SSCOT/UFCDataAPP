@@ -1,11 +1,9 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event;
 
 import android.graphics.PorterDuff;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
-import android.transition.Transition;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,9 +16,8 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -62,12 +59,9 @@ public class EventFragment extends Fragment {
 
     private boolean flagWait = false;
 
-
-
     public EventFragment() {
         // Required empty public constructor
     }
-
 
     public static EventFragment newInstance(Evento evento) {
         EventFragment fragment = new EventFragment();
@@ -114,7 +108,7 @@ public class EventFragment extends Fragment {
             @Override
             public void onResponse(Luchador luchador1) {
                 // Luchador 1
-                Picasso.with(getActivity()).load(luchador1.getImgCuerpoIzquierda()).into(imgLuchador1);
+                /*getActivity()*/ Picasso.get().load(luchador1.getImgCuerpoIzquierda()).into(imgLuchador1);
                 txtLuchador1Record.setText(String.format("%d - %d - %d", luchador1.getWins(), luchador1.getLosses(), luchador1.getDraws()));
                 txtLuchador1Altura.setText(luchador1.getAltura());
                 txtLuchador1Peso.setText(String.format("%s kg", luchador1.getPeso()));
@@ -128,14 +122,15 @@ public class EventFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                setLoading(false);
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
         luchadorProvider.getFighter(String.valueOf(id2), new LuchadorProvider.LuchadorUniqueProviderListener() {
             @Override
             public void onResponse(Luchador luchador2) {
                 // Luchador 2
-                Picasso.with(getActivity()).load(luchador2.getImgCuerpoIzquierda()).into(imgLuchador2);
+                /*getActivity()*/ Picasso.get().load(luchador2.getImgCuerpoIzquierda()).into(imgLuchador2);
                 txtLuchador2Record.setText(String.format("%d - %d - %d", luchador2.getWins(), luchador2.getLosses(), luchador2.getDraws()));
                 txtLuchador2Altura.setText(luchador2.getAltura());
                 txtLuchador2Peso.setText(String.format("%s kg", luchador2.getPeso()));
@@ -149,7 +144,8 @@ public class EventFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-
+                setLoading(false);
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
 

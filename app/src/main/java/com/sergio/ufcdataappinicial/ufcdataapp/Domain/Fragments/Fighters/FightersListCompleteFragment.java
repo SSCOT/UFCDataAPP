@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
-import android.support.v4.app.ActivityCompat;
-import android.support.v4.app.ActivityOptionsCompat;
 import android.support.v4.app.Fragment;
-import android.support.v4.app.FragmentActivity;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +13,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
@@ -24,6 +20,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -31,7 +28,7 @@ import java.util.Arrays;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
-public class FightersListCompleteFragment extends Fragment{
+public class FightersListCompleteFragment extends Fragment {
 
     @BindView(R.id.progressBar)
     ProgressBar progressBar;
@@ -88,7 +85,7 @@ public class FightersListCompleteFragment extends Fragment{
             public boolean onQueryTextChange(String newText) {
                 ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, newText);
                 Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray(new Luchador[listaLuchadoresFiltrados.size()]);
-                if(adapter != null)
+                if (adapter != null)
                     adapter.setFilter(luchadoresFiltrados);
 
                 return true;
@@ -142,7 +139,7 @@ public class FightersListCompleteFragment extends Fragment{
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }
@@ -188,7 +185,7 @@ public class FightersListCompleteFragment extends Fragment{
                 if (peso != null)
                     peso = peso.toLowerCase();
 
-                if ( (nombre != null && nombre.contains(texto))
+                if ((nombre != null && nombre.contains(texto))
                         || (apellido != null && apellido.contains(texto))
                         || (nick != null && nick.contains(texto))
                         || (nombreApellido.contains(texto))

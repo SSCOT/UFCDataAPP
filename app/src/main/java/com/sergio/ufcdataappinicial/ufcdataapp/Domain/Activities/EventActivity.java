@@ -10,18 +10,12 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFightsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event.EventFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
-
-import java.text.SimpleDateFormat;
-import java.util.Date;
-import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -34,8 +28,6 @@ public class EventActivity extends AppCompatActivity {
     ProgressBar progressBar;
     @BindView(R.id.collapsing_toolbar)
     CollapsingToolbarLayout collapsingToolbarLayout;
-
-    EventoProvider eventoProvider = new EventoProvider(this);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +43,7 @@ public class EventActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setTitleColor();
-        Picasso.with(this).load(event.getImgSecundaria()).into(imgEventDetail);
+        Picasso.get().load(event.getImgSecundaria()).into(imgEventDetail);
 
         // Lanzamos los datos del luchador
         FragmentTransaction ft = getFragmentManager().beginTransaction();
@@ -62,9 +54,6 @@ public class EventActivity extends AppCompatActivity {
         ft = getFragmentManager().beginTransaction();
         fragment = EventFightsFragment.newInstance(event.getId());
         commitFragment(ft, fragment, R.id.fightsContentFragment);
-
-        // setLoading(true);
-        // getFights(event.getId());
     }
 
     private void setTitleColor() {

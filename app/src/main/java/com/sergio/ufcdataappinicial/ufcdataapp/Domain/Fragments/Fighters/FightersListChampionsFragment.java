@@ -22,6 +22,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -92,8 +93,7 @@ public class FightersListChampionsFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                // TODO Sustituir TOAST
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }
