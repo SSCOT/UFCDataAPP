@@ -1,5 +1,8 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 import android.os.Parcelable;
 
 import com.google.gson.annotations.SerializedName;
@@ -9,8 +12,10 @@ import java.util.HashMap;
 import java.util.Hashtable;
 import java.util.Map;
 
+@Entity(tableName = "luchador")
 public class Luchador implements Serializable {
 
+    @PrimaryKey
     private int id;
     @SerializedName("first_name")
     private String nombre;
@@ -60,9 +65,11 @@ public class Luchador implements Serializable {
     @SerializedName("strengths")
     private String habilidades;
 
-
+    @Ignore
     @SerializedName("fights")
     private LuchadorCombate[] combates;
+
+    public Luchador(){}
 
     public Luchador(String nombre, String apellido, String nick, String categoria, String posLibraPorLibra, Boolean campeon, String situacionProfesional, int wins, int losses, int draws, String imgCinturon, String imgCuerpoIzquierda, String imgCuerpoDerecha, String imgPerfil, String residenciaCiudad, String residenciaEstado, String residenciaPais, String altura, float peso, int winsKo, int winsSubmission, int winsDecision, String habilidades, LuchadorCombate[] combates) {
         this.nombre = nombre;
@@ -235,7 +242,12 @@ public class Luchador implements Serializable {
     }
 
     public String getAltura() {
-        float alturaCm = Float.parseFloat(altura);
+        float alturaCm = 0;
+        if(altura != null)
+            alturaCm = Float.parseFloat(altura);
+        else
+            return null;
+
         return String.format("%.0f cm", alturaCm * 2.54);
     }
 
@@ -289,5 +301,9 @@ public class Luchador implements Serializable {
 
     public void setCombates(LuchadorCombate[] combates) {
         this.combates = combates;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }

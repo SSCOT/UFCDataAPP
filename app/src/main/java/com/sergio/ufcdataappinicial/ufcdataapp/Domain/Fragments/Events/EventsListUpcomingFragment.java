@@ -1,7 +1,10 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -13,21 +16,28 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EventsListUpcomingFragment extends Fragment {
+
+    private static UfcDatabase db;
+    private static Context context;
 
     @BindView(R.id.rvEvents)
     RecyclerView recyclerView;
@@ -65,6 +75,10 @@ public class EventsListUpcomingFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
+
+        context = getContext();
+        getDbLuchadores();
+
         eventProvider = new EventoProvider(getContext());
         luchadorProvider = new LuchadorProvider(getContext());
         recyclerConf(getView());
@@ -134,6 +148,30 @@ public class EventsListUpcomingFragment extends Fragment {
             progressBar.setVisibility(View.VISIBLE);
         } else {
             progressBar.setVisibility(View.GONE);
+        }
+    }
+
+    // PRUEBAS ROOOOOOOOOOOOMMMM
+    private void getDbLuchadores() {
+
+        db = Room.databaseBuilder(getActivity().getApplicationContext(), UfcDatabase.class, "ufcDb").build();
+        GetFavoritesCarsAsyncTask selectAsyncTask = new GetFavoritesCarsAsyncTask();
+        selectAsyncTask.execute();
+
+    }
+
+    private static class GetFavoritesCarsAsyncTask extends AsyncTask<Void, Integer, List<Luchador>> {
+
+        @Override
+        protected List<Luchador> doInBackground(Void... voids) {
+            return db.ufcDao().getAllFighters();
+        }
+
+        @Override
+        protected void onPostExecute(List<Luchador> luchadores) {
+            super.onPostExecute(luchadores);
+            if(luchadores.size() > 0)
+                Toast.makeText(context, luchadores.get(0).getNombre(), Toast.LENGTH_SHORT).show();
         }
     }
 }

@@ -81,7 +81,7 @@ public class FightsLuchadorAdapter extends RecyclerView.Adapter<FightsLuchadorAd
                 txtLuchadorApe.setText(fight.getOponente().getApellido());
             String imagen = fight.getOponente().getImg();
             if (imagen != null && !imagen.equals("")) {
-                /*context*/ Picasso.get().load(imagen).into(imgLuchador);
+                 Picasso.get().load(imagen).into(imgLuchador);
             }
             String result = fight.getResultado().getResultado();
             if (result != null) {

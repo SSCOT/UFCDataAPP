@@ -108,7 +108,7 @@ public class EventFragment extends Fragment {
             @Override
             public void onResponse(Luchador luchador1) {
                 // Luchador 1
-                /*getActivity()*/ Picasso.get().load(luchador1.getImgCuerpoIzquierda()).into(imgLuchador1);
+                 Picasso.get().load(luchador1.getImgCuerpoIzquierda()).into(imgLuchador1);
                 txtLuchador1Record.setText(String.format("%d - %d - %d", luchador1.getWins(), luchador1.getLosses(), luchador1.getDraws()));
                 txtLuchador1Altura.setText(luchador1.getAltura());
                 txtLuchador1Peso.setText(String.format("%s kg", luchador1.getPeso()));
@@ -130,7 +130,7 @@ public class EventFragment extends Fragment {
             @Override
             public void onResponse(Luchador luchador2) {
                 // Luchador 2
-                /*getActivity()*/ Picasso.get().load(luchador2.getImgCuerpoIzquierda()).into(imgLuchador2);
+                 Picasso.get().load(luchador2.getImgCuerpoIzquierda()).into(imgLuchador2);
                 txtLuchador2Record.setText(String.format("%d - %d - %d", luchador2.getWins(), luchador2.getLosses(), luchador2.getDraws()));
                 txtLuchador2Altura.setText(luchador2.getAltura());
                 txtLuchador2Peso.setText(String.format("%s kg", luchador2.getPeso()));

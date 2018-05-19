@@ -1,9 +1,6 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;
@@ -44,6 +41,7 @@ public class LuchadorProvider {
 
             @Override
             public void onResponse(Luchador[] luchadores) {
+                luchadores = Arrays.copyOfRange(luchadores,0,5);
                 listener.onResponse(luchadores);
             }
         }, new Response.ErrorListener() {

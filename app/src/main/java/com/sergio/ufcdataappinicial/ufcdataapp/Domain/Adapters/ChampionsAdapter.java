@@ -12,6 +12,8 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
@@ -77,9 +79,9 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
             weightClass.setText(luchador.getCategoria());
             String imagen = luchador.getImgCinturon();
             if (imagen != null && !imagen.equals("")) {
-                /*context*/ Picasso.get().load(luchador.getImgCinturon()).into(img);
+                 Picasso.get().load(luchador.getImgCinturon()).into(img);
             } else {
-                /*context*/ Picasso.get().load(luchador.getImgPerfil()).into(img);
+                 Picasso.get().load(luchador.getImgPerfil()).into(img);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {
@@ -94,4 +96,5 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
     public interface OnItemClickListener {
         void onItemClick(Luchador luchador, int position);
     }
+
 }

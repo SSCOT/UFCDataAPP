@@ -72,7 +72,7 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             }
             String imagen = luchador.getImgPerfil();
             if (imagen != null && !imagen.equals("")) {
-                /*context*/ Picasso.get().load(luchador.getImgPerfil()).into(img);
+                 Picasso.get().load(luchador.getImgPerfil()).into(img);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

@@ -1,7 +1,10 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters;
 
+import android.arch.persistence.room.Room;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.PorterDuff;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -17,17 +20,24 @@ import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Prueba;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
+import java.util.List;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class FightersListChampionsFragment extends Fragment {
+
+    private static ChampionsAdapter adapter;
+    private static Context context;
 
     @BindView(R.id.progressBarChampions)
     ProgressBar progressBar;
@@ -62,6 +72,8 @@ public class FightersListChampionsFragment extends Fragment {
         luchadorProvider = new LuchadorProvider(getActivity().getApplicationContext());
         recyclerConf(getView());
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
+        context = getContext();
+
         setLoading(true);
         getChampions();
     }
@@ -77,7 +89,7 @@ public class FightersListChampionsFragment extends Fragment {
             @Override
             public void onResponse(Luchador[] luchadores) {
                 setLoading(false);
-                ChampionsAdapter adapter = new ChampionsAdapter(getActivity(), luchadores, new ChampionsAdapter.OnItemClickListener() {
+                adapter = new ChampionsAdapter(getActivity(), luchadores, new ChampionsAdapter.OnItemClickListener() {
                     @Override
                     public void onItemClick(Luchador luchador, int position) {
                         Intent intent = new Intent();
@@ -105,5 +117,4 @@ public class FightersListChampionsFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
         }
     }
-
 }

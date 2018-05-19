@@ -47,7 +47,6 @@ public class FighterFragment extends Fragment {
     @BindView(R.id.pie_view)
     PieView pieView;
 
-
     public static FighterFragment newInstance(Luchador luchador) {
         FighterFragment fragment = new FighterFragment();
         Bundle arguments = new Bundle();
@@ -55,7 +54,6 @@ public class FighterFragment extends Fragment {
         fragment.setArguments(arguments);
         return fragment;
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -121,7 +119,7 @@ public class FighterFragment extends Fragment {
         }
 
         getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
-        /*getActivity()*/ Picasso.get().load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
+         Picasso.get().load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
 
     }
 

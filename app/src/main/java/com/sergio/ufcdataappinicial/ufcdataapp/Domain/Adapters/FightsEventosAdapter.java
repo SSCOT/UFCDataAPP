@@ -91,12 +91,12 @@ public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdap
 
                 String img1 = fight.getImgPerfil1();
                 if (img1 != null && !img1.equals("")) {
-                    /*context*/ Picasso.get().load(img1).into(imgLuchador1);
+                     Picasso.get().load(img1).into(imgLuchador1);
                 }
 
                 String img2 = fight.getImgPerfil2();
                 if (img2 != null && !img2.equals("")) {
-                    /*context*/ Picasso.get().load(img2).into(imgLuchador2);
+                     Picasso.get().load(img2).into(imgLuchador2);
                 }
                 txtLuchador1.setText(fight.getNombre1());
                 txtLuchadorApe1.setText(fight.getApellido1());
