@@ -22,6 +22,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.NoticiaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ArticlesAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -99,7 +100,7 @@ public class NewsListArticlesFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                Utilidades.messageWithOk(getContext(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

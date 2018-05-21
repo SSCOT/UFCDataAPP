@@ -1,6 +1,7 @@
-package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -9,7 +10,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
-import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -20,7 +21,8 @@ import java.util.Locale;
 public class EventoProvider {
 
     private Context context;
-    private com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider luchadorProvider;
+    private LuchadorProvider luchadorProvider;
+    Evento[][] eventsFinal;
 
     public EventoProvider(Context context) {
         this.context = context;
@@ -45,10 +47,7 @@ public class EventoProvider {
             public void onResponse(Evento[] events) {
 
                 // fecha actual
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
-                Date date = new Date();
-                String fecha = dateFormat.format(date);
-                int fechaActualInt = Integer.parseInt(fecha);
+                int fechaActualInt = Utilidades.getFechaActualInt();
 
                 int numeroEventos = events.length;
 
@@ -75,10 +74,24 @@ public class EventoProvider {
 
                 int contador = eventosPasadosAux.size();
 
-                Evento[][] eventsFinal = new Evento[2][];
+                eventsFinal = new Evento[2][];
 
                 eventsFinal[0] = eventosPasadosAux.toArray(new Evento[0]);
                 eventsFinal[1] = eventosProximosAux.toArray(new Evento[0]);
+
+                // COMPROBAMOS LA FECHA DE ACTUALIZACIÓN. SI ES MENOR A LA ACTUAL CAMBIAMOS EL VALOR
+                // obtenemos el dateSync de las shared preferences
+                SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
+                String fechaActualizacion = preferences.getString("dateSync", "");
+
+                // Si no había definida ninguna fecha o si es menor que la fecha actual, hay que volver a guardar todos los datos
+                if (fechaActualizacion.equals("") || fechaActualInt > Integer.parseInt(fechaActualizacion)) {
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putString("dateSync", eventsFinal[1][0].getFecha().replace("-", ""));
+                    editor.putBoolean("fightersUpdated",false);
+                    editor.putBoolean("championsUpdated",false);
+                    editor.apply();
+                }
 
                 listener.onResponse(eventsFinal);
             }

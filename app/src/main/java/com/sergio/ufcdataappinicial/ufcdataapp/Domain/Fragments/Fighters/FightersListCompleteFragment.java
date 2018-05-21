@@ -12,7 +12,6 @@ import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.SearchView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -20,8 +19,7 @@ import android.widget.ProgressBar;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Prueba;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.LuchadoresAdapter;
@@ -123,13 +121,9 @@ public class FightersListCompleteFragment extends Fragment {
     }
 
     private void getAllFighters() {
-        // luchadorProvider.getAll(new LuchadorProvider.LuchadorProviderListener() {
-        luchadorProvider.getAllPersistence(new LuchadorProvider.LuchadorProviderListener() {
+        luchadorProvider.getAll(new LuchadorProvider.LuchadorProviderListener() {
             @Override
             public void onResponse(Luchador[] luchadores) {
-
-                pruebaDB(luchadores);
-
                 swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
 
@@ -157,7 +151,6 @@ public class FightersListCompleteFragment extends Fragment {
             }
         });
     }
-
 
     private void setLoading(boolean loading) {
         if (loading) {
@@ -213,49 +206,4 @@ public class FightersListCompleteFragment extends Fragment {
 
         return luchadoresFiltrados;
     }
-
-
-    private void pruebaDB(Luchador[] luchadores) {
-        // for (Luchador luchador:luchadores) {
-        /*db = Room.databaseBuilder(getActivity(), UfcDatabase.class, "prueba").build();
-        InsertTask insertTask = new InsertTask();
-        insertTask.execute(luchadores[1]);
-        Log.d("", "pruebaDB: HECHO");*/
-        // }
-
-        /*Prueba[] pruebas = new Prueba[1];
-        pruebas[0] = new Prueba(1, "Sergio");
-        db = Room.databaseBuilder(getActivity(), UfcDatabase.class, "prueba").build();
-        InsertTask insertTask = new InsertTask();
-        insertTask.execute(pruebas);*/
-
-        db = Room.databaseBuilder(getActivity(), UfcDatabase.class, "ufcDb").build();
-        for (Luchador itemLuchador : luchadores) {
-            InsertTask insertTask = new InsertTask();
-            insertTask.execute(itemLuchador);
-        }
-
-    }
-
-    private static class InsertTask extends AsyncTask<Luchador, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Luchador... luchadores) {
-            if (db != null)
-                db.ufcDao().insertLuchador(luchadores);
-
-            return null;
-        }
-    }
-
-
-    /*private static class InsertTask extends AsyncTask<Prueba, Void, Void> {
-        @Override
-        protected Void doInBackground(Prueba... prueba) {
-            // UfcDatabase db = Room.databaseBuilder(context, UfcDatabase.class, "ufc_database").build();
-            if (db != null)
-                db.ufcDao().insertPrueba(prueba);
-            return null;
-        }
-    }*/
 }

@@ -1,9 +1,6 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
-import android.arch.persistence.room.Room;
 import android.content.Context;
-import android.os.AsyncTask;
-import android.util.Log;
 
 import com.android.volley.RequestQueue;
 import com.android.volley.Response;

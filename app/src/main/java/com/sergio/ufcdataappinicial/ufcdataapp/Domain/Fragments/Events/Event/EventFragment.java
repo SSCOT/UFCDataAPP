@@ -14,7 +14,7 @@ import android.widget.TextView;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 import com.squareup.picasso.Picasso;

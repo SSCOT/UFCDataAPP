@@ -1,13 +1,17 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model;
 
 import android.annotation.SuppressLint;
+import android.arch.persistence.room.Entity;
+import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
+@Entity(tableName = "noticia")
 public class Noticia {
 
+    @PrimaryKey
     private int id;
 
     @SerializedName("title")

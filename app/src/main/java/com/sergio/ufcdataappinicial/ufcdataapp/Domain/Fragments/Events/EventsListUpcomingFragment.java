@@ -3,9 +3,11 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events;
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.graphics.PorterDuff;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
@@ -22,7 +24,7 @@ import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
@@ -75,9 +77,7 @@ public class EventsListUpcomingFragment extends Fragment {
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-
         context = getContext();
-        getDbLuchadores();
 
         eventProvider = new EventoProvider(getContext());
         luchadorProvider = new LuchadorProvider(getContext());
@@ -107,7 +107,7 @@ public class EventsListUpcomingFragment extends Fragment {
                     @Override
                     public void onResponse(final Evento[][] eventos) {
 
-                        for (Evento itemEvento:eventos[1]) {
+                        for (Evento itemEvento : eventos[1]) {
                             itemEvento.setLuchador1(luchadoresSparse.get(itemEvento.getIdLuchador1()));
                             itemEvento.setLuchador2(luchadoresSparse.get(itemEvento.getIdLuchador2()));
                         }
@@ -129,7 +129,7 @@ public class EventsListUpcomingFragment extends Fragment {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         setLoading(false);
-                        Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                        Utilidades.messageWithOk(getActivity(), getView(), getResources().getString(R.string.error_recuperacion_datos));
                     }
                 });
             }
@@ -137,7 +137,7 @@ public class EventsListUpcomingFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(getActivity(), getView(), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
 
@@ -151,8 +151,9 @@ public class EventsListUpcomingFragment extends Fragment {
         }
     }
 
+
     // PRUEBAS ROOOOOOOOOOOOMMMM
-    private void getDbLuchadores() {
+    /*private void getDbLuchadores() {
 
         db = Room.databaseBuilder(getActivity().getApplicationContext(), UfcDatabase.class, "ufcDb").build();
         GetFavoritesCarsAsyncTask selectAsyncTask = new GetFavoritesCarsAsyncTask();
@@ -170,8 +171,8 @@ public class EventsListUpcomingFragment extends Fragment {
         @Override
         protected void onPostExecute(List<Luchador> luchadores) {
             super.onPostExecute(luchadores);
-            if(luchadores.size() > 0)
+            if (luchadores.size() > 0)
                 Toast.makeText(context, luchadores.get(0).getNombre(), Toast.LENGTH_SHORT).show();
         }
-    }
+    }*/
 }

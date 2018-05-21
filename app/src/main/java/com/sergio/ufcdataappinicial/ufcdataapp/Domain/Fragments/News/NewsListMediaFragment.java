@@ -22,6 +22,7 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.MediaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.MediaActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.MediaAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
+import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 import java.util.ArrayList;
 
@@ -95,7 +96,7 @@ public class NewsListMediaFragment extends Fragment {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Toast.makeText(getActivity(), "Error al recoger los datos", Toast.LENGTH_LONG).show();
+                Utilidades.messageWithOk(getContext(),getView(),getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

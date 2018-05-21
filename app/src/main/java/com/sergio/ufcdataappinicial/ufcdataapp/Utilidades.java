@@ -4,6 +4,10 @@ import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.Locale;
+
 public class Utilidades {
     public Utilidades() {
     }
@@ -29,5 +33,12 @@ public class Utilidades {
                 });
         snck.getView().setBackgroundColor(context.getResources().getColor(R.color.colorPrimaryDark));
         snck.show();
+    }
+
+    public static int getFechaActualInt() {
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyyMMdd", Locale.US);
+        Date date = new Date();
+        String fecha = dateFormat.format(date);
+        return Integer.parseInt(fecha);
     }
 }

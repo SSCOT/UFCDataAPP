@@ -14,13 +14,12 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;

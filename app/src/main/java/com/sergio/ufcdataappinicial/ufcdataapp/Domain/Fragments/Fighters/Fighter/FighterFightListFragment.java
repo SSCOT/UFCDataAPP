@@ -11,7 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.LuchadorCombate;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.FightsLuchadorAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
