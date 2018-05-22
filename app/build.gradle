@@ -65,7 +65,7 @@ android {
         }
         free {
             minSdkVersion 22
-            applicationId 'com.sergio.ufcdataappinicial.ufcdataapp'
+            applicationId 'com.sergio.ufcdataappinicial.ufcdataappFree'
             dimension "standar"
         }
     }
