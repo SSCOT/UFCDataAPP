@@ -5,6 +5,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -19,7 +20,7 @@ import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoProvider;
-import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.EventActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.EventsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
@@ -32,6 +33,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class EventsListPastFragment extends Fragment {
+
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.rvEvents)
     RecyclerView recyclerView;
@@ -90,7 +94,7 @@ public class EventsListPastFragment extends Fragment {
             public boolean onQueryTextChange(String newText) {
                 ArrayList<Evento> listaEventosFiltrados = filter(eventsGeneral, newText);
                 Evento[] eventosFiltrados = (Evento[]) listaEventosFiltrados.toArray(new Evento[listaEventosFiltrados.size()]);
-                if(adapter != null)
+                if (adapter != null)
                     adapter.setFilter(eventosFiltrados);
 
                 return true;
@@ -100,6 +104,13 @@ public class EventsListPastFragment extends Fragment {
 
             }
 
+        });
+
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getEvents();
+            }
         });
     }
 
@@ -140,22 +151,25 @@ public class EventsListPastFragment extends Fragment {
                                 startActivity(intent);
                             }
                         });
+                        swipeRefreshLayout.setRefreshing(false);
                         setLoading(false);
                         recyclerView.setAdapter(adapter);
                     }
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        swipeRefreshLayout.setRefreshing(false);
                         setLoading(false);
-                        Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                        Utilidades.messageWithOk(getActivity(), getView(), getResources().getString(R.string.error_recuperacion_datos));
                     }
                 });
             }
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
-                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(getActivity(), getView(), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }
@@ -196,7 +210,7 @@ public class EventsListPastFragment extends Fragment {
 
                 if ((titulo != null && titulo.contains(texto))
                         || (subtitulo != null && subtitulo.contains(texto))
-                        || (fecha != null && fecha.contains(texto) )) {
+                        || (fecha != null && fecha.contains(texto))) {
                     eventosFiltrados.add(currentEvent);
                 }
             }

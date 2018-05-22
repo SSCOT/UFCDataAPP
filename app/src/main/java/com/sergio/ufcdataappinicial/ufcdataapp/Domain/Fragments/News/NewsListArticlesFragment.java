@@ -5,20 +5,19 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
-import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.NoticiaProvider;
+// import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.NoticiaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ArticlesAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
@@ -28,6 +27,9 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 
 public class NewsListArticlesFragment extends Fragment {
+
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.progressBarArticles)
     ProgressBar progressBar;
@@ -70,6 +72,14 @@ public class NewsListArticlesFragment extends Fragment {
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getNews();
+
+        // Swipe refresh
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getNews();
+            }
+        });
     }
 
     private void recyclerConf(View view) {
@@ -83,6 +93,7 @@ public class NewsListArticlesFragment extends Fragment {
             @Override
             public void onResponse(Noticia[] response) {
                 news = response;
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
                 ArticlesAdapter adapter = new ArticlesAdapter(getActivity(), news, new ArticlesAdapter.OnItemClickListener() {
                     @Override
@@ -99,8 +110,9 @@ public class NewsListArticlesFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
-                Utilidades.messageWithOk(getContext(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(getContext(), getView(), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

@@ -28,6 +28,7 @@ public class MediaProvider {
     }
 
     public void getMedia(final MediaProviderListener listener) {
+        // premium
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_MEDIA, Media[].class, null, new Response.Listener<Media[]>() {
 
             @Override

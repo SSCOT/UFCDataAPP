@@ -2,6 +2,7 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento;
 
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
+import android.arch.persistence.room.PrimaryKey;
 
 import com.google.gson.annotations.SerializedName;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
@@ -12,6 +13,7 @@ import java.io.Serializable;
 @Entity(tableName = "evento")
 public class Evento implements Serializable {
 
+    @PrimaryKey
     private int id;
 
     @SerializedName("feature_image")
@@ -45,6 +47,8 @@ public class Evento implements Serializable {
 
     @Ignore
     private Combate[] combates;
+
+    public Evento(){    }
 
     public Evento(String imgPrincipal, String imgSecundaria, String fecha, String titulo, String subtitulo, String estado, String arena, String ciudad, float lat, float lon, int idLuchador1, int idLuchador2, Luchador luchador1, Luchador luchador2, Combate[] combates) {
         this.imgPrincipal = imgPrincipal;

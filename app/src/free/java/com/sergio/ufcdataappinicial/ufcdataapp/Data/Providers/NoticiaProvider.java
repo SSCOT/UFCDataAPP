@@ -23,10 +23,13 @@ public class NoticiaProvider {
     }
 
     public void getArticles(final NoticiasProviderListener listener) {
+        // free
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_NEWS, Noticia[].class, null, new Response.Listener<Noticia[]>() {
 
             @Override
             public void onResponse(Noticia[] news) {
+                // Las noticias son algo cambiante. SIEMPRE las guardamos
+
                 listener.onResponse(news);
             }
         }, new Response.ErrorListener() {

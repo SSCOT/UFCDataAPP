@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -9,12 +9,10 @@ import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
 public class LuchadorProvider {
 
-    static UfcDatabase db;
     static Context context;
 
     public LuchadorProvider(Context context) {
@@ -34,6 +32,7 @@ public class LuchadorProvider {
     }
 
     public void getAll(final LuchadorProviderListener listener) {
+        // premium
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_FIGHTERS_ALL, Luchador[].class, null, new Response.Listener<Luchador[]>() {
             @Override
             public void onResponse(Luchador[] luchadores) {
@@ -46,7 +45,6 @@ public class LuchadorProvider {
             @Override
             public void onErrorResponse(VolleyError error) {
                 // Recuperamos datos en local para mostrar los últimos datos que teníamos
-                // getAllLocal(listener);
                 LuchadorLocalProvider luchadorLocalProvider = new LuchadorLocalProvider(context);
                 luchadorLocalProvider.getAll(new LuchadorLocalProvider.LuchadorLocalProviderListener() {
                     @Override

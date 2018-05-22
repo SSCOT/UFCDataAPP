@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
 
@@ -10,7 +10,6 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.GsonRequest;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
 
 public class NoticiaProvider {
-
     Context context;
 
     public NoticiaProvider(Context context) {
@@ -23,20 +22,40 @@ public class NoticiaProvider {
     }
 
     public void getArticles(final NoticiasProviderListener listener) {
+        // premium
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_NEWS, Noticia[].class, null, new Response.Listener<Noticia[]>() {
 
             @Override
             public void onResponse(Noticia[] news) {
+                // Las noticias es algo muy cambiante y de poco peso. Guardamos siempre en local
+                saveData(news);
                 listener.onResponse(news);
             }
         }, new Response.ErrorListener() {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                listener.onErrorResponse(error);
+                // Recuperamos datos en local para mostrar los últimos datos que teníamos
+                NoticiaLocalProvider noticiaLocalProvider = new NoticiaLocalProvider(context);
+                noticiaLocalProvider.getAll(new NoticiaLocalProvider.NoticiaLocalProviderListener() {
+                    @Override
+                    public void onResponse(Noticia[] news) {
+                        listener.onResponse(news);
+                    }
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        listener.onErrorResponse(error);
+                    }
+                });
             }
         });
 
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
+    }
+
+    private void saveData(Noticia[] news) {
+        NoticiaLocalProvider localProvider = new NoticiaLocalProvider(context);
+        localProvider.insert(news);
     }
 }

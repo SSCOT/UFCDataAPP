@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
@@ -76,8 +76,8 @@ public class NoticiaLocalProvider {
         @Override
         protected void onPostExecute(List<Noticia> noticias) {
             super.onPostExecute(noticias);
-            Noticia[] luchadoresFinal = noticias.toArray(new Noticia[noticias.size()]);
-            listener.onResponse(luchadoresFinal);
+            Noticia[] noticiasFinal = noticias.toArray(new Noticia[noticias.size()]);
+            listener.onResponse(noticiasFinal);
         }
     }
 

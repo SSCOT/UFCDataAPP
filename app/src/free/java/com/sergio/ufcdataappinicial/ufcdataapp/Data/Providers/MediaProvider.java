@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
 
@@ -28,6 +28,7 @@ public class MediaProvider {
     }
 
     public void getMedia(final MediaProviderListener listener) {
+        // free
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_MEDIA, Media[].class, null, new Response.Listener<Media[]>() {
 
             @Override

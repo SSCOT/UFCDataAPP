@@ -1,5 +1,4 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd;
-/*
 
 import android.arch.persistence.room.Dao;
 import android.arch.persistence.room.Delete;
@@ -10,7 +9,6 @@ import android.arch.persistence.room.Query;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
-import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorLocalProvider;
 
 import java.util.List;
 
@@ -28,7 +26,7 @@ public interface UfcDao {
     void insertLuchadores(Luchador luchador);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertLuchador(Luchador...luchadores);
+    void insertLuchador(Luchador... luchadores);
 
     @Delete()
     void delete(Luchador luchador);
@@ -44,7 +42,7 @@ public interface UfcDao {
     void insertNews(Noticia noticia);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertNew(Noticia...noticias);
+    void insertNew(Noticia... noticias);
 
     @Delete()
     void deleteNew(Noticia noticia);
@@ -60,9 +58,8 @@ public interface UfcDao {
     void insertEvents(Evento evento);
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    void insertEvent(Evento...eventos);
+    void insertEvent(Evento... eventos);
 
     @Delete()
     void deleteEvent(Evento evento);
 }
-*/

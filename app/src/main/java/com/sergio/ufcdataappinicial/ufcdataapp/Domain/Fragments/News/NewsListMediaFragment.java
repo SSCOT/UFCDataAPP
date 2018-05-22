@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -14,7 +15,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
-import android.widget.Toast;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
@@ -31,6 +31,9 @@ import butterknife.ButterKnife;
 
 
 public class NewsListMediaFragment extends Fragment {
+
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.progressBarMedia)
     ProgressBar progressBar;
@@ -67,6 +70,14 @@ public class NewsListMediaFragment extends Fragment {
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         getMedia();
+
+        // Swipe refresh
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getMedia();
+            }
+        });
     }
 
     private void recyclerConf() {
@@ -80,6 +91,7 @@ public class NewsListMediaFragment extends Fragment {
             @Override
             public void onResponse(Media[] response) {
                 arrayMedia = sortResponse(response);
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
                 MediaAdapter adapter = new MediaAdapter(getActivity(), arrayMedia, new MediaAdapter.OnItemClickListener() {
                     @Override
@@ -95,8 +107,9 @@ public class NewsListMediaFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
-                Utilidades.messageWithOk(getContext(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(getContext(), getView(), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

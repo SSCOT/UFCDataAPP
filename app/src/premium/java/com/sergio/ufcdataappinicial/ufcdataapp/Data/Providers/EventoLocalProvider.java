@@ -1,4 +1,4 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;

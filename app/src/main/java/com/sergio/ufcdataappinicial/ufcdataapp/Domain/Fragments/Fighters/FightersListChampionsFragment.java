@@ -6,6 +6,7 @@ import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.support.v4.widget.SwipeRefreshLayout;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -16,7 +17,7 @@ import android.widget.ProgressBar;
 
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
-import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ChampionsAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
@@ -29,6 +30,9 @@ public class FightersListChampionsFragment extends Fragment {
 
     private static ChampionsAdapter adapter;
     private static Context context;
+
+    @BindView(R.id.swipe_container)
+    SwipeRefreshLayout swipeRefreshLayout;
 
     @BindView(R.id.progressBarChampions)
     ProgressBar progressBar;
@@ -52,7 +56,7 @@ public class FightersListChampionsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_fighters_list_champions, container, false);
-        ButterKnife.bind(this,view);
+        ButterKnife.bind(this, view);
         return view;
     }
 
@@ -67,6 +71,14 @@ public class FightersListChampionsFragment extends Fragment {
 
         setLoading(true);
         getChampions();
+
+        // Swipe refresh
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                getChampions();
+            }
+        });
     }
 
     private void recyclerConf(View view) {
@@ -79,6 +91,7 @@ public class FightersListChampionsFragment extends Fragment {
         luchadorProvider.getChampions(new LuchadorProvider.LuchadorProviderListener() {
             @Override
             public void onResponse(Luchador[] luchadores) {
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
                 adapter = new ChampionsAdapter(getActivity(), luchadores, new ChampionsAdapter.OnItemClickListener() {
                     @Override
@@ -95,8 +108,9 @@ public class FightersListChampionsFragment extends Fragment {
 
             @Override
             public void onErrorResponse(VolleyError error) {
+                swipeRefreshLayout.setRefreshing(false);
                 setLoading(false);
-                Utilidades.messageWithOk(getActivity(),getView(),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(getActivity(), getView(), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
     }

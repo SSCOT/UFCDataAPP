@@ -43,7 +43,8 @@ public class EventActivity extends AppCompatActivity {
         ButterKnife.bind(this);
 
         setTitleColor();
-        Picasso.get().load(event.getImgSecundaria()).into(imgEventDetail);
+        if (event.getImgSecundaria() != null && !event.getImgSecundaria().equals(""))
+            Picasso.get().load(event.getImgSecundaria()).into(imgEventDetail);
 
         // Lanzamos los datos del luchador
         FragmentTransaction ft = getFragmentManager().beginTransaction();

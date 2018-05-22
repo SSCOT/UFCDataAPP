@@ -1,16 +1,13 @@
-package com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers;
+package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.arch.persistence.room.Room;
 import android.content.Context;
 import android.os.AsyncTask;
 
-import com.android.volley.RequestQueue;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.bbdd.UfcDatabase;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListCompleteFragment;
 
-import java.util.Arrays;
 import java.util.List;
 
 public class LuchadorLocalProvider {
