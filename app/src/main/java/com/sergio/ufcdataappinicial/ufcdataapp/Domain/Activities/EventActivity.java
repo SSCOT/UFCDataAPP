@@ -44,7 +44,9 @@ public class EventActivity extends AppCompatActivity {
 
         setTitleColor();
         if (event.getImgSecundaria() != null && !event.getImgSecundaria().equals(""))
-            Picasso.get().load(event.getImgSecundaria()).into(imgEventDetail);
+            Picasso.get().load(event.getImgSecundaria()).placeholder(R.drawable.ufc_logo_white).into(imgEventDetail);
+        else
+            Picasso.get().load(R.drawable.ufc_logo_white).into(imgEventDetail);
 
         // Lanzamos los datos del luchador
         FragmentTransaction ft = getFragmentManager().beginTransaction();

@@ -83,21 +83,24 @@ public class FightsEventosAdapter extends RecyclerView.Adapter<FightsEventosAdap
         public void bindFight(final Combate fight, final OnItemClickListener listener) {
 
             // Si no tenemos los datos de los peleadores indicamos "pelea por confirmar"
-            if((fight.getNombre1() != "" && fight.getNombre1() != null) || (fight.getNombre2() != "" && fight.getNombre2() != null)){
+            if((!fight.getNombre1().equals("") && fight.getNombre1() != null) || (fight.getNombre2() != "" && fight.getNombre2() != null)){
                 if(fight.getDescripcion() != null)
                     txtTitulo.setText(fight.getDescripcion());
                 else
                     txtTitulo.setVisibility(View.GONE);
 
                 String img1 = fight.getImgPerfil1();
-                if (img1 != null && !img1.equals("")) {
-                     Picasso.get().load(img1).into(imgLuchador1);
-                }
+                if (img1 != null && !img1.equals(""))
+                     Picasso.get().load(img1).placeholder(R.drawable.male_profile_shadow).into(imgLuchador1);
+                else
+                    Picasso.get().load(R.drawable.male_profile_shadow).into(imgLuchador1);
 
                 String img2 = fight.getImgPerfil2();
-                if (img2 != null && !img2.equals("")) {
-                     Picasso.get().load(img2).into(imgLuchador2);
-                }
+                if (img2 != null && !img2.equals(""))
+                     Picasso.get().load(img2).placeholder(R.drawable.male_profile_shadow).into(imgLuchador2);
+                else
+                    Picasso.get().load(R.drawable.male_profile_shadow).into(imgLuchador2);
+
                 txtLuchador1.setText(fight.getNombre1());
                 txtLuchadorApe1.setText(fight.getApellido1());
                 txtLuchador2.setText(fight.getNombre2());

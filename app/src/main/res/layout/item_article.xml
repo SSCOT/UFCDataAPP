@@ -4,8 +4,7 @@
     xmlns:tool="http://schemas.android.com/tools"
     android:id="@+id/card_view"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:elevation="0dp">
+    android:layout_height="wrap_content">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -14,41 +13,45 @@
         <ImageView
             android:id="@+id/img"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/CardStandardDouble"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/none"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
             tool:srcCompat="@android:drawable/btn_star" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtTitle"
+            style="@style/textoTitulo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/img"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginStart="@dimen/smallHalf"
+            android:layout_marginEnd="@dimen/smallHalf"
+            android:layout_marginTop="@dimen/smallHalf"
+            tool:text="ESTO ES UN TÍTULO DE PRUEBA"
+            android:layout_marginBottom="@dimen/medium"/>
 
-            <TextView
-                android:id="@+id/txtTitle"
-                style="@style/textoTitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:gravity="center"
-                android:layout_margin="@dimen/smallHalf"
-                tool:text="ESTO ES UN TÍTULO DE PRUEBA" />
+        <TextView
+            android:id="@+id/txtFecha"
+            style="@style/textoSecundarioFondoTransparente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentEnd="true"
+            android:layout_alignBottom="@id/img"
+            tool:text="20161201"
+            android:paddingEnd="@dimen/small"/>
 
-            <TextView
-                android:id="@+id/txtAutor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="@dimen/margin_small"
-                tool:text="Tony Ferguson" />
+        <TextView
+            android:id="@+id/txtAutor"
+            style="@style/textoSecundarioFondoTransparente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/txtFecha"
+            android:layout_alignBottom="@id/txtFecha"
+            tool:text="Tony Ferguson" />
 
-            <TextView
-                android:id="@+id/txtFecha"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginRight="@dimen/margin_small"
-                tool:text="20161201" />
-        </LinearLayout>
 
     </RelativeLayout>
 

@@ -13,7 +13,6 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.FightersPagerAdapter;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters.NewsPagerAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 
 import butterknife.BindView;

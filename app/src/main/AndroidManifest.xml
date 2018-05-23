@@ -42,5 +42,4 @@
             android:theme="@style/AppThemeNoToolbar" />
         <activity android:name=".Domain.Activities.FightActivity" />
     </application>
-
 </manifest>

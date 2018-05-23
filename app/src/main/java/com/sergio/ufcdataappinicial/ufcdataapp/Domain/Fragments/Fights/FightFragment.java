@@ -131,8 +131,12 @@ public class FightFragment extends Fragment {
 
         txtLuchadorNom1.setText(fight.getNombre1());
         txtLuchadorApe1.setText(fight.getApellido1());
+
         if(fight.getImgCuerpo1() != null && !fight.getImgCuerpo1().equals(""))
-             Picasso.get().load(fight.getImgCuerpo1()).into(imgLuchador1);
+             Picasso.get().load(fight.getImgCuerpo1()).placeholder(R.drawable.male_shadow_left).into(imgLuchador1);
+        else
+            Picasso.get().load(R.drawable.male_shadow_left).into(imgLuchador1);
+
         txtLuchador1Altura.setText(fight.getAltura1());
         txtLuchador1Peso.setText(fight.getPeso1());
         txtLuchador1Reach.setText(fight.getAlcance1());
@@ -144,8 +148,12 @@ public class FightFragment extends Fragment {
 
         txtLuchadorNom2.setText(fight.getNombre2());
         txtLuchadorApe2.setText(fight.getApellido2());
+
         if(fight.getImgCuerpo2() != null && !fight.getImgCuerpo2().equals(""))
-             Picasso.get().load(fight.getImgCuerpo2()).into(imgLuchador2);
+             Picasso.get().load(fight.getImgCuerpo2()).placeholder(R.drawable.female_shadow_right).into(imgLuchador2);
+        else
+            Picasso.get().load(R.drawable.male_shadow_left).into(imgLuchador2);
+
         txtLuchador2Altura.setText(fight.getAltura2());
         txtLuchador2Peso.setText(fight.getPeso2());
         txtLuchador2Reach.setText(fight.getAlcance2());

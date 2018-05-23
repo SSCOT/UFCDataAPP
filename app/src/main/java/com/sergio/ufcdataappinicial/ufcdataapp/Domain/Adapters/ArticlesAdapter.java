@@ -71,11 +71,11 @@ public class ArticlesAdapter extends RecyclerView.Adapter<ArticlesAdapter.Notici
             autor.setText(noticia.getAutor());
             fecha.setText(noticia.getFecha());
             String imagen = noticia.getImg();
-            if (imagen != null && imagen != "") {
-                 Picasso.get().load(noticia.getImg()).into(img);
-            } else {
+            if (imagen != null && !imagen.equals(""))
+                Picasso.get().load(noticia.getImg()).placeholder(R.drawable.ufc_logo_white).into(img);
+            else
                 img.setImageResource(R.drawable.ufc_logo_white);
-            }
+
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

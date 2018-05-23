@@ -50,25 +50,9 @@ public class EventoProvider {
                 // Separamos eventos pasados de próximos
                 splitEvents(events, fechaActualInt);
 
-                // COMPROBAMOS LA FECHA DE ACTUALIZACIÓN. SI ES MENOR A LA ACTUAL CAMBIAMOS EL VALOR
-                // obtenemos el dateSync de las shared preferences
-                SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
-                String fechaActualizacion = preferences.getString("dateSync", "");
+                // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
+                checkAndChangeDateSync(events, fechaActualInt);
 
-                // Si no había definida ninguna fecha o si es menor que la fecha actual, hay que volver a guardar todos los datos
-                if (fechaActualizacion.equals("") || fechaActualInt > Integer.parseInt(fechaActualizacion)) {
-                    SharedPreferences.Editor editor = preferences.edit();
-                    // Como vienen ordenados por fecha cogemos la fecha más próxima
-                    editor.putString("dateSync", eventsFinal[1][0].getFecha().replace("-", ""));
-                    // flags a false para que se vuelvan a actualizar los luchadores y campeones
-                    editor.putBoolean("fightersUpdated", false);
-                    editor.putBoolean("championsUpdated", false);
-                    editor.apply();
-
-                    // Guardamos events
-                    EventoLocalProvider localProvider = new EventoLocalProvider(context);
-                    localProvider.insert(events);
-                }
 
                 listener.onResponse(eventsFinal);
             }
@@ -96,6 +80,27 @@ public class EventoProvider {
         });
 
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
+    }
+
+    private void checkAndChangeDateSync(Evento[] events, int fechaActualInt) {
+        // obtenemos el dateSync de las shared preferences
+        SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
+        String fechaActualizacion = preferences.getString("dateSync", "");
+
+        // Si no había definida ninguna fecha o si es menor que la fecha actual, hay que volver a guardar todos los datos
+        if (fechaActualizacion.equals("") || fechaActualInt > Integer.parseInt(fechaActualizacion)) {
+            SharedPreferences.Editor editor = preferences.edit();
+            // Como vienen ordenados por fecha cogemos la fecha más próxima
+            editor.putString("dateSync", eventsFinal[1][0].getFecha().replace("-", ""));
+            // flags a false para que se vuelvan a actualizar los luchadores y campeones
+            editor.putBoolean("fightersUpdated", false);
+            editor.putBoolean("championsUpdated", false);
+            editor.apply();
+
+            // Guardamos events
+            EventoLocalProvider localProvider = new EventoLocalProvider(context);
+            localProvider.insert(events);
+        }
     }
 
     private void splitEvents(Evento[] events, int fechaActualInt) {

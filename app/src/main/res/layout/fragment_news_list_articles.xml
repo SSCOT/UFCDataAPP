@@ -27,5 +27,4 @@
         android:progressDrawable="?android:attr/colorActivatedHighlight"
         android:progressTint="?attr/actionModeSplitBackground"
         android:visibility="visible" />
-
 </FrameLayout>

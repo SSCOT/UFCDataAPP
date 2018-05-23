@@ -16,7 +16,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_margin="@dimen/margin_small"
+            android:layout_margin="@dimen/small"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             tools:text="Khabib Nurmagomedov" />
 
@@ -28,16 +28,16 @@
 
             <ImageView
                 android:id="@+id/imgLuchadorDetailDescription"
-                android:layout_width="0dp"
-                android:layout_height="200dp"
+                android:layout_width="@dimen/none"
+                android:layout_height="@dimen/bodyImagesHeight"
                 android:layout_gravity="start"
-                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginStart="@dimen/small"
                 android:layout_weight="50" />
 
             <RelativeLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="@dimen/margin_small"
+                android:layout_marginEnd="@dimen/small"
                 android:layout_weight="50">
 
                 <TextView
@@ -55,7 +55,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@id/txtFighterDetailWeightClass"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/small"
                     tools:text="32-1-0" />
 
                 <TextView
@@ -65,7 +65,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtFighterDetailRecord"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/small"
                     tools:text="5' 6''" />
 
                 <TextView
@@ -75,8 +75,8 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtFighterDetailHeight"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginStart="@dimen/margin_small"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginStart="@dimen/small"
+                    android:layout_marginTop="@dimen/small"
                     tools:text="120 kg" />
 
                 <TextView
@@ -86,7 +86,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtFighterDetailWeight"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/small"
                     tools:text="Los Angeles" />
 
                 <TextView
@@ -96,7 +96,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtFighterDetailCity"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/small"
                     tools:text="California, Estados unidos" />
 
                 <TextView
@@ -105,7 +105,7 @@
                     android:layout_height="wrap_content"
                     android:layout_below="@+id/txtFighterDetailResidence"
                     android:layout_centerHorizontal="true"
-                    android:layout_marginTop="@dimen/margin_small"
+                    android:layout_marginTop="@dimen/small"
                     android:textStyle="italic" />
             </RelativeLayout>
         </LinearLayout>
@@ -126,10 +126,10 @@
             <View
                 android:id="@+id/viewLegendKO"
                 android:layout_width="@dimen/smallDouble"
-                android:layout_height="@dimen/margin_small"
+                android:layout_height="@dimen/small"
                 android:layout_alignTop="@id/pie_view"
-                android:layout_marginBottom="@dimen/margin_small"
-                android:layout_marginStart="@dimen/margin_small"
+                android:layout_marginBottom="@dimen/small"
+                android:layout_marginStart="@dimen/small"
                 android:layout_marginTop="@dimen/large"
                 android:layout_toEndOf="@id/pie_view"
                 android:background="@color/colorPrimary" />
@@ -139,17 +139,17 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/viewLegendKO"
-                android:layout_marginStart="@dimen/margin_small"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginStart="@dimen/small"
+                android:layout_marginTop="@dimen/small"
                 android:layout_toEndOf="@id/viewLegendKO"
                 android:text="@string/ko_tko" />
 
             <View
                 android:id="@+id/viewLegendSubmission"
                 android:layout_width="@dimen/smallDouble"
-                android:layout_height="@dimen/margin_small"
+                android:layout_height="@dimen/small"
                 android:layout_below="@id/viewLegendKO"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_margin="@dimen/small"
                 android:layout_toEndOf="@id/pie_view"
                 android:background="@color/colorPrimaryDark" />
 
@@ -158,7 +158,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@id/viewLegendSubmission"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/small"
                 android:layout_toEndOf="@id/viewLegendSubmission"
                 android:text="@string/submission" />
 
@@ -166,9 +166,9 @@
                 android:id="@+id/viewLegendDecision"
 
                 android:layout_width="@dimen/smallDouble"
-                android:layout_height="@dimen/margin_small"
+                android:layout_height="@dimen/small"
                 android:layout_below="@id/viewLegendSubmission"
-                android:layout_margin="@dimen/margin_small"
+                android:layout_margin="@dimen/small"
                 android:layout_toEndOf="@id/pie_view"
                 android:background="@color/black" />
 
@@ -177,7 +177,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignBottom="@+id/viewLegendDecision"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/small"
                 android:layout_toEndOf="@id/viewLegendSubmission"
                 android:text="@string/decision" />
 

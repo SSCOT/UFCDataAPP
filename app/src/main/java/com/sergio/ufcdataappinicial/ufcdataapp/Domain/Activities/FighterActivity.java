@@ -75,7 +75,7 @@ public class FighterActivity extends AppCompatActivity {
             @Override
             public void onErrorResponse(VolleyError error) {
                 setLoading(false);
-                Utilidades.messageWithOk(FighterActivity.this,findViewById(R.id.content),getResources().getString(R.string.error_recuperacion_datos));
+                Utilidades.messageWithOk(FighterActivity.this, findViewById(R.id.content), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
         // setLoading(false);
@@ -93,7 +93,10 @@ public class FighterActivity extends AppCompatActivity {
     }
 
     public void setFighterImage(String url) {
-        Picasso.get().load(url).into(imgLuchadorDetail);
+        if (url != null && url != "")
+            Picasso.get().load(url).placeholder(R.drawable.male_profile_shadow).into(imgLuchadorDetail);
+        else
+            Picasso.get().load(R.drawable.male_profile_shadow).into(imgLuchadorDetail);
     }
 
     @Override

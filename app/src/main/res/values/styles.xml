@@ -63,6 +63,12 @@
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">italic</item>
     </style>
+    <style name="textoSecundarioFondoTransparente" parent="textoSecundario">
+        <item name="android:textColor">@color/white</item>
+        <item name="android:background">@color/blackTrans</item>
+        <item name="android:padding">@dimen/smallHalf</item>
+    </style>
+
 
     <style name="textoWin" parent="textoMenor">
         <item name="android:textColor">@color/white</item>

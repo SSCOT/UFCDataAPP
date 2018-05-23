@@ -117,9 +117,12 @@ public class FighterFragment extends Fragment {
             txtFighterDetailWeightClass.setPadding(5, 5, 5, 5);
             txtFighterDetailWeightClass.setTextColor(getResources().getColor(R.color.white));
         }
-
         getTxtFighterDetailStrengths.setText(luchador.getHabilidades());
-         Picasso.get().load(luchador.getImgCuerpoIzquierda()).into(imgLuchadorDetailDescription);
+
+        if (luchador.getImgCuerpoIzquierda() != null && !luchador.getImgCuerpoIzquierda().equals(""))
+            Picasso.get().load(luchador.getImgCuerpoIzquierda()).placeholder(R.drawable.male_shadow_left).into(imgLuchadorDetailDescription);
+        else
+            Picasso.get().load(R.drawable.male_shadow_left).into(imgLuchadorDetailDescription);
 
     }
 

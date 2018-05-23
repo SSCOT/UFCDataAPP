@@ -1,11 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <dimen name="margin_small">10dp</dimen>
-    <dimen name="large">50dp</dimen>
+    <dimen name="none">0dp</dimen>
+
+    <dimen name="smallHalf">5dp</dimen>
+    <dimen name="small">10dp</dimen>
     <dimen name="smallDouble">20dp</dimen>
+
+    <dimen name="medium">30dp</dimen>
+
+    <dimen name="largeHalf">25dp</dimen>
+    <dimen name="large">50dp</dimen>
+    <dimen name="largeDouble">100dp</dimen>
+
+
     <dimen name="chartDim">200dp</dimen>
     <dimen name="chartDimHalf">100dp</dimen>
+
     <dimen name="CardStandard">100dp</dimen>
     <dimen name="CardStandardDouble">200dp</dimen>
-    <dimen name="smallHalf">5dp</dimen>
+
+    <dimen name="toolDim">35dp</dimen>
+
+    <dimen name="bodyImagesHeight">200dp</dimen>
 </resources>

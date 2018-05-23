@@ -78,11 +78,10 @@ public class ChampionsAdapter extends RecyclerView.Adapter<ChampionsAdapter.Luch
                 nickName.setText(String.format("'%s'", luchador.getNick()));
             weightClass.setText(luchador.getCategoria());
             String imagen = luchador.getImgCinturon();
-            if (imagen != null && !imagen.equals("")) {
-                 Picasso.get().load(luchador.getImgCinturon()).into(img);
-            } else {
-                 Picasso.get().load(luchador.getImgPerfil()).into(img);
-            }
+            if (imagen != null && !imagen.equals(""))
+                 Picasso.get().load(luchador.getImgCinturon()).placeholder(R.drawable.male_profile_shadow).into(img);
+            else
+                 Picasso.get().load(R.drawable.male_profile_shadow).into(img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override

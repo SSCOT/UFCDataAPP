@@ -6,7 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/CardStandard"
     android:layout_margin="@dimen/smallHalf"
-    android:elevation="@dimen/large"
+    android:layout_marginTop="@dimen/smallHalf"
+    android:elevation="@dimen/small"
     card_view:cardCornerRadius="@dimen/smallHalf">
 
     <LinearLayout
@@ -33,7 +34,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:layout_marginTop="@dimen/margin_small"
+                android:layout_marginTop="@dimen/small"
                 android:textAlignment="center"
                 style="@style/textoTitulo"
                 tool:text="Tony Ferguson" />

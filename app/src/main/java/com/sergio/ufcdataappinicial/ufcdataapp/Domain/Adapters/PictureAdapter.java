@@ -62,7 +62,9 @@ public class PictureAdapter extends RecyclerView.Adapter<PictureAdapter.MediaVie
         public void bindMedia(final Foto foto, final OnItemClickListener listener) {
             String imagen = foto.getThumbnail();
             if (imagen != null && !imagen.equals("")) {
-                 Picasso.get().load(imagen).into(img);
+                 Picasso.get().load(imagen).placeholder(R.drawable.ufc_logo_white).into(img);
+            } else {
+                Picasso.get().load(R.drawable.ufc_logo_white).into(img);
             }
 
             itemView.setOnClickListener(new View.OnClickListener() {

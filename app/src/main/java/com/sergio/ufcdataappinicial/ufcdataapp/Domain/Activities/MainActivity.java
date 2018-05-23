@@ -8,7 +8,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
 
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsFragment;
