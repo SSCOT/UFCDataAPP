@@ -41,5 +41,6 @@
             android:name=".Domain.Activities.EventActivity"
             android:theme="@style/AppThemeNoToolbar" />
         <activity android:name=".Domain.Activities.FightActivity" />
+        <receiver android:name=".Domain.Alarms.AlarmReceiver"/>
     </application>
 </manifest>

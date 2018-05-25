@@ -12,7 +12,7 @@ android {
     }
     buildTypes {
         debug {
-            applicationIdSuffix ".pre"
+            applicationIdSuffix ""
             buildConfigField "String", "API_URL_GET_FIGHTERS_ALL", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters\""
             buildConfigField "String", "API_URL_GET_FIGHTERS_CHAMPIONS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/title_holders\""
             buildConfigField "String", "API_URL_GET_FIGHTERS_WEIGHT_CLASS", "\"http://ufc-data-api.ufc.com/api/v3/iphone/fighters/stats/weight_class/%s\""

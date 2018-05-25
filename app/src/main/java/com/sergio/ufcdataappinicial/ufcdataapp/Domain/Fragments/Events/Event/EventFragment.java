@@ -1,9 +1,13 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.Event;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.graphics.PorterDuff;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,9 +19,12 @@ import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorProvider;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Alarms.AlarmReceiver;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 import com.squareup.picasso.Picasso;
+
+import java.util.Calendar;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -164,5 +171,33 @@ public class EventFragment extends Fragment {
         } else {
             progressBar.setVisibility(View.GONE);
         }
+    }
+
+
+    // TODO para borrar
+    private void configureAlarm() {
+        // TODO configurar alarma
+        Calendar calendar = Calendar.getInstance();
+
+                /*
+                calendar.set(Calendar.MONTH, 2);
+                calendar.set(Calendar.YEAR, 2017);
+                calendar.set(Calendar.DAY_OF_MONTH, 28);
+
+                calendar.set(Calendar.HOUR_OF_DAY, 20);
+                calendar.set(Calendar.MINUTE, 48);
+                calendar.set(Calendar.SECOND, 0);
+                calendar.set(Calendar.AM_PM,Calendar.PM);
+                */
+
+        calendar.add(Calendar.SECOND, 5);
+
+        Intent myIntent = new Intent (this.getActivity(), AlarmReceiver.class);
+        myIntent.putExtra("evento",evento);
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), 0, myIntent, 0);
+
+        AlarmManager alarmManager = (AlarmManager) this.getActivity().getApplicationContext().getSystemService(this.getActivity().getApplicationContext().ALARM_SERVICE);
+        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+        Log.d("-***", "onReceive: ENVIA AL ONRECEIVE");
     }
 }
