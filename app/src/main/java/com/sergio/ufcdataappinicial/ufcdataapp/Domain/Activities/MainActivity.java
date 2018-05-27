@@ -48,14 +48,12 @@ public class MainActivity extends AppCompatActivity {
                         setFragment("events");
                         break;
                 }
-
                 return true;
             }
         });
     }
 
     private void setFragment(String tipo) {
-
         Fragment fragment = null;
         FragmentTransaction ft = getFragmentManager().beginTransaction();
 
@@ -74,7 +72,6 @@ public class MainActivity extends AppCompatActivity {
         if (fragment == null) {
             return;
         }
-
         commitFragment(ft, fragment);
     }
 

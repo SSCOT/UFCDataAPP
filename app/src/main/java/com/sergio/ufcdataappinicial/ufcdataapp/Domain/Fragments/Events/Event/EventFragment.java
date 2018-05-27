@@ -101,8 +101,8 @@ public class EventFragment extends Fragment {
         progressBar.getIndeterminateDrawable().setColorFilter(getResources().getColor(R.color.colorPrimary), PorterDuff.Mode.SRC_IN);
         setLoading(true);
         setGeneralData();
-        if (evento.getLuchador1() != null && evento.getLuchador2() != null)
-            getData(evento.getLuchador1().getId(), evento.getLuchador2().getId());
+        if (evento.getIdLuchador1() > 0 && evento.getIdLuchador2() > 0)
+            getData(evento.getIdLuchador1(), evento.getIdLuchador2());
     }
 
     private void setGeneralData() {

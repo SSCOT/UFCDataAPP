@@ -15,7 +15,7 @@
 
     <string name="image_transition" translatable="false">image_transition</string>
 
-    <string name="error_recuperacion_datos" translatable="false">Ha habido un error en la recuperación de los datos.</string>
-    <string name="error_reproduccion_video" translatable="false">No se ha podido reproducir el vídeo.</string>
+    <string name="error_recuperacion_datos" translatable="false">There was a problem in data recovery.</string>
+    <string name="error_reproduccion_video" translatable="false">The video could not be played.</string>
 
 </resources>

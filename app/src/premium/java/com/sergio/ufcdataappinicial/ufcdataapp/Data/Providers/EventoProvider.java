@@ -7,6 +7,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.Toast;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -18,6 +19,10 @@ import com.sergio.ufcdataappinicial.ufcdataapp.Data.Requests.RequestManager;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Alarms.AlarmReceiver;
 import com.sergio.ufcdataappinicial.ufcdataapp.Utilidades;
 
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.ObjectOutput;
+import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
@@ -51,13 +56,9 @@ public class EventoProvider {
         GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_EVENTS, Evento[].class, null, new Response.Listener<Evento[]>() {
             @Override
             public void onResponse(Evento[] events) {
-
-                // fecha actual
                 int fechaActualInt = Utilidades.getFechaActualInt();
-
                 // Separamos eventos pasados de próximos
                 splitEvents(events, fechaActualInt);
-
                 // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
                 checkAndChangeDateSync(events, fechaActualInt);
 
@@ -166,35 +167,53 @@ public class EventoProvider {
     }
 
     private void configureAlarm() {
-        // TODO configurar alarma
         Calendar calendar = Calendar.getInstance();
 
-                /*
-                calendar.set(Calendar.MONTH, 2);
-                calendar.set(Calendar.YEAR, 2017);
-                calendar.set(Calendar.DAY_OF_MONTH, 28);
+        calendar.set(Calendar.MONTH, 1);
+        calendar.set(Calendar.YEAR, 2018);
+        calendar.set(Calendar.DAY_OF_MONTH, 27);
 
-                calendar.set(Calendar.HOUR_OF_DAY, 20);
-                calendar.set(Calendar.MINUTE, 48);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.AM_PM,Calendar.PM);
-                */
+        calendar.set(Calendar.HOUR_OF_DAY, 1);
+        calendar.set(Calendar.MINUTE, 1);
+        calendar.set(Calendar.SECOND, 0);
 
-        calendar.add(Calendar.SECOND, 5);
+        // calendar.add(Calendar.SECOND, 0);
 
-        Intent myIntent = new Intent(context, AlarmReceiver.class);
-        Bundle bundle = new Bundle();
-        Evento pruebaEvent = eventsFinal[1][0];
-        bundle.putString("titulo", pruebaEvent.getTitulo());
-        bundle.putString("subtitulo", pruebaEvent.getSubtitulo());
-        bundle.putString("img1", pruebaEvent.getImgPrincipal());
-        bundle.putString("img2", pruebaEvent.getImgSecundaria());
-        myIntent.putExtras(bundle);
-        // myIntent.putExtra("evento", pruebaEvent);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, myIntent, 0);
+        Evento evento = eventsFinal[1][0];
 
+        Intent intent = new Intent();
+        intent.setClass(context, AlarmReceiver.class);
+
+        ByteArrayOutputStream bos = new ByteArrayOutputStream();
+        ObjectOutput out = null;
+        byte[] eventoBytes = eventToBytes(evento, bos);
+        intent.putExtra("evento", eventoBytes);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getApplicationContext().getSystemService(context.ALARM_SERVICE);
+        Toast.makeText(context, "Notificación creada", Toast.LENGTH_SHORT).show();
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
+
         Log.d("-***", "onReceive: ENVIA AL ONRECEIVE");
+    }
+
+    private byte[] eventToBytes(Evento evento, ByteArrayOutputStream bos) {
+        ObjectOutput out;
+        byte[] eventoBytes = new byte[0];
+        try {
+            out = new ObjectOutputStream(bos);
+            out.writeObject(evento);
+            out.flush();
+            eventoBytes = bos.toByteArray();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                bos.close();
+            } catch (IOException ex) {
+                // ignore close exception
+            }
+        }
+        return eventoBytes;
     }
 }
