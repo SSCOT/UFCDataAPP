@@ -50,8 +50,9 @@
 
                 <ImageView
                     android:id="@+id/imgLuchador1"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/bodyImagesWidth"
+                    android:layout_height="@dimen/bodyImagesHeight"
+                    android:maxHeight="@dimen/largeDouble"
                     android:layout_below="@id/txtLuchadorApe1"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/small" />
@@ -189,8 +190,8 @@
 
                 <ImageView
                     android:id="@+id/imgStrike1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/iconFightSize"
+                    android:layout_height="@dimen/iconFightSize"
                     android:layout_below="@id/txtStriking1"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/strike_peq" />
@@ -245,8 +246,8 @@
 
                 <ImageView
                     android:id="@+id/imgGrapplin1"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/iconFightSize"
+                    android:layout_height="@dimen/iconFightSize"
                     android:layout_below="@id/txtGrappling1"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/grappling_peq" />
@@ -327,8 +328,8 @@
 
                 <ImageView
                     android:id="@+id/imgLuchador2"
-                    android:layout_width="150dp"
-                    android:layout_height="wrap_content"
+                    android:layout_width="@dimen/bodyImagesWidth"
+                    android:layout_height="@dimen/bodyImagesHeight"
                     android:layout_below="@id/txtLuchadorApe2"
                     android:layout_centerHorizontal="true"
                     android:layout_margin="@dimen/small" />
@@ -468,8 +469,8 @@
 
                 <ImageView
                     android:id="@+id/imgStrike2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/iconFightSize"
+                    android:layout_height="@dimen/iconFightSize"
                     android:layout_below="@id/txtStriking2"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/strike_peq" />
@@ -524,8 +525,8 @@
 
                 <ImageView
                     android:id="@+id/imgGrapplin2"
-                    android:layout_width="50dp"
-                    android:layout_height="50dp"
+                    android:layout_width="@dimen/iconFightSize"
+                    android:layout_height="@dimen/iconFightSize"
                     android:layout_below="@id/txtGrappling2"
                     android:layout_centerHorizontal="true"
                     android:src="@drawable/grappling_peq" />

@@ -23,9 +23,14 @@ import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
+import java.util.Locale;
 
 public class EventoProvider {
 
@@ -57,13 +62,13 @@ public class EventoProvider {
             @Override
             public void onResponse(Evento[] events) {
                 int fechaActualInt = Utilidades.getFechaActualInt();
-                // Separamos eventos pasados de próximos
+                // Separamos eventos pasados de próximo
                 splitEvents(events, fechaActualInt);
                 // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
                 checkAndChangeDateSync(events, fechaActualInt);
 
                 // TODO Borrar esto que es una prueba
-                configureAlarm();
+                // configureAlarm();
 
                 listener.onResponse(eventsFinal);
             }
@@ -159,6 +164,9 @@ public class EventoProvider {
         editor.putBoolean("fightersUpdated", false);
         editor.putBoolean("championsUpdated", false);
         editor.apply();
+
+        // Siempre que cambie la fecha de actualización generamos una notificación con el evento
+        configureAlarm(eventsFinal[1][0]);
     }
 
     private void saveEvents(Evento[] events) {
@@ -166,20 +174,28 @@ public class EventoProvider {
         localProvider.insert(events);
     }
 
-    private void configureAlarm() {
+    private void configureAlarm(Evento evento) {
+        String fechaEvento = evento.getFecha();
+        // Si no hay fecha no generamos ninguna notificación
+        if (fechaEvento != null && fechaEvento != "")
+            return;
+
+        int anio = Integer.parseInt(fechaEvento.substring(0, 4));
+        // El mes empieza con 0 para enero, así que restamos uno
+        int mes = Integer.parseInt(fechaEvento.substring(6, 7)) - 1;
+        int dia = Integer.parseInt(fechaEvento.substring(8, 10));
+
         Calendar calendar = Calendar.getInstance();
+        calendar.set(Calendar.YEAR, anio);
+        calendar.set(Calendar.MONTH, mes);
+        calendar.set(Calendar.DAY_OF_MONTH, dia);
 
-        calendar.set(Calendar.MONTH, 1);
-        calendar.set(Calendar.YEAR, 2018);
-        calendar.set(Calendar.DAY_OF_MONTH, 27);
+        // Para que avise el día anterior
+        calendar.add(Calendar.DATE, -1);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 1);
-        calendar.set(Calendar.MINUTE, 1);
+        calendar.set(Calendar.HOUR_OF_DAY, 18);
+        calendar.set(Calendar.MINUTE, 36);
         calendar.set(Calendar.SECOND, 0);
-
-        // calendar.add(Calendar.SECOND, 0);
-
-        Evento evento = eventsFinal[1][0];
 
         Intent intent = new Intent();
         intent.setClass(context, AlarmReceiver.class);

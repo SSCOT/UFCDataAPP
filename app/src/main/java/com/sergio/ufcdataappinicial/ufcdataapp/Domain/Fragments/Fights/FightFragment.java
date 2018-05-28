@@ -26,10 +26,6 @@ import im.dacer.androidcharts.PieView;
 
 public class FightFragment extends Fragment {
 
-    /*@BindView(R.id.chart)
-    StackedBarChart chart;*/
-    /*@BindView(R.id.chartBar)
-    BarChart barChart;*/
     @BindView(R.id.txtLuchadorNom1)
     TextView txtLuchadorNom1;
     @BindView(R.id.txtLuchadorApe1)
@@ -150,9 +146,9 @@ public class FightFragment extends Fragment {
         txtLuchadorApe2.setText(fight.getApellido2());
 
         if(fight.getImgCuerpo2() != null && !fight.getImgCuerpo2().equals(""))
-             Picasso.get().load(fight.getImgCuerpo2()).placeholder(R.drawable.female_shadow_right).into(imgLuchador2);
+             Picasso.get().load(fight.getImgCuerpo2()).placeholder(R.drawable.male_shadow_right).into(imgLuchador2);
         else
-            Picasso.get().load(R.drawable.male_shadow_left).into(imgLuchador2);
+            Picasso.get().load(R.drawable.male_shadow_right).into(imgLuchador2);
 
         txtLuchador2Altura.setText(fight.getAltura2());
         txtLuchador2Peso.setText(fight.getPeso2());

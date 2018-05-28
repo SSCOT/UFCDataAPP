@@ -22,4 +22,7 @@
     <dimen name="toolDim">35dp</dimen>
 
     <dimen name="bodyImagesHeight">200dp</dimen>
+    <dimen name="bodyImagesWidth">150dp</dimen>
+    <dimen name="iconFightSize">50dp</dimen>
+
 </resources>
