@@ -53,7 +53,7 @@ public class EventNotification extends AsyncTask<Evento, Void, Bitmap> {
 
         super.onPostExecute(result);
         try {
-            int NOTIFICATION_ID = 1;
+            int NOTIFICATION_ID = evento.getId();
             String CHANNEL_ID = "Events_channel";
             NotificationManager notificationManager = (NotificationManager) context.getSystemService(Context.NOTIFICATION_SERVICE);
 
@@ -92,9 +92,9 @@ public class EventNotification extends AsyncTask<Evento, Void, Bitmap> {
                 .setContentIntent(pendingIntent)
                 .setAutoCancel(true);
 
-        Bitmap notSoLarge = BitmapFactory.decodeResource(context.getResources(), R.drawable.ufc_logo_peq);
+        Bitmap imagenPequenia = BitmapFactory.decodeResource(context.getResources(), R.drawable.ufc_logo_peq);
         bigPictureStyle.bigPicture(result)
-                .bigLargeIcon(notSoLarge)
+                .bigLargeIcon(imagenPequenia)
                 .setBigContentTitle(titulo)
                 .setSummaryText(subtitulo + " (Tomorrow)");
         return builder;

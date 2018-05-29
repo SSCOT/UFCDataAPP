@@ -28,8 +28,9 @@ public class MediaProvider {
     }
 
     public void getMedia(final MediaProviderListener listener) {
-        // free
-        GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_MEDIA, Media[].class, null, new Response.Listener<Media[]>() {
+        // Versión US original
+        String url = String.format(BuildConfig.API_URL_GET_MEDIA,1);
+        GsonRequest gsonRequest = new GsonRequest<>(url, Media[].class, null, new Response.Listener<Media[]>() {
 
             @Override
             public void onResponse(Media[] arrayMedia) {

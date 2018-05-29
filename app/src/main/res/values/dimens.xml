@@ -25,4 +25,5 @@
     <dimen name="bodyImagesWidth">150dp</dimen>
     <dimen name="iconFightSize">50dp</dimen>
 
+    <dimen name="toolbarHeight">250dp</dimen>
 </resources>

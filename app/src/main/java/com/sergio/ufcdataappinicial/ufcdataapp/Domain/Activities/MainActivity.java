@@ -10,6 +10,7 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 
+import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsFragment;
@@ -84,11 +85,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu_action_bar, menu);
-        // menuItem = menu.findItem(R.id.itemBuscador);
-        // menuItem = menu.findItem(R.id.itemSettings);
-
+        if (BuildConfig.IS_PREMIUM) {
+            MenuInflater inflater = getMenuInflater();
+            inflater.inflate(R.menu.menu_action_bar, menu);
+        }
         return true;
     }
 

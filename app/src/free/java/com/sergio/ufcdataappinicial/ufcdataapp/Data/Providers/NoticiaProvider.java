@@ -23,8 +23,9 @@ public class NoticiaProvider {
     }
 
     public void getArticles(final NoticiasProviderListener listener) {
-        // free
-        GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_NEWS, Noticia[].class, null, new Response.Listener<Noticia[]>() {
+        // Versión US original
+        String url = String.format(BuildConfig.API_URL_GET_NEWS,1);
+        GsonRequest gsonRequest = new GsonRequest<>(url, Noticia[].class, null, new Response.Listener<Noticia[]>() {
 
             @Override
             public void onResponse(Noticia[] news) {

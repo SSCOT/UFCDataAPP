@@ -13,6 +13,9 @@
     <string name="loss">L</string>
     <string name="draw">D</string>
 
+    <string name="ok">OK</string>
+    <string name="cancel">CANCEL</string>
+
     <string name="image_transition" translatable="false">image_transition</string>
 
     <string name="error_recuperacion_datos" translatable="false">There was a problem in data recovery.</string>

@@ -66,26 +66,6 @@ public class LuchadorProvider {
 
         RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
     }
-
-    public void getFightersWeightClass(String weightClass, final LuchadorProvider.LuchadorProviderListener listener) {
-
-        GsonRequest gsonRequest = new GsonRequest<>(String.format(BuildConfig.API_URL_GET_FIGHTERS_WEIGHT_CLASS, weightClass), Luchador[].class, null, new Response.Listener<Luchador[]>() {
-
-            @Override
-            public void onResponse(Luchador[] luchadores) {
-                listener.onResponse(luchadores);
-            }
-        }, new Response.ErrorListener() {
-
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                listener.onErrorResponse(error);
-            }
-        });
-
-        RequestManager.getInstance().addToRequestQueue(context, gsonRequest);
-    }
-
     public void getFighter(String idLuchador, final LuchadorProvider.LuchadorUniqueProviderListener listener) {
         String url = String.format(BuildConfig.API_URL_GET_FIGHTER, idLuchador);
         GsonRequest gsonRequest = new GsonRequest<>(url, Luchador.class, null, new Response.Listener<Luchador>() {

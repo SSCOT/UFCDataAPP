@@ -67,8 +67,8 @@ public class EventoProvider {
                 // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
                 checkAndChangeDateSync(events, fechaActualInt);
 
-                // TODO Borrar esto que es una prueba
-                // configureAlarm();
+                // TODO borrar esto
+                // configureAlarm(eventsFinal[0][0]);
 
                 listener.onResponse(eventsFinal);
             }
@@ -151,7 +151,7 @@ public class EventoProvider {
             // Guardamos eventos en persistencia local
             saveEvents(events);
 
-            // Al haber cambios, configuramos la alarma para el próximo evento
+            // Al haber cambios, configuramos la alarma para el próximo evento si están permitidas las
             configureAlarm(eventsFinal[1][0]);
         }
     }
@@ -174,12 +174,12 @@ public class EventoProvider {
     private void configureAlarm(Evento evento) {
         String fechaEvento = evento.getFecha();
         // Si no hay fecha no generamos ninguna notificación
-        if (fechaEvento != null && fechaEvento != "")
+        if (fechaEvento == null || fechaEvento.equals(""))
             return;
 
         int anio = Integer.parseInt(fechaEvento.substring(0, 4));
         // El mes empieza con 0 para enero, así que restamos uno
-        int mes = Integer.parseInt(fechaEvento.substring(6, 7)) - 1;
+        int mes = Integer.parseInt(fechaEvento.substring(5, 7)) - 1;
         int dia = Integer.parseInt(fechaEvento.substring(8, 10));
 
         Calendar calendar = Calendar.getInstance();
@@ -190,9 +190,9 @@ public class EventoProvider {
         // Para que avise el día anterior
         calendar.add(Calendar.DATE, -1);
 
-        calendar.set(Calendar.HOUR_OF_DAY, 18);
-        calendar.set(Calendar.MINUTE, 36);
-        calendar.set(Calendar.SECOND, 0);
+       /*calendar.set(Calendar.HOUR_OF_DAY, 19);
+        calendar.set(Calendar.MINUTE, 28);
+        calendar.set(Calendar.SECOND, 0);*/
 
         Intent intent = new Intent();
         intent.setClass(context, AlarmReceiver.class);
@@ -204,10 +204,7 @@ public class EventoProvider {
 
         PendingIntent pendingIntent = PendingIntent.getBroadcast(context, 0, intent, 0);
         AlarmManager alarmManager = (AlarmManager) context.getApplicationContext().getSystemService(context.ALARM_SERVICE);
-        Toast.makeText(context, "Notificación creada", Toast.LENGTH_SHORT).show();
         alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-
-        Log.d("-***", "onReceive: ENVIA AL ONRECEIVE");
     }
 
     private byte[] eventToBytes(Evento evento, ByteArrayOutputStream bos) {

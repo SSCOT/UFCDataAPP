@@ -3,6 +3,8 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Alarms;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.widget.Toast;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Evento;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Notifications.EventNotification;
@@ -16,11 +18,16 @@ import java.io.ObjectInputStream;
 public class AlarmReceiver extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-        // Recuperamos en bytes porque hay problemas en el paso de objetos directamente
-        byte[] eventoBytes = intent.getByteArrayExtra("evento");
-        // Transformamos los bytes en evento
-        Evento evento = byteToObject(eventoBytes);
-        new EventNotification(context).execute(evento);
+        // Comprobamos que tiene permiso para ejecutar la alarma
+        SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
+        Boolean allowNotifications = preferences.getBoolean("allowNotifications", true);
+        if(allowNotifications){
+            // Recuperamos en bytes porque hay problemas en el paso de objetos directamente
+            byte[] eventoBytes = intent.getByteArrayExtra("evento");
+            // Transformamos los bytes en evento
+            Evento evento = byteToObject(eventoBytes);
+            new EventNotification(context).execute(evento);
+        }
     }
 
     private Evento byteToObject(byte[] eventoBytes) {
