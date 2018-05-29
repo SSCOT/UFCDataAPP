@@ -152,7 +152,7 @@ public class EventoProvider {
             saveEvents(events);
 
             // Al haber cambios, configuramos la alarma para el próximo evento
-            // configureAlarm();
+            configureAlarm(eventsFinal[1][0]);
         }
     }
 
@@ -164,9 +164,6 @@ public class EventoProvider {
         editor.putBoolean("fightersUpdated", false);
         editor.putBoolean("championsUpdated", false);
         editor.apply();
-
-        // Siempre que cambie la fecha de actualización generamos una notificación con el evento
-        configureAlarm(eventsFinal[1][0]);
     }
 
     private void saveEvents(Evento[] events) {

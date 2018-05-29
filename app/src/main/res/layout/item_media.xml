@@ -14,51 +14,56 @@
         <ImageView
             android:id="@+id/imgMedia"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/CardStandardDouble"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="@dimen/none"
+            android:adjustViewBounds="true"
+            android:scaleType="fitStart"
             tool:srcCompat="@android:drawable/btn_star" />
 
         <ImageView
-            android:layout_width="@dimen/large"
             android:id="@+id/iconMediaType"
+            android:layout_width="@dimen/large"
             android:layout_height="@dimen/large"
-            android:layout_marginTop="@dimen/CardStandard"
             android:layout_centerHorizontal="true"
+            android:layout_marginTop="@dimen/CardStandard"
             tool:srcCompat="@android:drawable/ic_media_play" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
+        <TextView
+            android:id="@+id/txtFechaMedia"
+            style="@style/textoSecundarioFondoTransparente"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@id/imgMedia"
+            android:layout_alignParentEnd="true"
+            android:paddingEnd="@dimen/small"
+            tool:text="20161201" />
+
+        <TextView
+            android:id="@+id/txtTituloMedia"
+            style="@style/textoTitulo"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/imgMedia"
-            android:orientation="vertical">
+            android:layout_centerHorizontal="true"
+            android:textAlignment="center"
+            android:layout_marginEnd="@dimen/smallHalf"
+            android:layout_marginStart="@dimen/smallHalf"
+            android:layout_marginTop="@dimen/smallHalf"
+            tool:text="ESTO ES UN TÍTULO DE PRUEBA" />
 
-            <TextView
-                android:id="@+id/txtTituloMedia"
-                style="@style/textoTitulo"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:layout_margin="@dimen/smallHalf"
-                android:gravity="center"
-                tool:text="KO of the Week: Jacare Souza vs Yushin Okami" />
+        <TextView
+            android:id="@+id/txtDescripcionMedia"
+            style="@style/textoMenorCursivo"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAlignment="center"
+            android:layout_below="@id/txtTituloMedia"
+            android:layout_marginEnd="@dimen/smallHalf"
+            android:layout_marginBottom="@dimen/smallDouble"
+            android:layout_marginStart="@dimen/smallHalf"
+            android:layout_marginTop="@dimen/smallHalf"
+            tool:text="In the middle of an 8-fight win streak, Jacare Souza finished Yushin Okami quickly in the first round of Fight Night Belo Horizonte in 2013. Next, he faces Kelvin Gastelum in the co-main event of UFC 224 on May 12." />
 
-            <TextView
-                android:id="@+id/txtFechaMedia"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_gravity="right"
-                android:layout_marginEnd="@dimen/smallHalf"
-                tool:text="20161201" />
-
-            <TextView
-                android:id="@+id/txtDescripcionMedia"
-                style="@style/textoMenor"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_margin="@dimen/smallHalf"
-                tool:text="In the middle of an 8-fight win streak, Jacare Souza finished Yushin Okami quickly in the first round of Fight Night Belo Horizonte in 2013. Next, he faces Kelvin Gastelum in the co-main event of UFC 224 on May 12." />
-
-
-        </LinearLayout>
 
     </RelativeLayout>
 

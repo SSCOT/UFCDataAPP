@@ -92,7 +92,7 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
                 if (imagen2 != null && !imagen2.equals(""))
                      Picasso.get().load(event.getLuchador2().getImgCuerpoDerecha()).placeholder(R.drawable.male_shadow_right).into(imgLuchador2);
                 else
-                    Picasso.get().load(R.drawable.female_shadow_right).into(imgLuchador2);
+                    Picasso.get().load(R.drawable.male_shadow_right).into(imgLuchador2);
 
             }
 

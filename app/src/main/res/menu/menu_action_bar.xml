@@ -7,4 +7,9 @@
         android:title="buscador"
         app:actionViewClass="android:support.v7.widget.searchView"
         app:showAsAction="always|collapseActionView" />
+    <item
+        android:id="@+id/itemSettings"
+        android:icon="@drawable/ic_settings_black_24dp"
+        android:title="settings"
+        app:showAsAction="always|collapseActionView" />
 </menu>

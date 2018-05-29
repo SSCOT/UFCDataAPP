@@ -62,4 +62,11 @@ public interface UfcDao {
 
     @Delete()
     void deleteEvent(Evento evento);
+
+    @Query("DELETE FROM evento")
+    void deleteEvents();
+    @Query("DELETE FROM noticia")
+    void deleteNews();
+    @Query("DELETE FROM luchador")
+    void deleteFighters();
 }

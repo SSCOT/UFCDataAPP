@@ -6,6 +6,8 @@ import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsFragment;
@@ -18,7 +20,7 @@ import butterknife.ButterKnife;
 
 public class MainActivity extends AppCompatActivity {
 
-    private String TAG = "MainActivity";
+    MenuItem menuItem;
 
     @BindView(R.id.navigation)
     BottomNavigationView navigation;
@@ -81,15 +83,36 @@ public class MainActivity extends AppCompatActivity {
         ft.commit();
     }
 
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu_action_bar, menu);
+        // menuItem = menu.findItem(R.id.itemBuscador);
+        // menuItem = menu.findItem(R.id.itemSettings);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.itemSettings:
+                DialogSettingsActivity dialogSettings = new DialogSettingsActivity();
+                dialogSettings.show(getFragmentManager(),"Settings");
+                break;
+                default:
+                    return super.onOptionsItemSelected(item);
+        }
+        return super.onOptionsItemSelected(item);
+    }
+
     /*@Override
     public boolean onCreateOptionsMenu(Menu menu) {
         return super.onCreateOptionsMenu(menu);
     }*/
 
-
    /* @Override
     public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_buscador, menu);
+        getMenuInflater().inflate(R.menu.menu_action_bar, menu);
         MenuItem menuItem = menu.findItem(R.id.itemBuscador);
         SearchView searchView = (SearchView) menuItem.getActionView();
 

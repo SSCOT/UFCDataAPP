@@ -59,10 +59,15 @@
         <item name="android:textColor">@color/black</item>
     </style>
 
+    <style name="textoMenorCursivo" parent="textoMenor">
+        <item name="android:textStyle">italic</item>
+    </style>
+
     <style name="textoSecundario" parent="textoEspecial">
         <item name="android:textSize">10sp</item>
         <item name="android:textStyle">italic</item>
     </style>
+
     <style name="textoSecundarioFondoTransparente" parent="textoSecundario">
         <item name="android:textColor">@color/white</item>
         <item name="android:background">@color/blackTrans</item>
@@ -97,6 +102,10 @@
         <item name="android:textColor">@color/white</item>
     </style>
 
-
+    <style name="SCBSwitch" parent="Theme.AppCompat.Light">
+        <item name="colorControlActivated">@color/colorPrimary</item>
+        <item name="colorSwitchThumbNormal">@color/colorPrimaryDark</item>
+        <item name="android:colorForeground">@color/black</item>
+    </style>
 
 </resources>

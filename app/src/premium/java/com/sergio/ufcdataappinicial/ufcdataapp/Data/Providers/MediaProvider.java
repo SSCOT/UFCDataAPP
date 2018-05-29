@@ -1,6 +1,7 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -28,8 +29,12 @@ public class MediaProvider {
     }
 
     public void getMedia(final MediaProviderListener listener) {
-        // premium
-        GsonRequest gsonRequest = new GsonRequest<>(BuildConfig.API_URL_GET_MEDIA, Media[].class, null, new Response.Listener<Media[]>() {
+        // Obtenemos la localización para saber el contenido a mostrar
+        SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
+        // int idLocalization = preferences.getInt("idLocalization", 5);
+        int idLocalization = preferences.getInt("idLocalization", 1);
+        String url = String.format(BuildConfig.API_URL_GET_MEDIA,idLocalization);
+        GsonRequest gsonRequest = new GsonRequest<>(url, Media[].class, null, new Response.Listener<Media[]>() {
 
             @Override
             public void onResponse(Media[] arrayMedia) {

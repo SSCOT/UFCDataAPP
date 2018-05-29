@@ -144,7 +144,7 @@ public class EventFragment extends Fragment {
                 if (luchador2.getImgCuerpoDerecha() != null && luchador2.getImgCuerpoDerecha() != "")
                     Picasso.get().load(luchador2.getImgCuerpoDerecha()).placeholder(R.drawable.male_shadow_right).into(imgLuchador2);
                 else
-                    Picasso.get().load(R.drawable.female_shadow_right).into(imgLuchador2);
+                    Picasso.get().load(R.drawable.male_shadow_right).into(imgLuchador2);
                 txtLuchador2Record.setText(String.format("%d - %d - %d", luchador2.getWins(), luchador2.getLosses(), luchador2.getDraws()));
                 txtLuchador2Altura.setText(luchador2.getAltura());
                 txtLuchador2Peso.setText(String.format("%s kg", luchador2.getPeso()));
