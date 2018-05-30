@@ -6,10 +6,10 @@
     android:layout_height="match_parent">
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/txtTitulo"
         style="@style/textoTitulo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="22dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="16dp"
@@ -26,7 +26,7 @@
 
         android:paddingEnd="@dimen/small"
         android:paddingStart="@dimen/small"
-        android:text="Push here to restore data"
+        android:text="@string/push_restore_data_1"
         android:textAllCaps="false"
         android:textColor="?attr/colorPrimary"
         android:textSize="12sp"
@@ -146,7 +146,7 @@
         android:paddingStart="@dimen/smallHalf"
         android:text="News version"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4" />
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
 
     <View

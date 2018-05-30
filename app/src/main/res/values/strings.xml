@@ -20,5 +20,7 @@
 
     <string name="error_recuperacion_datos" translatable="false">There was a problem in data recovery.</string>
     <string name="error_reproduccion_video" translatable="false">The video could not be played.</string>
-
+    <string name="push_restore_data_1">Push here to restore data</string>
+    <string name="push_restore_data_2">Push again to confirm</string>
+    <string name="push_restore_data_3">Local data is empty</string>
 </resources>

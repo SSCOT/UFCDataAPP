@@ -67,7 +67,7 @@ public class EventoProvider {
                 // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
                 checkAndChangeDateSync(events, fechaActualInt);
 
-                // TODO borrar esto
+                // TODO para borrar. Generación de notificación pasada para visualizar funcionamiento
                 // configureAlarm(eventsFinal[0][0]);
 
                 listener.onResponse(eventsFinal);
@@ -116,8 +116,8 @@ public class EventoProvider {
     }
 
     private void splitEvents(Evento[] events, int fechaActualInt) {
-        List<Evento> eventosPasadosAux = new ArrayList<Evento>();
-        List<Evento> eventosProximosAux = new ArrayList<Evento>();
+        List<Evento> eventosPasadosAux = new ArrayList<>();
+        List<Evento> eventosProximosAux = new ArrayList<>();
 
         for (Evento currentEvent : events) {
             String fechaEvento = currentEvent.getFecha().replace("-", "");
@@ -141,9 +141,10 @@ public class EventoProvider {
         // obtenemos el dateSync de las shared preferences
         SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
         String fechaActualizacion = preferences.getString("dateSync", "");
+        boolean eventsUpdated =  preferences.getBoolean("eventsUpdated", false);
 
         // Si no había definida ninguna fecha o si es menor que la fecha actual, hay que volver a guardar todos los datos
-        if (fechaActualizacion.equals("") || fechaActualInt > Integer.parseInt(fechaActualizacion)) {
+        if (fechaActualizacion.equals("") || fechaActualInt > Integer.parseInt(fechaActualizacion) || !eventsUpdated) {
 
             // Actualizamos Shared preferences
             changeDateSyncAndUpdateFlags(preferences);
@@ -163,6 +164,7 @@ public class EventoProvider {
         // flags a false para que se vuelvan a actualizar los luchadores y campeones
         editor.putBoolean("fightersUpdated", false);
         editor.putBoolean("championsUpdated", false);
+        editor.putBoolean("eventsUpdated",false);
         editor.apply();
     }
 

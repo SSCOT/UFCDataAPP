@@ -100,6 +100,8 @@ public class LuchadorProvider {
 
             @Override
             public void onResponse(Luchador luchador) {
+                LuchadorLocalProvider luchadorLocalProvider = new LuchadorLocalProvider(context);
+                luchadorLocalProvider.insertOne(luchador);
                 listener.onResponse(luchador);
             }
         }, new Response.ErrorListener() {
@@ -126,7 +128,6 @@ public class LuchadorProvider {
     }
 
     private void localCheckAndSave(Luchador[] luchadores) {
-
         /*
          * Comprobamos en las shared preferences si la fecha actual ha superado la fecha de sincronización
          * DE ser así tenemos que volver a guardar en local
@@ -141,7 +142,7 @@ public class LuchadorProvider {
         int fechaActualInt = Utilidades.getFechaActualInt();
 
         // Comprobamos si la fecha actual es mayor y si el boolean de datos actualizados es false
-        if(fechaActualInt > fechaSync && !dataUpdated) {
+        if(fechaActualInt > fechaSync || !dataUpdated) {
             // Al haber pasado la fecha del último evento, volvemos a guardar los datos de luchadores en local
             LuchadorLocalProvider localProvider = new LuchadorLocalProvider(context);
             localProvider.insert(luchadores);

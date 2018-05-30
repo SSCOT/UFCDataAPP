@@ -121,7 +121,6 @@ public class EventsListPastFragment extends Fragment {
     }
 
     private void getEvents() {
-        // TODO: Estaría mejor ver si están en local los luchadores y si no están hacer la búsqueda
         // Sacamos todos los datos de los luchadores
         luchadorProvider.getAll(new LuchadorProvider.LuchadorProviderListener() {
             @Override

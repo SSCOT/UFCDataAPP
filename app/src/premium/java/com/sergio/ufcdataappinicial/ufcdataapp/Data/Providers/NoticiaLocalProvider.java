@@ -54,6 +54,13 @@ public class NoticiaLocalProvider {
         getAllAsyncTask.execute();
     }
 
+    // Delete
+    public static void deleteAll() {
+        db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
+        DeleteAllAsyncTask deleteAllAsyncTask = new DeleteAllAsyncTask();
+        deleteAllAsyncTask.execute();
+    }
+
     public static void getNew(String idNoticia, final NoticiaLocalProvider.NoticiaLocalUniqueProviderListener listener) {
         db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
         NoticiaLocalProvider.GetOneAsyncTask getOneAsyncTask = new NoticiaLocalProvider.GetOneAsyncTask(idNoticia, listener);
@@ -78,6 +85,15 @@ public class NoticiaLocalProvider {
             super.onPostExecute(noticias);
             Noticia[] noticiasFinal = noticias.toArray(new Noticia[noticias.size()]);
             listener.onResponse(noticiasFinal);
+        }
+    }
+
+    private static class DeleteAllAsyncTask extends AsyncTask<Void,Void,Void> {
+        @Override
+        protected Void doInBackground(Void... voids) {
+            db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
+            db.ufcDao().deleteNews();
+            return null;
         }
     }
 

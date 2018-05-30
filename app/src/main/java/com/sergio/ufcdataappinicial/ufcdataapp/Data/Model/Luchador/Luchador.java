@@ -242,13 +242,17 @@ public class Luchador implements Serializable {
     }
 
     public String getAltura() {
-        float alturaCm = 0;
-        if(altura != null)
-            alturaCm = Float.parseFloat(altura);
-        else
+        // Error extraño con proveedor local. Hace un setAltura con la altura convertida en cm.
+        if (altura == null)
             return null;
 
-        return String.format("%.0f cm", alturaCm * 2.54);
+        if(altura.contains("cm"))
+            return altura;
+        else {
+            float alturaCm = 0;
+            alturaCm = Float.parseFloat(altura);
+            return String.format("%.0f cm", alturaCm * 2.54);
+        }
     }
 
     public void setAltura(String altura) {

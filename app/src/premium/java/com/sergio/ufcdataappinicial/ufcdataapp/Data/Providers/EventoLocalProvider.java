@@ -49,10 +49,16 @@ public class EventoLocalProvider {
 
     // GET
     public static void getAll(final EventoLocalProviderListener listener) {
-        // listenerGlobal = listener;
         db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
         GetAllAsyncTask getAllAsyncTask = new GetAllAsyncTask(listener);
         getAllAsyncTask.execute();
+    }
+
+    // Delete
+    public static void deleteAll() {
+        db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
+        DeleteAllAsyncTask deleteAllAsyncTask = new DeleteAllAsyncTask();
+        deleteAllAsyncTask.execute();
     }
 
     public static void getNew(String idEvento, final EventoLocalUniqueProviderListener listener) {
@@ -79,6 +85,16 @@ public class EventoLocalProvider {
             super.onPostExecute(eventos);
             Evento[] eventosFinal = eventos.toArray(new Evento[eventos.size()]);
             listener.onResponse(eventosFinal);
+        }
+    }
+
+    private static class DeleteAllAsyncTask extends AsyncTask<Void,Void,Void> {
+
+        @Override
+        protected Void doInBackground(Void... voids) {
+            db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
+            db.ufcDao().deleteEvents();
+            return null;
         }
     }
 
@@ -110,5 +126,7 @@ public class EventoLocalProvider {
             return null;
         }
     }
+
+
 
 }

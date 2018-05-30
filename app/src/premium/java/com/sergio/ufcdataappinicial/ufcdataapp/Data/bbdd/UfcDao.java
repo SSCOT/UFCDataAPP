@@ -48,7 +48,7 @@ public interface UfcDao {
     void deleteNew(Noticia noticia);
 
     // Eventos
-    @Query("SELECT * FROM evento")
+    @Query("SELECT * FROM evento ORDER BY fecha DESC")
     List<Evento> getAllEvents();
 
     @Query("SELECT * FROM evento WHERE id = :id")
