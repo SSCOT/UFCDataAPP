@@ -19,6 +19,9 @@ public interface UfcDao {
     @Query("SELECT * FROM luchador")
     List<Luchador> getAllFighters();
 
+    @Query("SELECT * FROM luchador WHERE campeon = 1")
+    List<Luchador> getChampions();
+
     @Query("SELECT * FROM luchador WHERE id = :id")
     Luchador getFighter(int id);
 

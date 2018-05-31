@@ -75,8 +75,8 @@ public class LuchadorProvider {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-               /* LuchadorLocalProvider luchadorLocalProvider = new LuchadorLocalProvider(context);
-                luchadorLocalProvider.getAllChampions(new LuchadorLocalProvider.LuchadorLocalProviderListener() {
+                LuchadorLocalProvider luchadorLocalProvider = new LuchadorLocalProvider(context);
+                luchadorLocalProvider.getChampions(new LuchadorLocalProvider.LuchadorLocalProviderListener() {
                     @Override
                     public void onResponse(Luchador[] luchadores) {
                         listener.onResponse(luchadores);
@@ -86,7 +86,7 @@ public class LuchadorProvider {
                     public void onErrorResponse(VolleyError error) {
                         listener.onErrorResponse(error);
                     }
-                });*/
+                });
                 listener.onErrorResponse(error);
             }
         });

@@ -7,7 +7,10 @@
     android:layout_height="@dimen/CardStandard"
     android:layout_margin="@dimen/smallHalf"
     android:layout_marginTop="@dimen/smallHalf"
+    android:clickable="true"
     android:elevation="@dimen/small"
+    android:focusable="true"
+    android:foreground="?android:actionBarItemBackground"
     card_view:cardCornerRadius="@dimen/smallHalf">
 
     <LinearLayout
@@ -31,25 +34,26 @@
 
             <TextView
                 android:id="@+id/txtName"
+                style="@style/textoTitulo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
                 android:layout_marginTop="@dimen/small"
                 android:textAlignment="center"
-                style="@style/textoTitulo"
                 tool:text="Tony Ferguson" />
 
             <TextView
                 android:id="@+id/txtNickName"
+                style="@style/textoMenor"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtName"
-                style="@style/textoMenor"
                 android:textAlignment="center"
                 tool:text="'Blessed Man'" />
 
             <TextView
                 android:id="@+id/txtWeight"
+                style="@style/textoMenorDorado"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_below="@id/txtNickName"
@@ -58,7 +62,6 @@
                 android:layout_marginStart="@dimen/smallHalf"
                 android:layout_marginTop="@dimen/smallHalf"
                 android:textAlignment="center"
-                style="@style/textoMenorDorado"
                 tool:text="Weither weight" />
 
         </RelativeLayout>

@@ -7,7 +7,10 @@
     android:layout_height="@dimen/CardStandard"
     android:layout_marginStart="@dimen/small"
     android:layout_marginEnd="@dimen/small"
-    android:elevation="0dp">
+    android:elevation="@dimen/none"
+    android:foreground="?android:actionBarItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -51,11 +54,11 @@
 
         <View
             android:id="@+id/divider"
-            android:layout_width="0dp"
+            android:layout_width="@dimen/none"
             android:layout_height="70dp"
             android:layout_alignParentTop="true"
             android:layout_centerHorizontal="true"
-            android:layout_marginTop="30dp"
+            android:layout_marginTop="@dimen/medium"
             android:background="?android:attr/listDivider" />
 
         <TextView

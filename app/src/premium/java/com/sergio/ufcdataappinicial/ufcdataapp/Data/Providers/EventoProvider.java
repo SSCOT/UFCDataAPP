@@ -159,12 +159,16 @@ public class EventoProvider {
 
     private void changeDateSyncAndUpdateFlags(SharedPreferences preferences) {
         SharedPreferences.Editor editor = preferences.edit();
+        // TODO prueba
+        String fechaprueba = eventsFinal[1][0].getFecha().replace("-", "");
+
         // Como vienen ordenados por fecha cogemos la fecha más próxima
         editor.putString("dateSync", eventsFinal[1][0].getFecha().replace("-", ""));
         // flags a false para que se vuelvan a actualizar los luchadores y campeones
         editor.putBoolean("fightersUpdated", false);
         editor.putBoolean("championsUpdated", false);
-        editor.putBoolean("eventsUpdated",false);
+        editor.putBoolean("eventsUpdated",true);
+        editor.putBoolean("alarmSend",false);
         editor.apply();
     }
 
@@ -174,6 +178,11 @@ public class EventoProvider {
     }
 
     private void configureAlarm(Evento evento) {
+        // Para evitar que la alarma se lance cada vez
+        /*SharedPreferences preferences = context.getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
+        boolean eventsUpdated =  preferences.getBoolean("eventsUpdated", false);*/
+
+
         String fechaEvento = evento.getFecha();
         // Si no hay fecha no generamos ninguna notificación
         if (fechaEvento == null || fechaEvento.equals(""))

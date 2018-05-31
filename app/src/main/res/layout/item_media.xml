@@ -5,7 +5,10 @@
     android:id="@+id/card_view"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:elevation="0dp">
+    android:elevation="@dimen/none"
+    android:foreground="?android:actionBarItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -45,10 +48,10 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/imgMedia"
             android:layout_centerHorizontal="true"
-            android:textAlignment="center"
             android:layout_marginEnd="@dimen/smallHalf"
             android:layout_marginStart="@dimen/smallHalf"
             android:layout_marginTop="@dimen/smallHalf"
+            android:textAlignment="center"
             tool:text="ESTO ES UN TÍTULO DE PRUEBA" />
 
         <TextView
@@ -56,15 +59,12 @@
             style="@style/textoMenorCursivo"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textAlignment="center"
             android:layout_below="@id/txtTituloMedia"
-            android:layout_marginEnd="@dimen/smallHalf"
             android:layout_marginBottom="@dimen/smallDouble"
+            android:layout_marginEnd="@dimen/smallHalf"
             android:layout_marginStart="@dimen/smallHalf"
             android:layout_marginTop="@dimen/smallHalf"
+            android:textAlignment="center"
             tool:text="In the middle of an 8-fight win streak, Jacare Souza finished Yushin Okami quickly in the first round of Fight Night Belo Horizonte in 2013. Next, he faces Kelvin Gastelum in the co-main event of UFC 224 on May 12." />
-
-
     </RelativeLayout>
-
 </android.support.v7.widget.CardView>

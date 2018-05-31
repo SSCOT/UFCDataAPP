@@ -18,6 +18,57 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
+    <View
+        android:id="@+id/divider4"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line"
+        android:layout_marginTop="@dimen/centerToSubtitleText"
+        android:layout_marginStart="@dimen/smallHalf"
+        android:layout_marginEnd="@dimen/smallHalf"
+        android:background="@color/colorPrimary"
+        app:layout_constraintStart_toEndOf="@+id/txtVersion"
+        app:layout_constraintTop_toTopOf="@+id/txtVersion" />
+
+    <TextView
+        android:id="@+id/txtVersion"
+        style="@style/textoSubtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/smallDouble"
+        android:layout_marginTop="@dimen/smallDouble"
+        android:background="@color/white"
+        android:paddingEnd="@dimen/smallHalf"
+        android:paddingStart="@dimen/smallHalf"
+        android:text="News version"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
+
+    <View
+        android:id="@+id/divider5"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/line"
+        android:layout_marginTop="@dimen/centerToSubtitleText"
+        android:background="@color/colorPrimary"
+        app:layout_constraintEnd_toEndOf="parent"
+        android:layout_marginStart="@dimen/smallHalf"
+        android:layout_marginEnd="@dimen/smallHalf"
+        app:layout_constraintStart_toEndOf="@+id/txtPermissions"
+        app:layout_constraintTop_toTopOf="@+id/txtPermissions" />
+
+    <TextView
+        android:id="@+id/txtPermissions"
+        style="@style/textoSubtitulo"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="@dimen/smallDouble"
+        android:layout_marginTop="@dimen/smallDouble"
+        android:background="@color/white"
+        android:paddingEnd="@dimen/smallHalf"
+        android:paddingStart="@dimen/smallHalf"
+        android:text="Permissions"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
     <Button
         android:id="@+id/btnDeleteDatabase"
         style="@style/Widget.AppCompat.Button.Borderless"
@@ -105,9 +156,11 @@
     <View
         android:id="@+id/divider3"
         android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/small"
+        android:layout_height="@dimen/line"
+        android:layout_marginTop="@dimen/centerToSubtitleText"
         android:background="@color/colorPrimary"
+        android:layout_marginStart="@dimen/smallHalf"
+        android:layout_marginEnd="@dimen/smallHalf"
         app:layout_constraintStart_toEndOf="@+id/txtLocalData"
         app:layout_constraintTop_toTopOf="@+id/txtLocalData" />
 
@@ -125,52 +178,9 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/swNotificaciones" />
 
-    <View
-        android:id="@+id/divider4"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="@dimen/small"
-        android:background="@color/colorPrimary"
-        app:layout_constraintStart_toEndOf="@+id/txtVersion"
-        app:layout_constraintTop_toTopOf="@+id/txtVersion" />
-
-    <TextView
-        android:id="@+id/txtVersion"
-        style="@style/textoSubtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/smallDouble"
-        android:layout_marginTop="@dimen/smallDouble"
-        android:background="@color/white"
-        android:paddingEnd="@dimen/smallHalf"
-        android:paddingStart="@dimen/smallHalf"
-        android:text="News version"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtTitulo" />
 
 
-    <View
-        android:id="@+id/divider5"
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        android:layout_marginTop="12dp"
-        android:background="@color/colorPrimary"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/txtPermissions"
-        app:layout_constraintTop_toTopOf="@+id/txtPermissions" />
 
-    <TextView
-        android:id="@+id/txtPermissions"
-        style="@style/textoSubtitulo"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="@dimen/smallDouble"
-        android:layout_marginTop="@dimen/smallDouble"
-        android:background="@color/white"
-        android:paddingEnd="@dimen/smallHalf"
-        android:paddingStart="@dimen/smallHalf"
-        android:text="Permissions"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/radioGroup" />
+
 
 </android.support.constraint.ConstraintLayout>

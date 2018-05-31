@@ -7,7 +7,10 @@
     android:layout_height="@dimen/CardStandard"
     android:layout_marginEnd="@dimen/small"
     android:layout_marginStart="@dimen/small"
-    android:elevation="0dp">
+    android:elevation="@dimen/none"
+    android:foreground="?android:actionBarItemBackground"
+    android:clickable="true"
+    android:focusable="true">
 
     <RelativeLayout
         android:layout_width="match_parent"

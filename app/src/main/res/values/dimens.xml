@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <dimen name="none">0dp</dimen>
+    <dimen name="line">1dp</dimen>
 
     <dimen name="smallHalf">5dp</dimen>
     <dimen name="small">10dp</dimen>
@@ -26,4 +27,6 @@
     <dimen name="iconFightSize">50dp</dimen>
 
     <dimen name="toolbarHeight">250dp</dimen>
+
+    <dimen name="centerToSubtitleText">10dp</dimen>
 </resources>

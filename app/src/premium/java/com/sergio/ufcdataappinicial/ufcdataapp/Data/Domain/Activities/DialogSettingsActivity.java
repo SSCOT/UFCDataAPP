@@ -1,12 +1,8 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Data.Domain.Activities;
 
-import android.animation.ArgbEvaluator;
-import android.animation.ObjectAnimator;
-import android.animation.ValueAnimator;
 import android.app.DialogFragment;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.graphics.Color;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.view.LayoutInflater;
@@ -15,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.RadioButton;
 import android.widget.Switch;
-import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.EventoLocalProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.LuchadorLocalProvider;
@@ -31,7 +26,6 @@ public class DialogSettingsActivity extends DialogFragment {
     RadioButton rdGlobal;
     RadioButton rdLatin;
 
-    TextView txt;
     Boolean deletePermission = false;
 
     @Nullable
@@ -46,8 +40,7 @@ public class DialogSettingsActivity extends DialogFragment {
         btnCancel = view.findViewById(R.id.btnCancel);
         btnOk = view.findViewById(R.id.btnOK);
 
-        // TODO borrar esto
-        txt = view.findViewById(R.id.txtTitulo);
+
 
         SharedPreferences preferences = getActivity().getSharedPreferences("dbAuxiliar", Context.MODE_PRIVATE);
         int idLocalization = preferences.getInt("idLocalization", 1);

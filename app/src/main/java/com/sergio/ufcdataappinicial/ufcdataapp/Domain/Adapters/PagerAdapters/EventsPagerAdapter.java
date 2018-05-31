@@ -6,9 +6,6 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsListPastFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsListUpcomingFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListChampionsFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListCompleteFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersListWeightFragment;
 
 public class EventsPagerAdapter extends FragmentStatePagerAdapter {
 

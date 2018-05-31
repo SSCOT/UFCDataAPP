@@ -2,8 +2,6 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers;
 
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.widget.Toast;
-
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
@@ -47,7 +45,6 @@ public class NoticiaProvider {
                 noticiaLocalProvider.getAll(new NoticiaLocalProvider.NoticiaLocalProviderListener() {
                     @Override
                     public void onResponse(Noticia[] news) {
-                        Toast.makeText(context, "TOTAL NOTICIAS = "+news.length, Toast.LENGTH_SHORT).show();
                         listener.onResponse(news);
                     }
 

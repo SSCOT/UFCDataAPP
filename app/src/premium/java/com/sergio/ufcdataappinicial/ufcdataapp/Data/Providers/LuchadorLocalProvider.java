@@ -53,7 +53,18 @@ public class LuchadorLocalProvider {
         // listenerGlobal = listener;
         db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
         GetAllAsyncTask getAllAsyncTask = new GetAllAsyncTask(listener);
-        getAllAsyncTask.execute();
+        // TODO revisar esto
+        // getAllAsyncTask.execute();
+        getAllAsyncTask.executeOnExecutor(GetAllAsyncTask.THREAD_POOL_EXECUTOR,null);
+    }
+
+    public static void getChampions(final LuchadorLocalProviderListener listener) {
+        // listenerGlobal = listener;
+        db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
+        GetChampionsAsyncTask getChampionsAsyncTask = new GetChampionsAsyncTask(listener);
+        // TODO revisar esto
+        // getAllAsyncTask.execute();
+        getChampionsAsyncTask.executeOnExecutor(GetAllAsyncTask.THREAD_POOL_EXECUTOR,null);
     }
 
     // Delete
@@ -82,6 +93,25 @@ public class LuchadorLocalProvider {
         @Override
         protected List<Luchador> doInBackground(Void... voids) {
             return db.ufcDao().getAllFighters();
+        }
+
+        @Override
+        protected void onPostExecute(List<Luchador> luchadores) {
+            super.onPostExecute(luchadores);
+            Luchador[] luchadoresFinal = luchadores.toArray(new Luchador[luchadores.size()]);
+            listener.onResponse(luchadoresFinal);
+        }
+    }
+
+    private static class GetChampionsAsyncTask extends AsyncTask<Void, Integer, List<Luchador>> {
+        LuchadorLocalProviderListener listener;
+        public GetChampionsAsyncTask(LuchadorLocalProviderListener listener) {
+            this.listener = listener;
+        }
+
+        @Override
+        protected List<Luchador> doInBackground(Void... voids) {
+            return db.ufcDao().getChampions();
         }
 
         @Override
@@ -129,6 +159,7 @@ public class LuchadorLocalProvider {
             return null;
         }
     }
+
 
 
 }
