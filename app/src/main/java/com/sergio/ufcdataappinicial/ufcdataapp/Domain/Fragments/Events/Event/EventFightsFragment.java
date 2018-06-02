@@ -52,7 +52,6 @@ public class EventFightsFragment extends Fragment {
         super.onCreate(savedInstanceState);
         if (getArguments() != null) {
             idEvent = getArguments().getInt("idEvent");
-
         }
     }
 

@@ -1,5 +1,6 @@
 package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fights;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
@@ -14,6 +15,7 @@ import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
 
@@ -24,7 +26,7 @@ import butterknife.ButterKnife;
 import im.dacer.androidcharts.PieHelper;
 import im.dacer.androidcharts.PieView;
 
-public class FightFragment extends Fragment {
+public class FightFragment extends Fragment implements View.OnClickListener {
 
     @BindView(R.id.txtLuchadorNom1)
     TextView txtLuchadorNom1;
@@ -158,9 +160,14 @@ public class FightFragment extends Fragment {
         txtStrikingDefense2.setText(fight.getStrikingDef2());
         txtGrapplingAccuracy2.setText(fight.getTakeDownAcc2());
         txtGrapplingDefense2.setText(fight.getTakeDownDef2());
-        
+
+        imgLuchador1.setOnClickListener(this);
+        imgLuchador2.setOnClickListener(this);
+
         setCharts();
     }
+
+
 
     private void setCharts() {
         // Chart1
@@ -212,4 +219,23 @@ public class FightFragment extends Fragment {
         pieView2.showPercentLabel(true);
     }
 
+    @Override
+    public void onClick(View view) {
+        switch (view.getId()) {
+            case R.id.imgLuchador1:
+                showFighter(fight.getId1(), fight.getNombre1(), fight.getApellido1());
+                break;
+            case R.id.imgLuchador2:
+                showFighter(fight.getId2(), fight.getNombre2(), fight.getApellido2());
+                break;
+        }
+    }
+
+    private void showFighter(String id, String nombre, String apellido) {
+        Intent intent = new Intent();
+        intent.setClass(getActivity(), FighterActivity.class);
+        intent.putExtra("idLuchador", id);
+        intent.putExtra("titulo",  nombre + " " + apellido);
+        startActivity(intent);
+    }
 }

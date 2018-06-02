@@ -8,6 +8,8 @@ public class Combate  implements Serializable {
 
     private int id;
 
+    @SerializedName("fighter1_id")
+    private String id1;
     @SerializedName("fighter1_first_name")
     private String nombre1;
     @SerializedName("fighter1_last_name")
@@ -43,6 +45,8 @@ public class Combate  implements Serializable {
     @SerializedName("fighter1_is_winner")
     private Boolean ganador1;
 
+    @SerializedName("fighter2_id")
+    private String id2;
     @SerializedName("fighter2_first_name")
     private String nombre2;
     @SerializedName("fighter2_last_name")
@@ -107,7 +111,8 @@ public class Combate  implements Serializable {
     @SerializedName("is_main_event")
     private Boolean esPelaPrincipal;
 
-    public Combate(String nombre1, String apellido1, String nick1, String altura1, String peso1, String record1, String pos1, String imgCuerpo1, String imgPerfil1, String knockDownAvg1, String strikingAcc1, String strikingDef1, String takeDownAvg1, String takeDownAcc1, String takeDownDef1, String sumisionAvg1, Boolean ganador1, String nombre2, String apellido2, String nick2, String altura2, String peso2, String record2, String pos2, String imgCuerpo2, String imgPerfil2, String knockDownAvg2, String strikingAcc2, String strikingDef2, String takeDownAvg2, String takeDownAcc2, String takeDownDef2, String sumisionAvg2, Boolean ganador2, int f1Wins, int f1Losses, int f1Draws, int f2Wins, int f2Losses, int f2Draws, String alcance1, String alcance2, Resultado result, String descripcion, Boolean esPeleaDeTitulo, Boolean esPelaPrincipal) {
+    public Combate(String id1, String nombre1, String apellido1, String nick1, String altura1, String peso1, String record1, String pos1, String imgCuerpo1, String imgPerfil1, String knockDownAvg1, String strikingAcc1, String strikingDef1, String takeDownAvg1, String takeDownAcc1, String takeDownDef1, String sumisionAvg1, Boolean ganador1, String id2, String nombre2, String apellido2, String nick2, String altura2, String peso2, String record2, String pos2, String imgCuerpo2, String imgPerfil2, String knockDownAvg2, String strikingAcc2, String strikingDef2, String takeDownAvg2, String takeDownAcc2, String takeDownDef2, String sumisionAvg2, Boolean ganador2, int f1Wins, int f1Losses, int f1Draws, int f2Wins, int f2Losses, int f2Draws, String alcance1, String alcance2, Resultado result, String descripcion, Boolean esPeleaDeTitulo, Boolean esPelaPrincipal) {
+        this.id1 = id1;
         this.nombre1 = nombre1;
         this.apellido1 = apellido1;
         this.nick1 = nick1;
@@ -125,6 +130,7 @@ public class Combate  implements Serializable {
         this.takeDownDef1 = takeDownDef1;
         this.sumisionAvg1 = sumisionAvg1;
         this.ganador1 = ganador1;
+        this.id2 = id2;
         this.nombre2 = nombre2;
         this.apellido2 = apellido2;
         this.nick2 = nick2;
@@ -549,5 +555,21 @@ public class Combate  implements Serializable {
 
     public void setAlcance2(String alcance2) {
         this.alcance2 = alcance2;
+    }
+
+    public String getId1() {
+        return id1;
+    }
+
+    public void setId1(String id1) {
+        this.id1 = id1;
+    }
+
+    public String getId2() {
+        return id2;
+    }
+
+    public void setId2(String id2) {
+        this.id2 = id2;
     }
 }

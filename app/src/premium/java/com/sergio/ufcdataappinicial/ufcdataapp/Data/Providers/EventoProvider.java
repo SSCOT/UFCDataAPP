@@ -159,8 +159,6 @@ public class EventoProvider {
 
     private void changeDateSyncAndUpdateFlags(SharedPreferences preferences) {
         SharedPreferences.Editor editor = preferences.edit();
-        // TODO prueba
-        String fechaprueba = eventsFinal[1][0].getFecha().replace("-", "");
 
         // Como vienen ordenados por fecha cogemos la fecha más próxima
         editor.putString("dateSync", eventsFinal[1][0].getFecha().replace("-", ""));

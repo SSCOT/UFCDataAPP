@@ -172,32 +172,4 @@ public class EventFragment extends Fragment {
             progressBar.setVisibility(View.GONE);
         }
     }
-
-
-    // TODO para borrar
-    private void configureAlarm() {
-        // TODO configurar alarma
-        Calendar calendar = Calendar.getInstance();
-
-                /*
-                calendar.set(Calendar.MONTH, 2);
-                calendar.set(Calendar.YEAR, 2017);
-                calendar.set(Calendar.DAY_OF_MONTH, 28);
-
-                calendar.set(Calendar.HOUR_OF_DAY, 20);
-                calendar.set(Calendar.MINUTE, 48);
-                calendar.set(Calendar.SECOND, 0);
-                calendar.set(Calendar.AM_PM,Calendar.PM);
-                */
-
-        calendar.add(Calendar.SECOND, 5);
-
-        Intent myIntent = new Intent (this.getActivity(), AlarmReceiver.class);
-        myIntent.putExtra("evento",evento);
-        PendingIntent pendingIntent = PendingIntent.getBroadcast(this.getActivity(), 0, myIntent, 0);
-
-        AlarmManager alarmManager = (AlarmManager) this.getActivity().getApplicationContext().getSystemService(this.getActivity().getApplicationContext().ALARM_SERVICE);
-        alarmManager.set(AlarmManager.RTC, calendar.getTimeInMillis(), pendingIntent);
-        Log.d("-***", "onReceive: ENVIA AL ONRECEIVE");
-    }
 }
