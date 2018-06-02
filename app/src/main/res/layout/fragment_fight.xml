@@ -9,6 +9,7 @@
         android:layout_height="match_parent">
 
         <LinearLayout
+            android:id="@+id/layoutGeneral"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:orientation="horizontal">
@@ -52,10 +53,10 @@
                     android:id="@+id/imgLuchador1"
                     android:layout_width="@dimen/bodyImagesWidth"
                     android:layout_height="@dimen/bodyImagesHeight"
-                    android:maxHeight="@dimen/largeDouble"
                     android:layout_below="@id/txtLuchadorApe1"
                     android:layout_centerHorizontal="true"
-                    android:layout_margin="@dimen/small" />
+                    android:layout_margin="@dimen/small"
+                    android:maxHeight="@dimen/largeDouble" />
 
                 <TextView
                     android:id="@+id/txtLuchador1Record"
@@ -571,6 +572,54 @@
             </RelativeLayout>
         </LinearLayout>
 
+        <RelativeLayout
+            android:id="@+id/relativePuntuacion"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginTop="@dimen/largeDouble">
 
+            <TextView
+                android:id="@+id/txtTipoFinal"
+                style="@style/textoSecundarioFondoNegro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerHorizontal="true"
+                android:gravity="center"
+                tools:text="Decission - Split" />
+
+            <TextView
+                android:id="@+id/txtScore1"
+                style="@style/textoSubtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/txtTipoFinal"
+                android:layout_marginTop="@dimen/small"
+                android:gravity="center"
+                tools:text="48/47" />
+
+            <TextView
+                android:id="@+id/txtScore2"
+                style="@style/textoSubtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/txtScore1"
+                android:layout_marginTop="@dimen/small"
+                android:gravity="center"
+                tools:text="48/47"
+
+                />
+
+            <TextView
+                android:id="@+id/txtScore3"
+                style="@style/textoSubtitulo"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_below="@id/txtScore2"
+                android:layout_marginTop="@dimen/small"
+                android:gravity="center"
+                tools:text="48/47"
+
+                />
+        </RelativeLayout>
     </RelativeLayout>
 </android.support.v4.widget.NestedScrollView>

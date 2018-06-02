@@ -10,10 +10,13 @@ import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Puntuacion;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
@@ -83,7 +86,22 @@ public class FightFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.win2)
     TextView txtWin2;
 
+    // TODO prueba
+    @BindView(R.id.txtTipoFinal)
+    TextView txtTipoFinal;
+    @BindView(R.id.txtScore1)
+    TextView txtScore1;
+    @BindView(R.id.txtScore2)
+    TextView txtScore2;
+    @BindView(R.id.txtScore3)
+    TextView txtScore3;
+
+    @BindView(R.id.relativePuntuacion)
+    RelativeLayout relativePuntuacion;
+
     Combate fight;
+
+    private int ganador = 0;
 
     public FightFragment() {
         // Required empty public constructor
@@ -122,16 +140,22 @@ public class FightFragment extends Fragment implements View.OnClickListener {
 
     private void setData() {
 
-       if(fight.getGanador1() != null && fight.getGanador1())
-           txtWin1.setVisibility(View.VISIBLE);
-       else if (fight.getGanador2() != null && fight.getGanador2())
-           txtWin2.setVisibility(View.VISIBLE);
+        if (fight.getGanador1() != null && fight.getGanador1()) {
+            txtWin1.setVisibility(View.VISIBLE);
+            txtWin1.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.infinite_fade));
+            ganador = 1;
+        } else if (fight.getGanador2() != null && fight.getGanador2()) {
+            txtWin2.setVisibility(View.VISIBLE);
+            txtWin2.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.infinite_fade));
+            ganador = 2;
+        }
+
 
         txtLuchadorNom1.setText(fight.getNombre1());
         txtLuchadorApe1.setText(fight.getApellido1());
 
-        if(fight.getImgCuerpo1() != null && !fight.getImgCuerpo1().equals(""))
-             Picasso.get().load(fight.getImgCuerpo1()).placeholder(R.drawable.male_shadow_left).into(imgLuchador1);
+        if (fight.getImgCuerpo1() != null && !fight.getImgCuerpo1().equals(""))
+            Picasso.get().load(fight.getImgCuerpo1()).placeholder(R.drawable.male_shadow_left).into(imgLuchador1);
         else
             Picasso.get().load(R.drawable.male_shadow_left).into(imgLuchador1);
 
@@ -147,8 +171,8 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         txtLuchadorNom2.setText(fight.getNombre2());
         txtLuchadorApe2.setText(fight.getApellido2());
 
-        if(fight.getImgCuerpo2() != null && !fight.getImgCuerpo2().equals(""))
-             Picasso.get().load(fight.getImgCuerpo2()).placeholder(R.drawable.male_shadow_right).into(imgLuchador2);
+        if (fight.getImgCuerpo2() != null && !fight.getImgCuerpo2().equals(""))
+            Picasso.get().load(fight.getImgCuerpo2()).placeholder(R.drawable.male_shadow_right).into(imgLuchador2);
         else
             Picasso.get().load(R.drawable.male_shadow_right).into(imgLuchador2);
 
@@ -164,9 +188,35 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         imgLuchador1.setOnClickListener(this);
         imgLuchador2.setOnClickListener(this);
 
+        //TODO prueba
+        txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
+
+        Puntuacion[] puntuaciones = fight.getResult().getPuntuaciones();
+
+        if(puntuaciones != null && puntuaciones.length == 3){
+            if (puntuaciones[0] != null)
+                txtScore1.setText(setPuntuacion(puntuaciones[0]));
+            if (puntuaciones[1] != null)
+                txtScore2.setText(setPuntuacion(puntuaciones[1]));
+            if (puntuaciones[2] != null)
+                txtScore3.setText(setPuntuacion(puntuaciones[2]));
+            relativePuntuacion.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in));
+        }
+
         setCharts();
+
     }
 
+    // generamos las puntuaciones en el orden correcto
+    private String setPuntuacion(Puntuacion puntuacion) {
+        String cadenaPuntuacion = "";
+        if (ganador == 1)
+            cadenaPuntuacion = puntuacion.getPuntuacionGanador() + "/" + puntuacion.getPuntuacionPerdedor();
+        else if (ganador == 2)
+            cadenaPuntuacion = puntuacion.getPuntuacionPerdedor() + "/" + puntuacion.getPuntuacionGanador();
+
+        return cadenaPuntuacion;
+    }
 
 
     private void setCharts() {
@@ -193,7 +243,7 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         pieView.setMinimumWidth(100);
         pieView.setDate(pieHelperArrayList);
         pieView.showPercentLabel(true);
-        
+
         // Chart2
         double total2 = fight.getF2Draws() + fight.getF2Losses() + fight.getF2Wins();
         double wins2 = (fight.getF2Wins() * 100) / total2;
@@ -235,7 +285,7 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         Intent intent = new Intent();
         intent.setClass(getActivity(), FighterActivity.class);
         intent.putExtra("idLuchador", id);
-        intent.putExtra("titulo",  nombre + " " + apellido);
+        intent.putExtra("titulo", nombre + " " + apellido);
         startActivity(intent);
     }
 }
