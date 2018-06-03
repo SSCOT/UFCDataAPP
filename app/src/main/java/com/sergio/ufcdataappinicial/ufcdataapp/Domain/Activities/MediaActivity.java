@@ -6,8 +6,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.Toast;
-
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Media.Media;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.MediaPhotoGalleryFragment;

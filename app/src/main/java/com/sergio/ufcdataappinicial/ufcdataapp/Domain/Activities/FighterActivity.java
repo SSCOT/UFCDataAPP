@@ -78,7 +78,6 @@ public class FighterActivity extends AppCompatActivity {
                 Utilidades.messageWithOk(FighterActivity.this, findViewById(R.id.content), getResources().getString(R.string.error_recuperacion_datos));
             }
         });
-        // setLoading(false);
     }
 
     private void setTitleColor() {

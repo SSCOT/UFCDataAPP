@@ -113,9 +113,4 @@ public class EventsAdapter extends RecyclerView.Adapter<EventsAdapter.EventsView
     public interface OnItemClickListener {
         void onItemClick(Evento evento, int position);
     }
-
-    /*public void updateData(Evento[] events){
-        this.events = events;
-        notifyDataSetChanged();
-    }*/
 }

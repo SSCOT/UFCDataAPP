@@ -11,7 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.BuildConfig;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Domain.Activities.DialogSettingsActivity;
+import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.DialogSettingsActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Fighters.FightersFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsFragment;
@@ -105,55 +105,4 @@ public class MainActivity extends AppCompatActivity {
         }
         return super.onOptionsItemSelected(item);
     }
-
-    /*@Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        return super.onCreateOptionsMenu(menu);
-    }*/
-
-   /* @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        getMenuInflater().inflate(R.menu.menu_action_bar, menu);
-        MenuItem menuItem = menu.findItem(R.id.itemBuscador);
-        SearchView searchView = (SearchView) menuItem.getActionView();
-
-        searchView.setOnQueryTextListener(this);
-
-        // TODO: Solución a esto. Menú lupa solo en ALL
-        MenuItemCompat.setOnActionExpandListener(menuItem, new MenuItemCompat.OnActionExpandListener() {
-            @Override
-            public boolean onMenuItemActionExpand(MenuItem item) {
-                return true;
-            }
-
-            @Override
-            public boolean onMenuItemActionCollapse(MenuItem item) {
-                // adapter.setFilter((Luchador[]) luchadoresGeneral.toArray());
-                return true;
-            }
-        });
-
-        return true;
-    }
-
-
-    @Override
-    public boolean onQueryTextSubmit(String s) {
-        return false;
-    }
-
-    @Override
-    public boolean onQueryTextChange(String texto) {
-        try {
-            *//*ArrayList<Luchador> listaLuchadoresFiltrados = filter(luchadoresGeneral, texto);
-            Luchador[] luchadoresFiltrados = (Luchador[]) listaLuchadoresFiltrados.toArray();
-            adapter.setFilter(luchadoresFiltrados);*//*
-            Toast.makeText(this, texto, Toast.LENGTH_SHORT).show();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-
-        return false;
-    }*/
 }

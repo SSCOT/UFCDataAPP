@@ -53,8 +53,6 @@ public class LuchadorLocalProvider {
         // listenerGlobal = listener;
         db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
         GetAllAsyncTask getAllAsyncTask = new GetAllAsyncTask(listener);
-        // TODO revisar esto
-        // getAllAsyncTask.execute();
         getAllAsyncTask.executeOnExecutor(GetAllAsyncTask.THREAD_POOL_EXECUTOR,null);
     }
 
@@ -62,8 +60,6 @@ public class LuchadorLocalProvider {
         // listenerGlobal = listener;
         db = Room.databaseBuilder(context, UfcDatabase.class, "ufcDb").build();
         GetChampionsAsyncTask getChampionsAsyncTask = new GetChampionsAsyncTask(listener);
-        // TODO revisar esto
-        // getAllAsyncTask.execute();
         getChampionsAsyncTask.executeOnExecutor(GetAllAsyncTask.THREAD_POOL_EXECUTOR,null);
     }
 

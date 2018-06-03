@@ -7,10 +7,10 @@
     android:layout_height="@dimen/CardStandard"
     android:layout_marginEnd="@dimen/small"
     android:layout_marginStart="@dimen/small"
-    android:elevation="@dimen/none"
-    android:foreground="?android:actionBarItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:elevation="@dimen/none"
+    android:focusable="true"
+    android:foreground="?android:actionBarItemBackground">
 
     <RelativeLayout
         android:layout_width="match_parent"
@@ -65,7 +65,7 @@
             android:id="@+id/imgLuchador2"
             android:layout_width="@dimen/large"
             android:layout_height="@dimen/large"
-            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true"
             android:layout_below="@id/titulo"
             android:layout_margin="@dimen/small"
             tool:src="@color/cardview_shadow_start_color" />
@@ -95,7 +95,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtLuchadorApe1"
-            android:layout_marginLeft="@dimen/small"
+            android:layout_marginStart="@dimen/small"
             android:layout_toEndOf="@id/imgLuchador1"
             android:text="WIN"
             android:visibility="invisible" />
@@ -106,22 +106,22 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/txtLuchadorApe2"
-            android:layout_marginRight="@dimen/small"
+            android:layout_marginEnd="@dimen/small"
             android:layout_toStartOf="@id/imgLuchador2"
             android:text="WIN"
             android:visibility="invisible" />
 
         <TextView
+            android:id="@+id/txtTipoFinal"
+            style="@style/textoSecundarioFondoNegro"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            style="@style/textoSecundarioFondoNegro"
-            android:id="@+id/txtTipoFinal"
-            tool:text="Decission"
-            android:layout_marginBottom="@dimen/small"
             android:layout_alignParentBottom="true"
             android:layout_centerHorizontal="true"
+            android:layout_marginBottom="@dimen/small"
             android:padding="2dp"
-            android:visibility="gone"/>
+            android:visibility="gone"
+            tool:text="Decission" />
 
         <View
             android:id="@+id/divider2"

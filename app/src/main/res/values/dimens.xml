@@ -2,6 +2,8 @@
 <resources>
     <dimen name="none">0dp</dimen>
     <dimen name="line">1dp</dimen>
+    <dimen name="corner_radius_standar">2dp</dimen>
+
 
     <dimen name="smallHalf">5dp</dimen>
     <dimen name="small">10dp</dimen>

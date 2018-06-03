@@ -4,13 +4,8 @@ import android.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MenuItem;
-import android.widget.Toolbar;
-
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.ArticleFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
 
 public class ArticleActivity extends AppCompatActivity {
 

@@ -17,7 +17,6 @@ import android.widget.ProgressBar;
 import com.android.volley.VolleyError;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Noticia;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Providers.NoticiaProvider;
-// import com.sergio.ufcdataappinicial.ufcdataappPremium.Data.Providers.NoticiaProvider;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.ArticleActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.ArticlesAdapter;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;

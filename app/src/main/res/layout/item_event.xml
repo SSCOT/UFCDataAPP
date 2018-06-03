@@ -7,7 +7,7 @@
     android:layout_height="wrap_content"
     android:layout_margin="@dimen/small"
     android:elevation="@dimen/medium"
-    card_view:cardCornerRadius="2dp"
+    card_view:cardCornerRadius="@dimen/corner_radius_standar"
     android:foreground="?android:actionBarItemBackground"
     android:clickable="true"
     android:focusable="true">

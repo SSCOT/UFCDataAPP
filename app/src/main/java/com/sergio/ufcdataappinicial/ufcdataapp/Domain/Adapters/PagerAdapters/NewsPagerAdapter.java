@@ -3,9 +3,6 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Domain.Adapters.PagerAdapters;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
-
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsListPastFragment;
-import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.Events.EventsListUpcomingFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsListArticlesFragment;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Fragments.News.NewsListMediaFragment;
 

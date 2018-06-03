@@ -3,14 +3,8 @@ package com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador;
 import android.arch.persistence.room.Entity;
 import android.arch.persistence.room.Ignore;
 import android.arch.persistence.room.PrimaryKey;
-import android.os.Parcelable;
-
 import com.google.gson.annotations.SerializedName;
-
 import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Hashtable;
-import java.util.Map;
 
 @Entity(tableName = "luchador")
 public class Luchador implements Serializable {

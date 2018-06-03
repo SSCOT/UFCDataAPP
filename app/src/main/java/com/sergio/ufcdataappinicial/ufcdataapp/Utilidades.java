@@ -3,7 +3,6 @@ package com.sergio.ufcdataappinicial.ufcdataapp;
 import android.content.Context;
 import android.support.design.widget.Snackbar;
 import android.view.View;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;

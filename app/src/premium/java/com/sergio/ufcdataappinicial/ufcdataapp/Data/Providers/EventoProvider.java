@@ -67,9 +67,6 @@ public class EventoProvider {
                 // Comprobamos la fecha de actualización. Si es menor que la actual cambiamos el valor
                 checkAndChangeDateSync(events, fechaActualInt);
 
-                // TODO para borrar. Generación de notificación pasada para visualizar funcionamiento
-                // configureAlarm(eventsFinal[0][0]);
-
                 listener.onResponse(eventsFinal);
             }
         }, new Response.ErrorListener() {

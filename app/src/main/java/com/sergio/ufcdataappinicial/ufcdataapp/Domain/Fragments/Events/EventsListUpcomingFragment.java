@@ -41,8 +41,6 @@ public class EventsListUpcomingFragment extends Fragment {
     @BindView(R.id.progressBarEvents)
     ProgressBar progressBar;
 
-    String tipo;
-
     EventoProvider eventProvider;
     LuchadorProvider luchadorProvider;
 

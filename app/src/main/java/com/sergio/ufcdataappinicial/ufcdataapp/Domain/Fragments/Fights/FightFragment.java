@@ -4,10 +4,7 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.support.annotation.Nullable;
-import android.support.design.widget.Snackbar;
-import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AnimationUtils;
@@ -17,7 +14,6 @@ import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Puntuacion;
-import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Luchador.Luchador;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -86,7 +82,6 @@ public class FightFragment extends Fragment implements View.OnClickListener {
     @BindView(R.id.win2)
     TextView txtWin2;
 
-    // TODO prueba
     @BindView(R.id.txtTipoFinal)
     TextView txtTipoFinal;
     @BindView(R.id.txtScore1)
@@ -188,7 +183,6 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         imgLuchador1.setOnClickListener(this);
         imgLuchador2.setOnClickListener(this);
 
-        //TODO prueba
         txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
 
         Puntuacion[] puntuaciones = fight.getResult().getPuntuaciones();

@@ -7,11 +7,11 @@
     android:layout_height="@dimen/CardStandard"
     android:layout_margin="@dimen/smallHalf"
     android:layout_marginBottom="@dimen/smallHalf"
-    android:elevation="@dimen/small"
-    card_view:cardCornerRadius="@dimen/smallHalf"
-    android:foreground="?android:actionBarItemBackground"
     android:clickable="true"
-    android:focusable="true">
+    android:elevation="@dimen/small"
+    android:focusable="true"
+    android:foreground="?android:actionBarItemBackground"
+    card_view:cardCornerRadius="@dimen/smallHalf">
 
     <LinearLayout
         android:layout_width="match_parent"

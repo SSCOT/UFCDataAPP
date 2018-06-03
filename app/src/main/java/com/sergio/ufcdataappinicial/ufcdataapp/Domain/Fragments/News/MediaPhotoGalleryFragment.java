@@ -103,16 +103,6 @@ public class MediaPhotoGalleryFragment extends Fragment {
                         startActivity(intent);
                     }
                 });
-                /*MediaAdapter adapter = new MediaAdapter(getActivity(), fotos, new MediaAdapter.OnItemClickListener() {
-                    @Override
-                    public void onItemClick(Media mediaItem, int position) {
-
-                        *//*Intent intent = new Intent();
-                        intent.setClass(getActivity(), MediaActivity.class);
-                        intent.putExtra("mediaItem", arrayMedia[position]);
-                        startActivity(intent);*//*
-                    }
-                });*/
                 recycler.setAdapter(adapter);
             }
 
