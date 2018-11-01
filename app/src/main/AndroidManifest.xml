@@ -13,6 +13,7 @@
         android:theme="@style/AppTheme">
         <activity
             android:name=".Domain.Activities.MainActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,6 +23,7 @@
         </activity>
         <activity
             android:name=".Domain.Activities.ArticleActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppTheme" />
         <activity
             android:name=".Domain.Activities.MediaActivity"
@@ -33,18 +35,23 @@
 
         <activity
             android:name=".Domain.Activities.FighterActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoToolbar" />
         <activity
             android:name=".Domain.Activities.PhotoActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoToolbar" />
         <activity
             android:name=".Domain.Activities.EventActivity"
+            android:screenOrientation="portrait"
             android:theme="@style/AppThemeNoToolbar" />
-        <activity android:name=".Domain.Activities.FightActivity" />
+        <activity
+            android:name=".Domain.Activities.FightActivity"
+            android:screenOrientation="portrait" />
 
         <receiver android:name=".Domain.Alarms.AlarmReceiver" />
 
-<!--        <activity android:name=".Domain.Activities.DialogSettingsActivity"></activity>-->
+        <!--        <activity android:name=".Domain.Activities.DialogSettingsActivity"></activity>-->
     </application>
 
 </manifest>

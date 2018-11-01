@@ -93,9 +93,9 @@ public class FighterActivity extends AppCompatActivity {
 
     public void setFighterImage(String url) {
         if (url != null && url != "")
-            Picasso.get().load(url).placeholder(R.drawable.male_profile_shadow).into(imgLuchadorDetail);
+            Picasso.get().load(url).placeholder(R.drawable.male_profile_shadow_white).into(imgLuchadorDetail);
         else
-            Picasso.get().load(R.drawable.male_profile_shadow).into(imgLuchadorDetail);
+            Picasso.get().load(R.drawable.male_profile_shadow_white).into(imgLuchadorDetail);
     }
 
     @Override

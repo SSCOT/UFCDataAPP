@@ -72,9 +72,9 @@ public class LuchadoresAdapter extends RecyclerView.Adapter<LuchadoresAdapter.Lu
             }
             String imagen = luchador.getImgPerfil();
             if (imagen != null && !imagen.equals(""))
-                Picasso.get().load(luchador.getImgPerfil()).placeholder(R.drawable.male_profile_shadow).into(img);
+                Picasso.get().load(luchador.getImgPerfil()).placeholder(R.drawable.male_profile_shadow_white).into(img);
             else
-                Picasso.get().load(R.drawable.male_profile_shadow).into(img);
+                Picasso.get().load(R.drawable.male_profile_shadow_white).into(img);
 
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
