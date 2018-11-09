@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Combate;
 import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Puntuacion;
+import com.sergio.ufcdataappinicial.ufcdataapp.Data.Model.Evento.Resultado;
 import com.sergio.ufcdataappinicial.ufcdataapp.Domain.Activities.FighterActivity;
 import com.sergio.ufcdataappinicial.ufcdataapp.R;
 import com.squareup.picasso.Picasso;
@@ -183,19 +184,27 @@ public class FightFragment extends Fragment implements View.OnClickListener {
         imgLuchador1.setOnClickListener(this);
         imgLuchador2.setOnClickListener(this);
 
-        txtTipoFinal.setText(fight.getResult().getMetodoFinalizacion());
 
-        Puntuacion[] puntuaciones = fight.getResult().getPuntuaciones();
+        Resultado fightResult = fight.getResult();
 
-        if(puntuaciones != null && puntuaciones.length == 3){
-            if (puntuaciones[0] != null)
-                txtScore1.setText(setPuntuacion(puntuaciones[0]));
-            if (puntuaciones[1] != null)
-                txtScore2.setText(setPuntuacion(puntuaciones[1]));
-            if (puntuaciones[2] != null)
-                txtScore3.setText(setPuntuacion(puntuaciones[2]));
-            relativePuntuacion.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in));
+        if(fightResult != null) {
+            if(fightResult.getMetodoFinalizacion() != null)
+                txtTipoFinal.setText(fightResult.getMetodoFinalizacion());
+
+            Puntuacion[] puntuaciones = fightResult.getPuntuaciones();
+
+            if(puntuaciones != null && puntuaciones.length == 3){
+                if (puntuaciones[0] != null)
+                    txtScore1.setText(setPuntuacion(puntuaciones[0]));
+                if (puntuaciones[1] != null)
+                    txtScore2.setText(setPuntuacion(puntuaciones[1]));
+                if (puntuaciones[2] != null)
+                    txtScore3.setText(setPuntuacion(puntuaciones[2]));
+                relativePuntuacion.startAnimation(AnimationUtils.loadAnimation(getActivity(), R.anim.fade_in));
+            }
         }
+
+
 
         setCharts();
 
